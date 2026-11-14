@@ -1,4 +1,4 @@
-import { buildBossArt } from "./game/boss-art.js?v=20261108is20";
+import { buildBossArt } from "./game/boss-art.js?v=20261114eu5";
 // ===== Geração de texturas Phaser/canvas — VanBerto's =====
 // Extraído de dia-crianca.js. Ficheiro 100% autocontido: cada função só
 // depende do parâmetro `scene` (instância Phaser) e de constantes locais.
@@ -25,9 +25,11 @@ export function makeTextures(scene){
   makeDoorTexture(scene);
   makeVilaosTextures(scene);
   makeBossTextures(scene);
-  buildBossArt(scene); // imagens dos bosses (ver game/boss-art.js)
+  europaBossesRedraw(scene); // EUROPA: projéteis dos bosses (e desenhos de reserva)
+  buildBossArt(scene); // desenhos finais dos bosses (imagens, ver game/boss-art.js)
   makeSparkTexture(scene);
   makeItemTextures(scene);
+  europaItensRedraw(scene); // EUROPA: tratado, bandeira, medalha europeia, moedas de euro e bandeirinhas
   makeVanBertoTexture(scene,"vanberto_open",false,-1);
   makeVanBertoTexture(scene,"vanberto_blink",true,-1);
   makeVanBertoTexture(scene,"vanberto_wink","wink",-1);
@@ -3121,4 +3123,300 @@ function makeVanBertoTexture(scene,key,blink,step,armsUp){
 
   ctx.restore();
   tex.refresh();
+}
+
+// ===== EUROPA — helpers para o redesenho dos 4 bosses (116×116, 7 expressões cada) e dos seus projéteis =====
+// v = { arms: "up"|"down", eyes: "open"|"blink"|"x"|"happy"|"angry"|"sad", mouth: "grin"|"laugh"|"o"|"frown" }
+const HB_VARIANTS = {
+  "":          { arms:"up",   eyes:"open",  mouth:"grin"  },
+  "_armsdown": { arms:"down", eyes:"open",  mouth:"grin"  },
+  "_blink":    { arms:"up",   eyes:"blink", mouth:"grin"  },
+  "_ouch":     { arms:"up",   eyes:"x",     mouth:"o"     },
+  "_laugh":    { arms:"up",   eyes:"happy", mouth:"laugh" },
+  "_angry":    { arms:"up",   eyes:"angry", mouth:"grin"  },
+  "_sad":      { arms:"down", eyes:"sad",   mouth:"frown" },
+};
+function hbEllipse(ctx,x,y,rx,ry,fill,stroke,lw){ ctx.beginPath(); ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2); if(fill){ctx.fillStyle=fill;ctx.fill();} if(stroke){ctx.lineWidth=lw||2.4;ctx.strokeStyle=stroke;ctx.stroke();} }
+function hbEyes(ctx,v,xs,y,r,fill,glow,shape){
+  ctx.save(); ctx.lineCap="round"; ctx.lineJoin="round";
+  for(const x of xs){
+    const left = x<xs[0]+1 && xs.length>1 && x===xs[0];
+    if(v.eyes==="blink"){ ctx.strokeStyle="#12062a"; ctx.lineWidth=2.6; ctx.beginPath(); ctx.moveTo(x-r,y); ctx.lineTo(x+r,y); ctx.stroke(); continue; }
+    if(v.eyes==="x"){ ctx.strokeStyle="#12062a"; ctx.lineWidth=2.8; ctx.beginPath(); ctx.moveTo(x-r*.8,y-r*.8); ctx.lineTo(x+r*.8,y+r*.8); ctx.moveTo(x+r*.8,y-r*.8); ctx.lineTo(x-r*.8,y+r*.8); ctx.stroke(); continue; }
+    if(v.eyes==="happy"){ ctx.strokeStyle="#12062a"; ctx.lineWidth=2.8; ctx.beginPath(); ctx.arc(x,y+r*.5,r,Math.PI*1.1,Math.PI*1.9); ctx.stroke(); continue; }
+    ctx.shadowColor=glow; ctx.shadowBlur=6; ctx.fillStyle=fill;
+    if(shape==="tri"){ ctx.beginPath(); ctx.moveTo(x-r,y+r*.7); ctx.lineTo(x,y-r*.9); ctx.lineTo(x+r,y+r*.7); ctx.closePath(); ctx.fill(); }
+    else { ctx.beginPath(); ctx.ellipse(x,y,r,r*1.1,0,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0; ctx.fillStyle="#12062a"; ctx.beginPath(); ctx.ellipse(x+(v.eyes==="sad"?0:0),y+(v.eyes==="sad"?r*.35:r*.1),r*.45,r*.6,0,0,Math.PI*2); ctx.fill(); ctx.fillStyle="#fff"; ctx.beginPath(); ctx.arc(x-r*.3,y-r*.3,r*.22,0,Math.PI*2); ctx.fill(); }
+    ctx.shadowBlur=0;
+    if(v.eyes==="angry"||v.eyes==="sad"){ // sobrancelhas
+      ctx.strokeStyle="#12062a"; ctx.lineWidth=3; ctx.beginPath();
+      const inward = v.eyes==="angry";
+      const isL = (x===xs[0]);
+      const dy = inward ? 1 : -1; // angry: cantos interiores para baixo; sad: interiores para cima
+      if(isL){ ctx.moveTo(x-r*1.2,y-r*1.5-dy*2); ctx.lineTo(x+r*1.2,y-r*1.5+dy*3); }
+      else   { ctx.moveTo(x-r*1.2,y-r*1.5+dy*3); ctx.lineTo(x+r*1.2,y-r*1.5-dy*2); }
+      ctx.stroke();
+    }
+  }
+  ctx.restore();
+}
+function hbMouth(ctx,v,x,y,w,fill,teeth){
+  ctx.save(); ctx.lineJoin="round"; ctx.lineCap="round"; ctx.strokeStyle="#12062a"; ctx.lineWidth=2.4;
+  if(v.mouth==="o"){ ctx.fillStyle="#2a0a1a"; ctx.beginPath(); ctx.ellipse(x,y+2,w*.18,w*.22,0,0,Math.PI*2); ctx.fill(); ctx.stroke(); }
+  else if(v.mouth==="frown"){ ctx.beginPath(); ctx.moveTo(x-w*.35,y+5); ctx.quadraticCurveTo(x,y-3,x+w*.35,y+5); ctx.stroke(); }
+  else {
+    const open = v.mouth==="laugh" ? w*.34 : w*.2;
+    ctx.fillStyle=fill||"#2a0a1a"; ctx.beginPath(); ctx.moveTo(x-w*.45,y-1); ctx.quadraticCurveTo(x,y+open*2.2,x+w*.45,y-1); ctx.quadraticCurveTo(x,y+open*.2,x-w*.45,y-1); ctx.closePath(); ctx.fill(); ctx.stroke();
+    if(teeth){ ctx.fillStyle=teeth; for(const dx of [-.28,-.1,.1,.28]){ ctx.beginPath(); ctx.moveTo(x+w*dx-2.4,y); ctx.lineTo(x+w*dx+2.4,y); ctx.lineTo(x+w*dx,y+4.4); ctx.closePath(); ctx.fill(); } }
+  }
+  ctx.restore();
+}
+
+// ---------- 1) GUARDIÃO DOS MAPAS — um pergaminho-mapa vivo, com a bússola ao peito ----------
+function euGuardiao(ctx,v){
+  const cx=58; ctx.save(); ctx.lineJoin="round"; ctx.lineCap="round";
+  const up=v.arms==="up";
+  // braços azuis com luvas douradas
+  ctx.strokeStyle="#2a5bd8"; ctx.lineWidth=6;
+  for(const sg of [-1,1]){ ctx.beginPath(); ctx.moveTo(cx+sg*30,58); ctx.bezierCurveTo(cx+sg*44,up?50:66,cx+sg*50,up?34:80,cx+sg*(up?46:50),up?22:88); ctx.stroke();
+    ctx.fillStyle="#ffd23f"; ctx.strokeStyle="#7a5400"; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(cx+sg*(up?46:50),up?20:90,6,0,Math.PI*2); ctx.fill(); ctx.stroke(); ctx.strokeStyle="#2a5bd8"; ctx.lineWidth=6; }
+  // rolos (cima e baixo)
+  for(const y of [10,96]){ ctx.fillStyle="#c98f4a"; ctx.strokeStyle="#6a3d10"; ctx.lineWidth=2.4; ctx.beginPath(); ctx.roundRect?ctx.roundRect(20,y,76,13,6.5):ctx.rect(20,y,76,13); ctx.fill(); ctx.stroke();
+    ctx.fillStyle="#e8b46a"; ctx.fillRect(26,y+3,64,3); }
+  // pergaminho
+  ctx.fillStyle="#f7e8bb"; ctx.strokeStyle="#8a5a1d"; ctx.lineWidth=2.4; ctx.beginPath(); ctx.rect(26,22,64,76); ctx.fill(); ctx.stroke();
+  // continentes e rota tracejada
+  ctx.fillStyle="rgba(120,180,90,0.55)"; for(const [x,y,rx,ry] of [[40,84,10,6],[74,80,12,7],[62,90,7,4]]){ ctx.beginPath(); ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2); ctx.fill(); }
+  ctx.setLineDash([3,3]); ctx.strokeStyle="#d03030"; ctx.lineWidth=1.8; ctx.beginPath(); ctx.moveTo(34,76); ctx.quadraticCurveTo(54,68,70,82); ctx.stroke(); ctx.setLineDash([]);
+  ctx.strokeStyle="#d03030"; ctx.lineWidth=2.2; ctx.beginPath(); ctx.moveTo(68,79); ctx.lineTo(74,85); ctx.moveTo(74,79); ctx.lineTo(68,85); ctx.stroke();
+  // rosa-dos-ventos
+  ctx.fillStyle="#2a5bd8"; ctx.strokeStyle="#12307a"; ctx.lineWidth=1.4; ctx.beginPath(); ctx.arc(80,32,6.5,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  ctx.fillStyle="#ffd23f"; ctx.beginPath(); ctx.moveTo(80,26); ctx.lineTo(82,32); ctx.lineTo(80,38); ctx.lineTo(78,32); ctx.closePath(); ctx.fill();
+  // cara
+  hbEyes(ctx,v,[46,70],50,7,"#ffffff","#2a6bff");
+  hbMouth(ctx,v,58,66,30,"#5a2a10","#ffffff");
+  // estrela dourada (a que se perdeu) no topo
+  ctx.fillStyle="#ffd23f"; ctx.strokeStyle="#8a5f00"; ctx.lineWidth=1.6; ctx.beginPath();
+  for(let i=0;i<10;i++){ const r=i%2?3.4:7.5, a=-Math.PI/2+i*Math.PI/5; ctx.lineTo(cx+Math.cos(a)*r,6+Math.sin(a)*r); } ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+// ---------- 2) DRAGÃO DA CONFUSÃO CULTURAL — dragão-manta-de-retalhos com balão de «?!» ----------
+function euDragao(ctx,v){
+  const cx=58, cy=70; ctx.save(); ctx.lineJoin="round"; ctx.lineCap="round";
+  const up=v.arms==="up";
+  // asas
+  ctx.fillStyle="#7a4fd0"; ctx.strokeStyle="#33196b"; ctx.lineWidth=2.2;
+  for(const sg of [-1,1]){ ctx.beginPath(); ctx.moveTo(cx+sg*26,cy-6); ctx.quadraticCurveTo(cx+sg*58,cy-40,cx+sg*52,cy-2); ctx.quadraticCurveTo(cx+sg*44,cy+4,cx+sg*36,cy+4); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+  // braços/garras
+  ctx.strokeStyle="#16967f"; ctx.lineWidth=6;
+  for(const sg of [-1,1]){ ctx.beginPath(); ctx.moveTo(cx+sg*30,cy+8); ctx.quadraticCurveTo(cx+sg*44,up?cy-6:cy+14,cx+sg*(up?42:44),up?cy-20:cy+26); ctx.stroke();
+    ctx.fillStyle="#ffe9a8"; ctx.strokeStyle="#7a5a10"; ctx.lineWidth=1.8; for(const d of [-3,0,3]){ ctx.beginPath(); ctx.moveTo(cx+sg*(up?42:44)+d,up?cy-20:cy+26); ctx.lineTo(cx+sg*(up?42:44)+d*1.6,up?cy-27:cy+33); ctx.lineTo(cx+sg*(up?42:44)+d+2,up?cy-20:cy+26); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+    ctx.strokeStyle="#16967f"; ctx.lineWidth=6; }
+  // corpo + retalhos de bandeiras (a «confusão»)
+  ctx.save(); ctx.beginPath(); ctx.ellipse(cx,cy,36,34,0,0,Math.PI*2); ctx.clip();
+  ctx.fillStyle="#1fb59a"; ctx.fillRect(0,0,116,116);
+  const patches=[["#e04040",22,40,34,28],["#ffd23f",54,34,34,26],["#2a5bd8",78,50,30,30],["#ffffff",30,70,30,26],["#2fa84a",56,80,34,30],["#ff8a1f",80,82,26,26]];
+  for(const [c,x,y,w,h] of patches){ ctx.fillStyle=c; ctx.globalAlpha=.85; ctx.fillRect(x,y,w,h); } ctx.globalAlpha=1;
+  ctx.strokeStyle="rgba(20,40,80,.45)"; ctx.lineWidth=1.3; ctx.setLineDash([3,2]); for(const x of [54,78]){ ctx.beginPath(); ctx.moveTo(x,34); ctx.lineTo(x,108); ctx.stroke(); } for(const y of [50,78]){ ctx.beginPath(); ctx.moveTo(22,y); ctx.lineTo(96,y); ctx.stroke(); } ctx.setLineDash([]);
+  ctx.restore();
+  ctx.strokeStyle="#0e5f50"; ctx.lineWidth=2.6; ctx.beginPath(); ctx.ellipse(cx,cy,36,34,0,0,Math.PI*2); ctx.stroke();
+  // barriga
+  ctx.fillStyle="#ffe9b0"; ctx.strokeStyle="#b5893c"; ctx.lineWidth=1.6; ctx.beginPath(); ctx.ellipse(cx,cy+16,17,15,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  // cornos e espigões
+  ctx.fillStyle="#ffd23f"; ctx.strokeStyle="#8a5f00"; ctx.lineWidth=1.8;
+  for(const sg of [-1,1]){ ctx.beginPath(); ctx.moveTo(cx+sg*14,cy-30); ctx.lineTo(cx+sg*24,cy-48); ctx.lineTo(cx+sg*20,cy-26); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+  ctx.fillStyle="#ff8a1f"; for(const dx of [-8,0,8]){ ctx.beginPath(); ctx.moveTo(cx+dx-4,cy-33); ctx.lineTo(cx+dx,cy-43); ctx.lineTo(cx+dx+4,cy-33); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+  // cara
+  hbEyes(ctx,v,[46,70],cy-12,7,"#ffe34a","#ffb300");
+  hbMouth(ctx,v,cx,cy+2,30,"#5a1a2a","#ffffff");
+  // balão «?!»
+  ctx.fillStyle="#ffffff"; ctx.strokeStyle="#2a3b7a"; ctx.lineWidth=2; ctx.beginPath(); ctx.ellipse(92,16,15,11,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(82,24); ctx.lineTo(76,32); ctx.lineTo(88,26); ctx.fill(); ctx.stroke();
+  ctx.fillStyle="#d03030"; ctx.font="bold 15px Arial"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText("?!",92,17);
+  ctx.restore();
+}
+// ---------- 3) TITÃ DA DISCÓRDIA — gigante de pedra rachada, com a fenda vermelha ao peito ----------
+function euTita(ctx,v){
+  const cx=58; ctx.save(); ctx.lineJoin="round"; ctx.lineCap="round";
+  const up=v.arms==="up";
+  const stone=(x,y,w,h,r,fill)=>{ ctx.fillStyle=fill||"#8d95ab"; ctx.strokeStyle="#3a4058"; ctx.lineWidth=2.6; ctx.beginPath(); ctx.roundRect?ctx.roundRect(x,y,w,h,r):ctx.rect(x,y,w,h); ctx.fill(); ctx.stroke(); };
+  // pernas
+  stone(34,86,20,24,5,"#7b8399"); stone(62,86,20,24,5,"#7b8399");
+  // braços e punhos
+  for(const sg of [-1,1]){ const bx=cx+sg*(up?44:46), by=up?26:70;
+    ctx.strokeStyle="#7b8399"; ctx.lineWidth=14; ctx.beginPath(); ctx.moveTo(cx+sg*30,52); ctx.quadraticCurveTo(cx+sg*(up?46:50),up?44:62,bx,by+8); ctx.stroke();
+    stone(bx-11,by-11,22,22,6,"#9aa2b8");
+    ctx.strokeStyle="#3a4058"; ctx.lineWidth=1.6; ctx.beginPath(); ctx.moveTo(bx-4,by-9); ctx.lineTo(bx+1,by-1); ctx.lineTo(bx-3,by+7); ctx.stroke();
+    // elos de corrente partidos
+    ctx.strokeStyle="#c8cde0"; ctx.lineWidth=2.2; ctx.beginPath(); ctx.ellipse(bx,by+15,3.2,5,0,0,Math.PI*2); ctx.stroke(); }
+  // tronco
+  ctx.fillStyle="#8d95ab"; ctx.strokeStyle="#3a4058"; ctx.lineWidth=2.8; ctx.beginPath(); ctx.moveTo(26,52); ctx.lineTo(90,52); ctx.lineTo(82,92); ctx.lineTo(34,92); ctx.closePath(); ctx.fill(); ctx.stroke();
+  // musgo
+  ctx.fillStyle="#5f9a4a"; for(const [x,y,r] of [[34,56,4],[40,59,3],[82,58,4],[78,62,3]]){ ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); }
+  // fenda vermelha (a discórdia)
+  ctx.save(); ctx.shadowColor="#ff3030"; ctx.shadowBlur=8; ctx.strokeStyle="#ff4a3a"; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(58,56); ctx.lineTo(52,66); ctx.lineTo(60,74); ctx.lineTo(54,86); ctx.stroke(); ctx.restore();
+  ctx.strokeStyle="#3a4058"; ctx.lineWidth=1.6; ctx.beginPath(); ctx.moveTo(70,60); ctx.lineTo(76,70); ctx.lineTo(70,78); ctx.stroke();
+  // cabeça de pedra
+  stone(36,8,44,40,9,"#9aa2b8");
+  ctx.strokeStyle="#3a4058"; ctx.lineWidth=1.6; ctx.beginPath(); ctx.moveTo(66,10); ctx.lineTo(62,20); ctx.lineTo(68,26); ctx.stroke();
+  hbEyes(ctx,v,[47,69],27,6,"#ff7a2a","#ff3d00");
+  hbMouth(ctx,v,58,39,26,"#2a1a1a","#e8e8f0");
+  ctx.restore();
+}
+// ---------- 4) SOMBRA DA INDIFERENÇA — nuvem cinzenta de olhos sonolentos, com a estrela apagada ----------
+function euSombra(ctx,v){
+  const cx=58; ctx.save(); ctx.lineJoin="round"; ctx.lineCap="round";
+  const up=v.arms==="up";
+  // cauda ondulada
+  const g=ctx.createLinearGradient(0,20,0,112); g.addColorStop(0,"#8a8fb5"); g.addColorStop(1,"#3b3d5c");
+  ctx.fillStyle=g; ctx.strokeStyle="#262842"; ctx.lineWidth=2.6;
+  ctx.beginPath(); ctx.moveTo(22,60);
+  ctx.bezierCurveTo(14,30,40,8,58,8); ctx.bezierCurveTo(78,8,102,30,94,60);
+  ctx.bezierCurveTo(98,78,92,92,88,104); ctx.quadraticCurveTo(80,96,74,108); ctx.quadraticCurveTo(66,98,58,110); ctx.quadraticCurveTo(50,98,42,108); ctx.quadraticCurveTo(36,96,28,104);
+  ctx.bezierCurveTo(24,92,18,78,22,60); ctx.closePath(); ctx.fill(); ctx.stroke();
+  // braços de névoa
+  ctx.strokeStyle="#6c7096"; ctx.lineWidth=7;
+  for(const sg of [-1,1]){ ctx.beginPath(); ctx.moveTo(cx+sg*34,62); ctx.quadraticCurveTo(cx+sg*(up?50:46),up?50:74,cx+sg*(up?46:42),up?34:88); ctx.stroke(); ctx.fillStyle="#9ba0c4"; ctx.beginPath(); ctx.arc(cx+sg*(up?46:42),up?32:90,5.5,0,Math.PI*2); ctx.fill(); }
+  // olhos sonolentos
+  const open = v.eyes==="open"||v.eyes==="angry"||v.eyes==="sad";
+  if(open){
+    for(const x of [44,72]){ ctx.fillStyle="#e8ecff"; ctx.beginPath(); ctx.ellipse(x,46,8,8.6,0,0,Math.PI*2); ctx.fill(); ctx.fillStyle="#262842"; ctx.beginPath(); ctx.ellipse(x,v.eyes==="sad"?50:48,3.6,4,0,0,Math.PI*2); ctx.fill();
+      // pálpebra pesada (cobre metade de cima)
+      ctx.fillStyle="#6a6e92"; ctx.strokeStyle="#262842"; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(x-9.5,v.eyes==="angry"?(x<58?42:47):46); ctx.lineTo(x+9.5,v.eyes==="angry"?(x<58?47:42):46); ctx.lineTo(x+9.5,36); ctx.lineTo(x-9.5,36); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+  } else hbEyes(ctx,v,[44,72],46,7,"#e8ecff","#8aa0ff");
+  // boca: linha plana (indiferença)
+  if(v.mouth==="grin"){ ctx.strokeStyle="#262842"; ctx.lineWidth=2.6; ctx.beginPath(); ctx.moveTo(48,68); ctx.lineTo(68,68); ctx.stroke(); }
+  else hbMouth(ctx,v,58,68,28,"#1a1a2e",null);
+  // estrela apagada ao peito
+  ctx.fillStyle="#8a8d9c"; ctx.strokeStyle="#4b4d5e"; ctx.lineWidth=1.6; ctx.beginPath();
+  for(let i=0;i<10;i++){ const r=i%2?4.6:10, a=-Math.PI/2+i*Math.PI/5; ctx.lineTo(cx+Math.cos(a)*r,88+Math.sin(a)*r); } ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+// ---------- Projéteis ----------
+function euProjPin(ctx){ // 30×30 — pino de mapa vermelho
+  ctx.save(); ctx.lineJoin="round";
+  ctx.fillStyle="#e23a3a"; ctx.strokeStyle="#6a1010"; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(15,28); ctx.bezierCurveTo(4,17,5,4,15,4); ctx.bezierCurveTo(25,4,26,17,15,28); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.fillStyle="#ffffff"; ctx.beginPath(); ctx.arc(15,13,4.6,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+function euProjBubble(ctx){ // 30×30 — balão de confusão «?!»
+  ctx.save(); ctx.lineJoin="round";
+  ctx.fillStyle="#ffffff"; ctx.strokeStyle="#2a3b7a"; ctx.lineWidth=2; ctx.beginPath(); ctx.ellipse(15,13,13,10,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(8,20); ctx.lineTo(5,28); ctx.lineTo(15,22); ctx.fill(); ctx.stroke();
+  ctx.fillStyle="#d03030"; ctx.font="bold 13px Arial"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText("?!",15,14);
+  ctx.restore();
+}
+function euProjRock(ctx){ // 32×24 — pedra rachada
+  ctx.save(); ctx.lineJoin="round";
+  ctx.fillStyle="#8d95ab"; ctx.strokeStyle="#3a4058"; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(4,16); ctx.lineTo(8,6); ctx.lineTo(16,2); ctx.lineTo(25,5); ctx.lineTo(29,13); ctx.lineTo(24,21); ctx.lineTo(12,22); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.strokeStyle="#ff4a3a"; ctx.lineWidth=1.8; ctx.beginPath(); ctx.moveTo(16,3); ctx.lineTo(13,11); ctx.lineTo(18,15); ctx.lineTo(15,21); ctx.stroke();
+  ctx.restore();
+}
+function euProjOrb(ctx){ // 30×30 — orbe cinzento com olho sonolento
+  ctx.save();
+  const g=ctx.createRadialGradient(12,11,2,15,15,14); g.addColorStop(0,"#a9aed0"); g.addColorStop(1,"#3b3d5c");
+  ctx.fillStyle=g; ctx.strokeStyle="#262842"; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(15,15,13,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  ctx.fillStyle="#e8ecff"; ctx.beginPath(); ctx.ellipse(15,16,6,5,0,0,Math.PI*2); ctx.fill(); ctx.fillStyle="#262842"; ctx.beginPath(); ctx.arc(15,17,2.4,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle="#6a6e92"; ctx.fillRect(8.5,10.5,13,5.5); ctx.strokeStyle="#262842"; ctx.lineWidth=1.4; ctx.beginPath(); ctx.moveTo(8.5,16); ctx.lineTo(21.5,16); ctx.stroke();
+  ctx.restore();
+}
+function euProjStar(ctx){ // 34×28 — estrela dourada (conhecimento: para apanhar)
+  ctx.save(); ctx.lineJoin="round"; ctx.shadowColor="#ffd23f"; ctx.shadowBlur=6;
+  ctx.fillStyle="#ffd23f"; ctx.strokeStyle="#8a5f00"; ctx.lineWidth=1.8; ctx.beginPath();
+  for(let i=0;i<10;i++){ const r=i%2?5.6:13, a=-Math.PI/2+i*Math.PI/5; ctx.lineTo(17+Math.cos(a)*r,15+Math.sin(a)*r); } ctx.closePath(); ctx.fill(); ctx.shadowBlur=0; ctx.stroke();
+  ctx.fillStyle="rgba(255,255,255,.7)"; ctx.beginPath(); ctx.arc(13,10,2,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+function euProjBadStar(ctx){ // 34×28 — estrela apagada e rachada (a evitar)
+  ctx.save(); ctx.lineJoin="round";
+  ctx.fillStyle="#7d8090"; ctx.strokeStyle="#33344a"; ctx.lineWidth=1.8; ctx.beginPath();
+  for(let i=0;i<10;i++){ const r=i%2?5.6:13, a=-Math.PI/2+i*Math.PI/5; ctx.lineTo(17+Math.cos(a)*r,15+Math.sin(a)*r); } ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.strokeStyle="#d03030"; ctx.lineWidth=2.2; ctx.beginPath(); ctx.moveTo(11,9); ctx.lineTo(23,21); ctx.moveTo(23,9); ctx.lineTo(11,21); ctx.stroke();
+  ctx.restore();
+}
+function europaBossesRedraw(scene){
+  const BOSSES={ virus_gigante:euGuardiao, monstro_phishing:euDragao, robo_spam:euTita, espiao_sombras:euSombra };
+  for(const [name,draw] of Object.entries(BOSSES)){
+    for(const [suf,v] of Object.entries(HB_VARIANTS)){
+      const key="boss_"+name+suf;
+      if(scene.textures.exists(key)) scene.textures.remove(key);
+      const tex=scene.textures.createCanvas(key,116,116), ctx=tex.getContext();
+      draw(ctx,v); tex.refresh();
+    }
+  }
+  const PROJ={ boss_proj_germ:[30,30,euProjPin], boss_proj_hook:[30,30,euProjBubble], boss_proj_qmark:[30,30,euProjBubble], boss_proj_spam:[32,24,euProjRock], boss_proj_shadow:[30,30,euProjOrb], boss_proj_book:[34,28,euProjStar], boss_proj_badbook:[34,28,euProjBadStar] };
+  for(const [key,[w,h,draw]] of Object.entries(PROJ)){
+    if(scene.textures.exists(key)) scene.textures.remove(key);
+    const tex=scene.textures.createCanvas(key,w,h), ctx=tex.getContext(); draw(ctx); tex.refresh();
+  }
+}
+
+// ===== EUROPA — itens apanháveis e decoração com temática da UE =====
+// Substituem, depois de makeItemTextures(): tratado (item_chave), bandeira (item_chip), medalha europeia (item_medalha),
+// moedas de euro (item_cadeado_0..5) e bandeirinhas de países (item_pacote_0..4).
+function euStarPoly(ctx,cx,cy,R,r){ ctx.beginPath(); for(let i=0;i<10;i++){ const a=-Math.PI/2+i*Math.PI/5, rr=i%2?r:R; ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr); } ctx.closePath(); }
+function euStarRing(ctx,cx,cy,ring,R,fill){ ctx.fillStyle=fill; for(let k=0;k<12;k++){ const a=-Math.PI/2+k*Math.PI/6; euStarPoly(ctx,cx+Math.cos(a)*ring,cy+Math.sin(a)*ring,R,R*0.42); ctx.fill(); } }
+function euItemTratado(ctx){ // 52×56
+  ctx.save(); ctx.translate(26,28); ctx.rotate(-0.12); ctx.translate(-26,-28); ctx.lineJoin="round";
+  ctx.shadowColor="rgba(255,214,80,.7)"; ctx.shadowBlur=8;
+  ctx.fillStyle="#f6e5b3"; ctx.strokeStyle="#7a5418"; ctx.lineWidth=2; ctx.beginPath(); ctx.rect(11,9,30,38); ctx.fill(); ctx.shadowBlur=0; ctx.stroke();
+  for(const y of [7,43]){ ctx.fillStyle="#d9a85a"; ctx.strokeStyle="#7a5418"; ctx.beginPath(); ctx.roundRect?ctx.roundRect(7,y,38,9,4.5):ctx.rect(7,y,38,9); ctx.fill(); ctx.stroke(); ctx.fillStyle="#f0c680"; ctx.fillRect(11,y+2,30,2); }
+  ctx.strokeStyle="#8a6a30"; ctx.lineWidth=1.6; for(const y of [18,24,30]){ ctx.beginPath(); ctx.moveTo(16,y); ctx.lineTo(36,y); ctx.stroke(); }
+  ctx.fillStyle="#d23a3a"; ctx.strokeStyle="#7a1010"; ctx.lineWidth=1.8; ctx.beginPath(); ctx.arc(26,37,6.5,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  ctx.fillStyle="#ffd23f"; euStarPoly(ctx,26,37,4,1.8); ctx.fill();
+  ctx.restore();
+}
+function euItemBandeira(ctx){ // 44×44
+  ctx.save(); ctx.lineJoin="round";
+  ctx.strokeStyle="#6a4012"; ctx.lineWidth=3.2; ctx.beginPath(); ctx.moveTo(8,5); ctx.lineTo(8,41); ctx.stroke();
+  ctx.fillStyle="#ffd23f"; ctx.beginPath(); ctx.arc(8,5,3,0,Math.PI*2); ctx.fill();
+  ctx.shadowColor="rgba(80,140,255,.7)"; ctx.shadowBlur=7;
+  ctx.fillStyle="#1544b5"; ctx.strokeStyle="#0a2166"; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(10,8); ctx.quadraticCurveTo(22,4,32,9); ctx.quadraticCurveTo(40,12,40,12); ctx.lineTo(40,31); ctx.quadraticCurveTo(30,34,22,29); ctx.quadraticCurveTo(15,26,10,29); ctx.closePath(); ctx.fill(); ctx.shadowBlur=0; ctx.stroke();
+  euStarRing(ctx,25,19,7,1.9,"#ffd23f");
+  ctx.restore();
+}
+function euItemMedalha(ctx){ // 52×58
+  ctx.save(); ctx.lineJoin="round";
+  ctx.fillStyle="#1544b5"; ctx.strokeStyle="#0a2166"; ctx.lineWidth=1.8;
+  for(const sg of [-1,1]){ ctx.beginPath(); ctx.moveTo(26+sg*3,2); ctx.lineTo(26+sg*14,2); ctx.lineTo(26+sg*3,30); ctx.lineTo(26-sg*1,30); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+  ctx.shadowColor="rgba(255,214,80,.9)"; ctx.shadowBlur=10;
+  const g=ctx.createRadialGradient(22,28,2,26,32,22); g.addColorStop(0,"#fff0a0"); g.addColorStop(1,"#e0a800");
+  ctx.fillStyle=g; ctx.strokeStyle="#7a5400"; ctx.lineWidth=2.2; ctx.beginPath(); ctx.arc(26,34,20,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0; ctx.stroke();
+  ctx.fillStyle="#1544b5"; ctx.strokeStyle="#0a2166"; ctx.lineWidth=1.8; ctx.beginPath(); ctx.arc(26,34,14.5,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  euStarRing(ctx,26,34,9,2.6,"#ffd23f");
+  ctx.restore();
+}
+function euItemMoeda(ctx,tipo){ // 32×32 — moeda de euro
+  const P={ ouro:["#fff0a0","#e3aa00","#7a5400","#9a6b00"], prata:["#f4f6fb","#b4bccf","#5a6378","#6a7388"], cobre:["#ffd0a8","#c9743a","#6a3512","#7d4219"] }[tipo.cor];
+  ctx.save(); ctx.shadowColor="rgba(255,225,120,.6)"; ctx.shadowBlur=5;
+  const g=ctx.createRadialGradient(12,11,2,16,16,16); g.addColorStop(0,P[0]); g.addColorStop(1,P[1]);
+  ctx.fillStyle=g; ctx.strokeStyle=P[2]; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(16,16,14,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0; ctx.stroke();
+  if(tipo.bimetal){ ctx.fillStyle="#d8deea"; ctx.strokeStyle=P[2]; ctx.lineWidth=1.4; ctx.beginPath(); ctx.arc(16,16,9,0,Math.PI*2); ctx.fill(); ctx.stroke(); }
+  else { ctx.strokeStyle=P[2]; ctx.lineWidth=1.2; ctx.beginPath(); ctx.arc(16,16,10.5,0,Math.PI*2); ctx.stroke(); }
+  ctx.fillStyle=P[3]; ctx.font="bold 15px Arial"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(tipo.texto||"€",16,17);
+  ctx.restore();
+}
+function euItemBandeirinha(ctx,pais){ // 48×36 — bandeira de um país
+  ctx.save(); ctx.lineJoin="round";
+  ctx.shadowColor="rgba(0,0,0,.35)"; ctx.shadowBlur=4;
+  ctx.fillStyle="#fff"; ctx.beginPath(); ctx.rect(4,4,40,28); ctx.fill(); ctx.shadowBlur=0;
+  ctx.save(); ctx.beginPath(); ctx.rect(4,4,40,28); ctx.clip();
+  if(pais==="pt"){ ctx.fillStyle="#0a7a2e"; ctx.fillRect(4,4,16,28); ctx.fillStyle="#d21f2b"; ctx.fillRect(20,4,24,28); ctx.fillStyle="#ffd23f"; ctx.beginPath(); ctx.arc(20,18,5.5,0,Math.PI*2); ctx.fill(); ctx.fillStyle="#d21f2b"; ctx.fillRect(18,15,4,6); }
+  if(pais==="fr"){ ctx.fillStyle="#1d3fa8"; ctx.fillRect(4,4,14,28); ctx.fillStyle="#ffffff"; ctx.fillRect(18,4,13,28); ctx.fillStyle="#d21f2b"; ctx.fillRect(31,4,13,28); }
+  if(pais==="es"){ ctx.fillStyle="#c8102e"; ctx.fillRect(4,4,40,28); ctx.fillStyle="#ffc400"; ctx.fillRect(4,11,40,14); }
+  if(pais==="it"){ ctx.fillStyle="#0a8a3a"; ctx.fillRect(4,4,14,28); ctx.fillStyle="#ffffff"; ctx.fillRect(18,4,13,28); ctx.fillStyle="#d21f2b"; ctx.fillRect(31,4,13,28); }
+  if(pais==="de"){ ctx.fillStyle="#111"; ctx.fillRect(4,4,40,10); ctx.fillStyle="#d21f2b"; ctx.fillRect(4,13,40,10); ctx.fillStyle="#ffc400"; ctx.fillRect(4,22,40,10); }
+  const sh=ctx.createLinearGradient(4,4,44,32); sh.addColorStop(0,"rgba(255,255,255,.35)"); sh.addColorStop(.5,"rgba(255,255,255,0)"); sh.addColorStop(1,"rgba(0,0,0,.15)"); ctx.fillStyle=sh; ctx.fillRect(4,4,40,28);
+  ctx.restore();
+  ctx.strokeStyle="#33405f"; ctx.lineWidth=1.8; ctx.strokeRect(4,4,40,28);
+  ctx.restore();
+}
+function europaItensRedraw(scene){
+  const novo=(key,w,h,fn)=>{ if(scene.textures.exists(key)) scene.textures.remove(key); const tex=scene.textures.createCanvas(key,w,h); fn(tex.getContext()); tex.refresh(); };
+  novo("item_chave",52,56,euItemTratado);
+  novo("item_chip",44,44,euItemBandeira);
+  novo("item_medalha",52,58,euItemMedalha);
+  const moedas=[{cor:"ouro"},{cor:"ouro",bimetal:true,texto:"2€"},{cor:"ouro"},{cor:"prata"},{cor:"cobre",texto:"c"},{cor:"ouro",bimetal:true}];
+  moedas.forEach((m,i)=>novo("item_cadeado_"+i,32,32,ctx=>euItemMoeda(ctx,m)));
+  ["pt","fr","es","it","de"].forEach((p,i)=>novo("item_pacote_"+i,48,36,ctx=>euItemBandeirinha(ctx,p)));
 }

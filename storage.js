@@ -2,7 +2,7 @@
 // Antes: 7 chaves separadas em localStorage (uma por sistema: som/alto contraste,
 // mapa, álbum de artefactos, estrelas, conquistas, estatísticas globais...),
 // cada uma com o seu próprio try/catch e sem qualquer versão.
-// Agora: UMA única chave "vanbertos_internet_segura_save_v1", com os dados de cada sistema
+// Agora: UMA única chave "vanbertos_europa_save_v1", com os dados de cada sistema
 // guardados no seu próprio "namespace" dentro do mesmo objeto. Cada módulo
 // continua tão independente como antes — só troca localStorage.getItem/setItem
 // diretos por loadNamespace/saveNamespace.
@@ -11,7 +11,7 @@
 // (v1), esse progresso é lido uma única vez e copiado para a chave nova antes
 // de ser apagado — ninguém perde progresso por causa desta reorganização.
 
-const ROOT_KEY = "vanbertos_internet_segura_save_v1";
+const ROOT_KEY = "vanbertos_europa_save_v1";
 
 let root = null;
 
@@ -85,7 +85,7 @@ const OLD_HC_KEY = "vanbertos_hc";                    // "1" / "0"
 
 (function migrateFromOldKeys() {
   try {
-    return; // Internet Segura: não migra chaves antigas (evita mexer nos dados da Missão Cibersegurança)
+    if (localStorage.getItem(ROOT_KEY)) return; // já está na v2
     const migrated = {};
     let foundAnything = false;
 

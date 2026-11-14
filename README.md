@@ -1,36 +1,41 @@
-# VanBerto's e a Missão Internet Segura
+# VanBerto's — A Missão Europa 🇪🇺 (v5)
 
-Versão construída sobre o motor da Missão Cibersegurança v105 (20 níveis em 4 mundos, bosses, tubos e salas secretas,
-estrelas, conquistas, certificado, PWA offline) com a identidade do jogo «VanBerto's e a Missão Internet Segura».
+Versão do jogo da UE construída sobre o motor mais recente da «Missão Internet Segura» (v14), mantendo os 20 níveis, as perguntas, os mapas e a história da Missão Europa, agora em **azul e amarelo da UE**.
 
-## Novidades desta versão
+## Novidades da v5
 
-- **Estrutura nova (Perguntas.docx):** 4 mundos × 5 níveis com os nomes e as missões do documento — Ilha dos Guardiões Digitais, Vale das Ameaças Digitais, Cidade Conectada e Universo da Inteligência Digital. Cada nível tem as 5 perguntas novas (Fácil, Intermédio e Avançado) mais perguntas antigas do tema mais próximo; as de segurança técnica (palavras-passe, vírus, Wi-Fi, cópias de segurança…) passaram para as lutas dos bosses. As opções são baralhadas.
-- **Bosses novos (um por mundo, com os desenhos da imagem enviada):** Guardião da Internet (nível 5, **escudo** azul), O Sombra das Redes (nível 10, fica **invisível**), O Manipulador Digital (nível 15, **anel de notificações**) e A Inteligência Artificial (nível 20, **firewall**). Cada um tem a sua proteção, que sobe e desce: só se salta no boss quando a proteção está em baixo. Cada um tem também as suas falas, projéteis e perguntas. O ficheiro `game/boss-art.js` liga as imagens `boss-*.png` ao motor.
-
-- **Chaves 🔑 (como as moedas do Super Mário):** cada chave vale +10 pontos e soma ao contador «🔑 n/100» no ecrã. **Ao chegar às 100 chaves ganhas +1 vida** (se já tiveres o máximo, ganhas +500 pontos) e o contador volta a zero. As chaves estão em arcos no chão, em filas por cima das plataformas e dentro dos blocos «?». O contador fica guardado entre níveis e sessões, e cada chave só conta uma vez por nível (não dá para repetir um nível para ganhar vidas). «Recomeçar» e «Limpar tudo» zeram o contador.
-
-- **Obstáculos novos** (`game/blocks.js`), colocados automaticamente em sítios livres:
-  - **Plataformas que caem** (pedra gretada): abanam ao pisá-las, caem ao fim de ~0,7 s e voltam passados ~3 s. Têm um prémio por cima (escudo, duplo salto ou vida). Não existem no Extremo.
-  - **Firewalls** (feixe vermelho-rosa entre dois postes): ligam e desligam, piscam antes de ligar e tiram uma vida se tocares com o feixe ligado. Com Star Power atravessas. Nível 4 em diante.
-  - **Vento** (zona com riscas brancas): empurra o VanBerto's para um lado enquanto lá estiveres. Só em alguns níveis.
-
-- **Estética nova (tema claro):** fundo creme com pontinhos, cartões brancos com contorno marinho grosso e sombra dura, botões amarelos para a ação principal, letra Nunito. Modal inicial com a mascote VanBerto's e «Olá! Como te chamas?». Os fundos dos mundos mantêm as cores originais das imagens.
-
-- **Blocos para dar cabeçadas (tipo Super Mário)** — `game/blocks.js`:
-  - **Bloco «?»** (dourado): salta por baixo e bate com a cabeça. Dá 🔑 (uma chave, +10 pontos) ou, às vezes, um item (🛡️ escudo,
-    🦅 duplo salto, ❤️ vida). Fica cinzento depois de usado.
-  - **Tijolo**: dá só um abanão; com o **escudo 🛡️** (ou Star Power) o VanBerto's **parte-o** (+5 pontos).
-  - Dá também para saltar para cima dos blocos e usá-los como degraus.
-- **Plataformas extra flutuantes** com blocos por cima, em todos os níveis (1 a 2 por nível).
-- Os blocos e as plataformas extra são colocados automaticamente em sítios livres (sem tapar canos, trampolins, itens,
-  spawn, porta ou letreiros) e ficam sempre no mesmo lugar em cada nível.
-- Na **Fácil** os blocos podem dar escudo, duplo salto e vida; no **Difícil** só moedas, duplo salto e escudo;
-  no **Extremo** só moedas. Os itens saídos dos blocos **não contam** para as estrelas do nível.
-- Guardado em separado da Missão Cibersegurança (outra chave de gravação e outra cache offline), por isso os dois jogos
-  podem estar no mesmo site do GitHub Pages sem se misturarem.
+- **Bosses com os desenhos novos** (`boss/*.webp`, 7 poses cada, recortadas da imagem enviada): o motor usa a pose certa para cada momento (normal, riso, ataque, espanto ao ser atingido, zangado na fúria, triste ao ser derrotado). Ligação em `game/boss-art.js`.
+  - 🗺️ **Guardião dos Mapas** (nível 5): *escudo da bússola* azul.
+  - 🐉 **Dragão da Confusão Cultural** (nível 9): *aura de confusão* amarela a rodar.
+  - 🤖 **Titã da Discórdia** (nível 15): *anel de balões de barulho* à volta do boss.
+  - 🌑 **Sombra da Indiferença** (nível 20): fica *invisível* enquanto protegida.
+  Só se salta no boss quando a proteção está em baixo (o salto ressalta com ela em cima).
+- **Moedas de euro 💶** (antes «chaves»): cada moeda vale +10 pontos; **100 moedas = +1 vida** (ou +500 pontos se já tiveres o máximo). Contador «💶 n/100» no ecrã.
+- **Blocos «?» e tijolos** para dar cabeçadas, plataformas extra flutuantes, **plataformas que caem**, **barreiras intermitentes** (amarelas) e **vento**.
+- **Visual claro** (cartões brancos com contorno azul-UE, fundo azul-pálido, botões amarelos) e modal inicial com a mascote.
+- Guardado como antes em `vanbertos_europa_save_v1` (as gravações da v4 continuam a funcionar).
 
 ---
+
+
+Jogo de plataformas educativo sobre a União Europeia, para o Dia da Europa (9 de maio).
+Feito sobre o motor dos jogos «Missão» do VanBerto's (20 níveis, 4 mundos, 4 bosses, quiz, mapa da aventura).
+
+**História:** a Estrela da Europa perdeu o seu brilho! O VanBerto's viaja pelos quatro mundos, vence os guardiões dos desafios e recupera as **12 estrelas da bandeira europeia** (3 por boss).
+
+| Mundo | Níveis | Temas | Boss |
+|---|---|---|---|
+| 1 — Reino das Bandeiras Perdidas | 1–5 | geografia e símbolos | Guardião dos Mapas |
+| 2 — Vale das Mil Culturas | 6–9 | línguas, património, tradições, diversidade | Dragão da Confusão Cultural |
+| 3 — Fortaleza da União | 10–15 | Dia da Europa e Schuman, paz, história, valores, direitos, instituições | Titã da Discórdia |
+| 4 — O Futuro da Europa | 16–20 | ambiente, energia, ciência, Erasmus+, jovens e cidadania digital | Sombra da Indiferença |
+
+**Conteúdo:** as perguntas estão em `data-quiz.js`, gerado por `_dev/importar_perguntas.py` a partir de `_dev/perguntas_atualizadas.json` (extraído do Word «Perguntas Atualizadas»). Cartões «Sabias que…?» e dicas: `_dev/cartoes_dicas.json`. (`_dev/gerar_quiz_europa.py` é o gerador anterior, só para consulta.)
+Os ids internos dos bosses mantêm os nomes do motor (`virus_gigante` = Guardião dos Mapas, `monstro_phishing` = Dragão, `robo_spam` = Titã, `espiao_sombras` = Sombra).
+Arte da autora: mapas dos mundos 1 a 4 (`map-mundo1..4.webp`), fundos dos níveis (`mundoN_*.webp`, as mesmas imagens, inteiras e só sem as estrelas desenhadas) e sala secreta (`sala_secreta.webp`). Gerados por `_dev/gerar_fundos.py`.
+
+---
+(Notas técnicas do motor, herdadas do jogo base:)
 
 # VanBerto's — Missão Cibersegurança
 
@@ -147,7 +152,7 @@ e abrir <http://localhost:8000>.
 ## Versões e cache
 
 Todos os ficheiros carregados pelo `index.html` e todos os `import` internos levam **a mesma**
-string `?v=…` (atualmente `20261107is1`). Tem de ser sempre igual em todo o lado: o mesmo módulo
+string `?v=…` (atualmente `20261031eu4`). Tem de ser sempre igual em todo o lado: o mesmo módulo
 importado com strings diferentes é carregado duas vezes, como duas instâncias separadas, e os
 browsers que já têm o jogo podem ficar com uma mistura de ficheiros velhos e novos.
 
