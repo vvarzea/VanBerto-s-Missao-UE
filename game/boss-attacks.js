@@ -167,27 +167,27 @@ export function currentPopupConfig() {
   };
 }
 
-// Desenha uma janela de pop-up (fundo + barra de título vermelha + "✖" +
-// texto de isco) — tudo com Graphics/Text, sem precisar de texturas novas.
-// CORRIGIDO (pedido: "as imagens dos spams são demasiado grandes") — barra
-// de título, cantos e tipo de letra reduzidos junto com os anchors (ver
-// popupHazard em data-bosses.js, agora ~25% mais pequenos), para a janela
-// continuar proporcionada em vez de ficar com texto grande a mais dentro
-// de uma caixa mais pequena.
-
+// Desenha um "balão de discórdia" do Titã (fundo claro + barra azul-UE + frases de
+// quem só quer ter razão) — tudo com Graphics/Text, sem texturas novas. Tapa um
+// pedaço do ecrã (obstáculo de VISÃO, não de contacto).
 function makePopupWindow(scene, x, y, w, h) {
   const gfx = scene.add.graphics().setDepth(25);
-  gfx.fillStyle(0xf5f5f5, 0.97);
-  gfx.fillRoundedRect(x - w/2, y - h/2, w, h, 6);
-  gfx.fillStyle(0xff3030, 1);
+  gfx.fillStyle(0xf4f8ff, 0.97);
+  gfx.fillRoundedRect(x - w/2, y - h/2, w, h, 8);
+  gfx.fillStyle(0x003399, 1);
   gfx.fillRoundedRect(x - w/2, y - h/2, w, 17);
-  gfx.lineStyle(3, 0xff3030, 1);
-  gfx.strokeRoundedRect(x - w/2, y - h/2, w, h, 6);
-  const label = scene.add.text(x, y - h/2 + 9, "🧱 MURO", { fontSize:"10px", fontStyle:"900", color:"#ffffff" }).setOrigin(0.5).setDepth(26);
-  const closeX = scene.add.text(x + w/2 - 12, y - h/2 + 9, "✖", { fontSize:"12px", fontStyle:"900", color:"#ffffff" }).setOrigin(0.5).setDepth(26);
-  const body = scene.add.text(x, y + 8, "💰 OFERTA!\n👆 CLICA AQUI", { fontSize:"11px", fontStyle:"800", color:"#c72030", align:"center" }).setOrigin(0.5).setDepth(26);
+  gfx.lineStyle(3, 0x003399, 1);
+  gfx.strokeRoundedRect(x - w/2, y - h/2, w, h, 8);
+  gfx.fillStyle(0xffcc00, 1);                       // detalhe amarelo na barra
+  gfx.fillRect(x - w/2 + 6, y - h/2 + 14, w - 12, 3);
+  const label = scene.add.text(x, y - h/2 + 8, "📢 DISCÓRDIA", { fontSize:"10px", fontStyle:"900", color:"#ffffff" }).setOrigin(0.5).setDepth(26);
+  const closeX = scene.add.text(x + w/2 - 12, y - h/2 + 8, "💢", { fontSize:"10px" }).setOrigin(0.5).setDepth(26);
+  const lines = ["💬 Eu é que sei!\n🙉 Não ouço ninguém", "🗯️ Nós contra eles!\n🚫 Não quero ouvir", "😠 A culpa é tua!\n🙊 Não falo contigo"];
+  popupLineIdx = (popupLineIdx + 1) % lines.length;
+  const body = scene.add.text(x, y + 8, lines[popupLineIdx], { fontSize:"10px", fontStyle:"800", color:"#0a2466", align:"center" }).setOrigin(0.5).setDepth(26);
   return { gfx, label, closeX, body };
 }
+let popupLineIdx = 0;
 
 function destroyPopupElements(elements) {
   ["gfx","label","closeX","body"].forEach(k => { try{ elements[k].destroy(); }catch{} });
