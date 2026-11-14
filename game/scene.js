@@ -560,7 +560,7 @@ function updateCritters() {
         c.collected=true; c.sprite.destroy(); c.sprite=null;
         const pts=c.isDrone?15:10;
         set_score(score + (pts)); scoreText.setText(`🌟 Pontos: ${score}`);
-        showFloat(sceneRef,px,py-68,c.isDrone?`🛸 Drone +${pts}`:`📦 Pacote +${pts}`,c.isDrone?"#c0d8f0":"#ff80c0");
+        showFloat(sceneRef,px,py-68,c.isDrone?`🕊️ Pomba +${pts}`:`🚩 Bandeirinha +${pts}`,c.isDrone?"#c0d8f0":"#ff80c0");
         if(Math.random()<0.4) showFloat(sceneRef,px,py-100,pickPraise(),"#ffd700");
         ensureAudio(); SFX.coin();
         const tint=c.isDrone?[0xc0d8f0,0x40e0ff,0xffffff]:[0xff80c0,0xd0a0ff,0x80d0ff,0xffffff];

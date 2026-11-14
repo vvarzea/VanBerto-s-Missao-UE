@@ -105,7 +105,7 @@ export const LEVELS = [
     ],
     // 1 par, a meio do nível — recompensa: ❤️ vida extra.
     pipes:[
-      {x:1180,y:337,room:true,kind:"heart",fact:"Sabias que uma palavra-passe longa, com várias palavras, é difícil de adivinhar?"}
+      {x:1180,y:337,room:true,kind:"heart",fact:"Sabias que Portugal fica no extremo sudoeste da Europa e é banhado pelo Oceano Atlântico?"}
     ],
     items:[{x:900,y:400,kind:"balao"},{x:1460,y:260,kind:"medalha"},{x:1740,y:330,kind:"estrela"}],
     malwares:[{x:1320,y:480,vx:0,pattern:"mini"},{x:2140,y:480,vx:-155,pattern:"patrol"}]
@@ -156,7 +156,7 @@ export const LEVELS = [
     pipes:[
       {x:650,y:474,toX:600,toY:157},
       {x:600,y:157,toX:650,toY:474},
-      {x:1320,y:417,room:true,kind:"estrela",returnX:1880,returnY:417,fact:"Sabias que o CNCS é o Centro Nacional de Cibersegurança e ajuda Portugal a estar seguro online?"}
+      {x:1320,y:417,room:true,kind:"estrela",returnX:1880,returnY:417,fact:"Sabias que as 12 estrelas da bandeira não representam o número de países? O 12 simboliza perfeição e harmonia."}
     ],
     items:[{x:840,y:390,kind:"brinquedo"},{x:1080,y:310,kind:"estrela"},{x:1600,y:330,kind:"duplosalto"},{x:2100,y:310,kind:"balao"},{x:2580,y:310,kind:"medalha"},{x:560,y:470,kind:"heart"},{x:650,y:165,kind:"balao"}],
     malwares:[{x:980,y:480,vx:180,pattern:"patrol"},{x:1580,y:480,vx:-183,pattern:"jumper"},{x:2040,y:480,vx:182,pattern:"jumper"},{x:2450,y:480,vx:-179,pattern:"jumper"},{x:2780,y:480,vx:177}],
@@ -204,7 +204,7 @@ export const LEVELS = [
     ],
     // 1 par, perto do fim do nível — recompensa: 🛡️ escudo.
     pipes:[
-      {x:2260,y:407,room:true,kind:"medalha",fact:"Sabias que nunca deves partilhar a palavra-passe dos teus jogos, nem com amigos?"}
+      {x:2260,y:407,room:true,kind:"medalha",fact:"Sabias que a União Europeia tem 24 línguas oficiais e todas têm o mesmo valor?"}
     ],
     items:[{x:860,y:380,kind:"medalha"},{x:1100,y:290,kind:"duplosalto"},{x:1560,y:260,kind:"estrela"},{x:2050,y:290,kind:"brinquedo"},{x:560,y:470,kind:"heart"}],
     malwares:[{x:1010,y:480,vx:170},{x:1480,y:480,vx:-170},{x:1940,y:480,vx:172},{x:2400,y:480,vx:-168},{x:2720,y:480,vx:165}],
@@ -305,7 +305,7 @@ export const LEVELS = [
     pipes:[
       {x:1760,y:325,toX:1810,toY:99},
       {x:1810,y:99,toX:1760,toY:325},
-      {x:2320,y:325,room:true,kind:"estrela",fact:"Sabias que o phishing quer pressa: «a tua conta vai ser bloqueada!» é um sinal de alerta?"}
+      {x:2320,y:325,room:true,kind:"estrela",fact:"Sabias que o lema da UE é «Unida na diversidade»? As diferenças entre países são uma riqueza."}
     ],
     items:[{x:920,y:342,kind:"estrela"},{x:1480,y:248,kind:"medalha"},{x:2040,y:392,kind:"balao"},{x:2600,y:392,kind:"brinquedo"},{x:560,y:470,kind:"heart"},{x:1760,y:107,kind:"heart"}],
     malwares:[{x:1060,y:480,vx:190,pattern:"jumper"},{x:1660,y:480,vx:-195,pattern:"jumper"},{x:2260,y:480,vx:190,pattern:"jumper"},{x:2860,y:480,vx:-185,pattern:"jumper"},{x:3200,y:480,vx:188,pattern:"jumper"}],
@@ -392,7 +392,7 @@ export const LEVELS = [
       {x:3370,y:520,w:960,h:28}
     ],
     pipes:[
-      {x:2100,y:307,room:true,kind:"medalha",fact:"Sabias que o Wi-Fi público pode ser vigiado? Evita pagamentos e palavras-passe nele."}
+      {x:2100,y:307,room:true,kind:"medalha",fact:"Sabias que a CECA, criada em 1951, juntou seis países à volta do carvão e do aço para evitar novas guerras?"}
     ],
     items:[{x:820,y:380,kind:"balao"},{x:1040,y:290,kind:"estrela"},{x:1640,y:300,kind:"duplosalto"},{x:2320,y:220,kind:"medalha"},{x:2780,y:390,kind:"brinquedo"},{x:560,y:470,kind:"heart"}],
     malwares:[{x:950,y:480,vx:194,pattern:"patrol"},{x:1530,y:480,vx:-198,pattern:"jumper"},{x:1980,y:480,vx:196,pattern:"jumper"},{x:2440,y:480,vx:-194,pattern:"patrol"},{x:2880,y:480,vx:192,pattern:"jumper"}],
@@ -451,7 +451,7 @@ export const LEVELS = [
     pipes:[
       {x:1400,y:397,toX:1450,toY:111},
       {x:1450,y:111,toX:1400,toY:397},
-      {x:2960,y:397,room:true,kind:"balaofesta",fact:"Sabias que os leitores de ecrã leem em voz alta, ajudando quem não vê bem?"}
+      {x:2960,y:397,room:true,kind:"balaofesta",fact:"Sabias que quem tem a nacionalidade de um país da UE é também cidadão europeu e pode viver, estudar e trabalhar noutro país da União?"}
     ],
     movingPlatforms:[
       {x:1270,y:400,w:130,h:22,rangeX:120,rangeY:0,speed:80},
@@ -523,7 +523,7 @@ export const LEVELS = [
       {x:3530,y:520,w:960,h:28}
     ],
     pipes:[
-      {x:2860,y:247,room:true,kind:"heart",fact:"Sabias que, se algo online te preocupar, a Linha Internet Segura (800 21 90 90) pode ajudar?"},
+      {x:2860,y:247,room:true,kind:"heart",fact:"Sabias que a UE quer ser neutra em carbono até 2050? Reduzir, reutilizar e reciclar ajuda!"},
       // Túnel decorativo — mantido perto do início, afastado da plataforma
       // em x:820 (variedade: nem todos os túneis de um nível ficam juntos).
       {x:680,y:474,decorative:true}
@@ -646,7 +646,7 @@ export const LEVELS = [
     pipes:[
       {x:1160,y:397,toX:1210,toY:111},
       {x:1210,y:111,toX:1160,toY:397},
-      {x:2920,y:297,room:true,kind:"balaofesta",fact:"Sabias que alguém online pode fingir ser quem não é? Nunca combines encontros."}
+      {x:2920,y:297,room:true,kind:"balaofesta",fact:"Sabias que o Erasmus+ já permitiu a milhões de jovens estudar, treinar ou fazer voluntariado noutro país?"}
     ],
     items:[{x:800,y:220,kind:"estrela"},{x:1520,y:230,kind:"balao"},{x:1920,y:220,kind:"duplosalto"},{x:2720,y:210,kind:"medalha"},{x:3120,y:380,kind:"brinquedo"},{x:560,y:470,kind:"heart"},{x:1160,y:119,kind:"balao"}],
     malwares:[{x:880,y:480,vx:208,pattern:"patrol"},{x:1440,y:480,vx:-212,pattern:"jumper"},{x:2020,y:480,vx:208,pattern:"jumper"},{x:2620,y:480,vx:-204,pattern:"jumper"},{x:3220,y:480,vx:-206,pattern:"patrol"}],
@@ -682,7 +682,7 @@ export const LEVELS = [
     pipes:[
       {x:1920,y:317,toX:1970,toY:91},
       {x:1970,y:91,toX:1920,toY:317},
-      {x:3300,y:387,room:true,kind:"medalha",fact:"Sabias que as crianças têm direitos também online, como a privacidade e a proteção?"},
+      {x:3300,y:387,room:true,kind:"medalha",fact:"Sabias que a UE tem uma Declaração de Direitos e Princípios Digitais? Os teus direitos também valem online."},
       // Túnel decorativo — perto do fim, no chão fixo, antes da porta,
       // afastado da plataforma em x:3300 (que fica logo por cima).
       {x:3480,y:474,decorative:true}
