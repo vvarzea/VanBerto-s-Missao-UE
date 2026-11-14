@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/input.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/input.js
  *
  * Controlos por toque (D-pad e botões no ecrã).
  *
@@ -7,8 +7,8 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { player, touch } from "./state.js?v=20261108is20";
-import { ensureAudio } from "../audio.js?v=20261108is20";
+import { player, touch } from "./state.js?v=20261114eu5";
+import { ensureAudio } from "../audio.js?v=20261114eu5";
 
 // ===== Touch =====
 

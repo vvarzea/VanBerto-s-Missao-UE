@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/world.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/world.js
  *
  * Objetos do nível: balões, bichos, escudos, plataformas móveis, trampolins, perigos, passagens secretas e letreiros.
  *
@@ -7,20 +7,20 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { hitFlash } from "./dom.js?v=20261108is20";
-import { applyHitStop, showFloat } from "./feedback.js?v=20261108is20";
-import { showGameOver } from "./flow.js?v=20261108is20";
-import { clearPower, setInvuln } from "./items.js?v=20261108is20";
-import { updateHearts } from "./level.js?v=20261108is20";
-import { saveGame } from "./overlays.js?v=20261108is20";
-import { snapPlayerToGround } from "./rooms.js?v=20261108is20";
-import { _critterSession, _overlayPaused, awaitingQuiz, balloons, collectedItemIndices, collectedRoomPipes, critters, currentLevel, currentSign, decorativePipes, extraShieldCounted, getVillainSpeedMult, hazards, invuln, isStarAllowedExtremo, itemCountText, itemsCollected, itemsGroup, itemsTotal, lives, livesLostThisLevel, malwareGroup, movingPlatforms, pausedByTeacher, pipeHintSign, player, powered, sceneRef, secretDoors, secretSigns, set__critterSession, set__hudDirty, set_awaitingQuiz, set_balloons, set_critters, set_currentSign, set_extraShieldCounted, set_hazards, set_invuln, set_itemsCollected, set_itemsTotal, set_lives, set_livesLostThisLevel, set_movingPlatforms, set_pipeHintSign, set_secretDoors, set_secretSigns, set_trampolines, tipText, touch, trampolines } from "./state.js?v=20261108is20";
-import { triggerVanBertoSad } from "./vanberto.js?v=20261108is20";
-import { THEMES, LEVELS } from "../data-levels.js?v=20261108is20";
-import { makePlatformTextureThemed } from "../textures.js?v=20261108is20";
-import { ensureAudio, SFX, beep } from "../audio.js?v=20261108is20";
-import { onSecretFoundForAchievements } from "../achievements.js?v=20261108is20";
-import { NPC_SIGNS } from "../data-story.js?v=20261108is20";
+import { hitFlash } from "./dom.js?v=20261114eu5";
+import { applyHitStop, showFloat } from "./feedback.js?v=20261114eu5";
+import { showGameOver } from "./flow.js?v=20261114eu5";
+import { clearPower, setInvuln } from "./items.js?v=20261114eu5";
+import { updateHearts } from "./level.js?v=20261114eu5";
+import { saveGame } from "./overlays.js?v=20261114eu5";
+import { snapPlayerToGround } from "./rooms.js?v=20261114eu5";
+import { _critterSession, _overlayPaused, awaitingQuiz, balloons, collectedItemIndices, collectedRoomPipes, critters, currentLevel, currentSign, decorativePipes, extraShieldCounted, getVillainSpeedMult, hazards, invuln, isStarAllowedExtremo, itemCountText, itemsCollected, itemsGroup, itemsTotal, lives, livesLostThisLevel, malwareGroup, movingPlatforms, pausedByTeacher, pipeHintSign, player, powered, sceneRef, secretDoors, secretSigns, set__critterSession, set__hudDirty, set_awaitingQuiz, set_balloons, set_critters, set_currentSign, set_extraShieldCounted, set_hazards, set_invuln, set_itemsCollected, set_itemsTotal, set_lives, set_livesLostThisLevel, set_movingPlatforms, set_pipeHintSign, set_secretDoors, set_secretSigns, set_trampolines, tipText, touch, trampolines } from "./state.js?v=20261114eu5";
+import { triggerVanBertoSad } from "./vanberto.js?v=20261114eu5";
+import { THEMES, LEVELS } from "../data-levels.js?v=20261114eu5";
+import { makePlatformTextureThemed } from "../textures.js?v=20261114eu5";
+import { ensureAudio, SFX, beep } from "../audio.js?v=20261114eu5";
+import { onSecretFoundForAchievements } from "../achievements.js?v=20261114eu5";
+import { NPC_SIGNS } from "../data-story.js?v=20261114eu5";
 
 // ===== Balões flutuantes apanháveis =====
 
@@ -427,7 +427,7 @@ function hitByHazard(scene, h) {
   });
   applyHitStop(scene);
 
-  if (powered) { clearPower(scene); setInvuln(scene, 800); tipText.setText("🛡️ Escudo usado! Cuidado."); return; }
+  if (powered) { clearPower(scene); setInvuln(scene, 800); tipText.setText("🏅 Medalha usada! Cuidado."); return; }
 
   set_lives(lives - ( 1)); updateHearts(); set_livesLostThisLevel(livesLostThisLevel + 1); set__hudDirty( true);
   // Bug corrigido: quando esta é a última vida, travar já aqui o resto do

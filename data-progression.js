@@ -1,60 +1,60 @@
-// ===== Sistemas de progressão: mapa, artefactos, conquistas — MISSÃO CIBERSEGURANÇA =====
+// ===== Sistemas de progressão: mapa, artefactos, conquistas — MISSÃO EUROPA =====
 // MAP_REGIONS, ARTEFACTS, ARTEFACT_SETS, SET_REACTIONS, ACHIEVEMENTS_DEFS
 
 // Mantém os 20 níveis e a sua dificuldade intactos (só o TEMA de cada
 // nível mudou, ver data-levels.js). Os 4 mundos e as posições dos bosses
 // mantêm-se exatamente iguais à estrutura original.
 export const MAP_REGIONS = [
-  { id:"origens",        icon:"🛡️", name:"Ilha dos Guardiões Digitais",      sub:"Identidade, direitos, empatia e o Guardião da Internet", levels:[0,1,2,3,4],
+  { id:"origens",        icon:"🗺️", name:"Reino das Bandeiras Perdidas", sub:"Mapas, países, capitais e o Guardião dos Mapas",       levels:[0,1,2,3,4],
     mapBg:"map-mundo1.webp",
-    nodePos:[{x:22.7,y:85.0},{x:37.1,y:76.5},{x:52.6,y:68.0},{x:68.8,y:51.0},{x:85.5,y:20.2}] },
-  { id:"desenvolvimento",icon:"⚠️", name:"Vale das Ameaças Digitais",        sub:"Pressões, relações online e o Sombra das Redes",        levels:[5,6,7,8,9],
+    nodePos:[{x:11.0,y:74.0},{x:30.0,y:38.0},{x:46.0,y:52.0},{x:56.0,y:82.0},{x:88.0,y:70.0}] },
+  { id:"desenvolvimento",icon:"🎭", name:"Vale das Mil Culturas",         sub:"Línguas, tradições e o Dragão da Confusão Cultural",   levels:[5,6,7,8],
     mapBg:"map-mundo2.webp",
-    nodePos:[{x:18.0,y:58.0},{x:30.0,y:60.5},{x:43.0,y:60.5},{x:55.0,y:57.0},{x:73.0,y:48.0}] },
-  { id:"protecao",       icon:"🏙️", name:"Cidade Conectada",                 sub:"Comunidades, partilha e o Manipulador Digital",          levels:[10,11,12,13,14],
+    nodePos:[{x:14.0,y:80.0},{x:40.0,y:62.0},{x:49.0,y:32.0},{x:80.0,y:40.0}] },
+  { id:"protecao",       icon:"🏛️", name:"Fortaleza da União",            sub:"Dia da Europa, valores, direitos e o Titã da Discórdia", levels:[9,10,11,12,13,14],
     mapBg:"map-mundo3.webp",
-    nodePos:[{x:12.0,y:84.0},{x:30.0,y:79.0},{x:50.0,y:72.5},{x:69.0,y:78.0},{x:85.0,y:67.0}] },
-  { id:"participacao",   icon:"🧠", name:"Universo da Inteligência Digital", sub:"Algoritmos, IA e a Inteligência Artificial",             levels:[15,16,17,18,19],
+    nodePos:[{x:9.0,y:82.0},{x:24.0,y:38.0},{x:44.0,y:88.0},{x:55.0,y:62.0},{x:73.0,y:22.0},{x:84.0,y:73.0}] },
+  { id:"participacao",   icon:"🌱", name:"O Futuro da Europa",            sub:"Ambiente, inovação, jovens e a Sombra da Indiferença",  levels:[15,16,17,18,19],
     mapBg:"map-mundo4.webp",
-    nodePos:[{x:5.0,y:78.0},{x:18.0,y:89.0},{x:35.0,y:82.0},{x:30.0,y:59.0},{x:50.0,y:53.0}] },
-  { id:"base",           icon:"🏠", name:"Base do VanBerto's",            sub:"O teu ponto de partida",                           levels:[] },
+    nodePos:[{x:8.0,y:84.0},{x:32.0,y:40.0},{x:42.0,y:66.0},{x:50.0,y:20.0},{x:80.0,y:75.0}] },
+  { id:"base",           icon:"🏠", name:"Base do VanBerto's",            sub:"O teu ponto de partida",                               levels:[] },
 ];
 
 export const ARTEFACTS = [
-  { emoji:"🪪", name:"Crachá da Identidade", short:"O Portal da Identidade", color:"#40d0ff", glow:"rgba(64,208,255,0.6)", vanberto:"A tua identidade digital é só tua — cuida dela!", set:0 },
-  { emoji:"⚖️", name:"Balança dos Direitos", short:"A Fortaleza dos Direitos", color:"#ffd700", glow:"rgba(255,215,0,0.6)", vanberto:"Online também tens direitos e deveres!", set:0 },
-  { emoji:"💚", name:"Coração da Empatia", short:"A Floresta da Empatia", color:"#ff9060", glow:"rgba(255,144,96,0.6)", vanberto:"Antes de escrever, pensa como o outro se vai sentir.", set:0 },
-  { emoji:"🌈", name:"Flor da Inclusão", short:"O Jardim da Inclusão", color:"#80ffb0", glow:"rgba(128,255,176,0.6)", vanberto:"Todos merecem ser incluídos, online e offline.", set:0 },
-  { emoji:"🧭", name:"Bússola das Escolhas", short:"O Farol das Escolhas", color:"#e0409a", glow:"rgba(224,64,154,0.6)", vanberto:"Antes de clicar, pensa: é uma boa escolha?", set:0 },
-  { emoji:"🧗", name:"Capacete da Coragem", short:"O Desfiladeiro das Pressões", color:"#c0a0ff", glow:"rgba(192,160,255,0.6)", vanberto:"Podes dizer não, mesmo quando todos dizem sim.", set:1 },
-  { emoji:"🤝", name:"Lanterna da Confiança", short:"A Caverna das Relações Online", color:"#60e060", glow:"rgba(96,224,96,0.6)", vanberto:"Nem toda a gente online é quem diz ser.", set:1 },
-  { emoji:"🛑", name:"Escudo Anti-Bullying", short:"O Pântano do Ciberbullying", color:"#ffa040", glow:"rgba(255,160,64,0.6)", vanberto:"Se vires bullying, não partilhes: apoia e pede ajuda.", set:1 },
-  { emoji:"🎭", name:"Máscara Desmascarada", short:"A Ponte da Manipulação", color:"#8a5cff", glow:"rgba(138,92,255,0.6)", vanberto:"Quem manipula quer que ajas sem pensar. Pára e verifica!", set:1 },
-  { emoji:"🆘", name:"Farol do Apoio", short:"A Fortaleza do Apoio", color:"#ffe060", glow:"rgba(255,224,96,0.6)", vanberto:"Há sempre alguém de confiança para te ajudar.", set:1 },
-  { emoji:"🏘️", name:"Bandeira da Comunidade", short:"A Praça das Comunidades", color:"#60ffff", glow:"rgba(96,255,255,0.6)", vanberto:"Numa boa comunidade, todos se respeitam.", set:2 },
-  { emoji:"📤", name:"Caixa da Partilha", short:"O Bairro da Partilha Responsável", color:"#ffc060", glow:"rgba(255,192,96,0.6)", vanberto:"Antes de partilhares, pensa em quem pode ser afetado.", set:2 },
-  { emoji:"👣", name:"Pegada Dourada", short:"A Avenida da Pegada Digital", color:"#80c8ff", glow:"rgba(128,200,255,0.6)", vanberto:"Tudo o que publicas deixa rasto — pensa antes!", set:2 },
-  { emoji:"🧩", name:"Peça da Colaboração", short:"A Torre da Colaboração", color:"#ff6060", glow:"rgba(255,96,96,0.6)", vanberto:"Trabalhar em equipa online exige respeito e regras claras.", set:2 },
-  { emoji:"🧘", name:"Relógio do Bem-Estar", short:"O Centro do Bem-Estar Digital", color:"#ffd080", glow:"rgba(255,208,128,0.6)", vanberto:"Equilibra o tempo de ecrã com descanso e brincadeira.", set:2 },
-  { emoji:"🪐", name:"Satélite dos Algoritmos", short:"O Planeta dos Algoritmos", color:"#c080ff", glow:"rgba(192,128,255,0.6)", vanberto:"Os algoritmos sugerem conteúdos — tu decides o que vês.", set:3 },
-  { emoji:"🤖", name:"Chip da IA Responsável", short:"O Laboratório da Inteligência Artificial", color:"#ff80a0", glow:"rgba(255,128,160,0.6)", vanberto:"A IA ajuda, mas não substitui o teu pensamento.", set:3 },
-  { emoji:"🧪", name:"Lupa dos Deepfakes", short:"O Mundo dos Conteúdos Sintéticos", color:"#60d0ff", glow:"rgba(96,208,255,0.6)", vanberto:"Imagens e vozes podem ser criadas por IA — confirma antes de acreditares.", set:3 },
-  { emoji:"📡", name:"Antena da Informação Fiável", short:"A Estação da Informação Fiável", color:"#80ff80", glow:"rgba(128,255,128,0.6)", vanberto:"Compara várias fontes antes de acreditar e de partilhar.", set:3 },
-  { emoji:"🚀", name:"Coroa do Futuro Digital", short:"O Núcleo do Futuro Digital", color:"#ff6b35", glow:"rgba(255,107,53,0.6)", vanberto:"Usa a tecnologia com consciência — o futuro constrói-se com bons hábitos.", set:3 },
+  { emoji:"🧭", name:"Bússola da Europa", short:"Onde Fica a Europa", color:"#40d0ff", glow:"rgba(64,208,255,0.6)", vanberto:"Já sei onde fica a Europa no mapa!", set:0 },
+  { emoji:"🇵🇹", name:"Bandeira de Portugal", short:"Portugal na Europa", color:"#ff6060", glow:"rgba(255,96,96,0.6)", vanberto:"Portugal, no extremo ocidental da Europa!", set:0 },
+  { emoji:"🏛️", name:"Mapa das Capitais", short:"Países e Capitais", color:"#ffd700", glow:"rgba(255,215,0,0.6)", vanberto:"Lisboa, Paris, Roma, Bruxelas... já sei muitas!", set:0 },
+  { emoji:"🇪🇺", name:"Bandeira das 12 Estrelas", short:"A Bandeira Europeia", color:"#4a7bff", glow:"rgba(74,123,255,0.6)", vanberto:"Doze estrelas douradas em círculo!", set:0 },
+  { emoji:"🎶", name:"Partitura da Ode à Alegria", short:"Símbolos da UE", color:"#ffe060", glow:"rgba(255,224,96,0.6)", vanberto:"Unida na diversidade!", set:0 },
+  { emoji:"🗣️", name:"Balão das Línguas", short:"Línguas da Europa", color:"#ff9060", glow:"rgba(255,144,96,0.6)", vanberto:"24 línguas oficiais, uma só Europa!", set:1 },
+  { emoji:"🏰", name:"Chave do Património", short:"Monumentos e Património", color:"#c0a0ff", glow:"rgba(192,160,255,0.6)", vanberto:"Proteger o património é guardar a nossa história!", set:1 },
+  { emoji:"🥘", name:"Prato Tradicional", short:"Sabores e Tradições", color:"#ffa040", glow:"rgba(255,160,64,0.6)", vanberto:"Cada país tem sabores e músicas únicos!", set:1 },
+  { emoji:"🤝", name:"Mãos Unidas", short:"Diversidade e Respeito", color:"#80ffb0", glow:"rgba(128,255,176,0.6)", vanberto:"Diferentes, mas unidos pelo respeito!", set:1 },
+  { emoji:"📜", name:"Declaração Schuman", short:"Dia da Europa", color:"#ffd080", glow:"rgba(255,208,128,0.6)", vanberto:"9 de maio de 1950: tudo começou aqui!", set:1 },
+  { emoji:"🕊️", name:"Pomba da Paz", short:"Paz e Cooperação", color:"#e8f4ff", glow:"rgba(232,244,255,0.6)", vanberto:"Juntos, a paz é mais forte!", set:2 },
+  { emoji:"📖", name:"Tratado de Roma", short:"Da CECA à UE", color:"#ffc060", glow:"rgba(255,192,96,0.6)", vanberto:"Seis países começaram, hoje somos 27!", set:2 },
+  { emoji:"⚖️", name:"Balança dos Valores", short:"Valores Europeus", color:"#ff6b35", glow:"rgba(255,107,53,0.6)", vanberto:"Dignidade, liberdade, democracia, igualdade e Estado de direito!", set:2 },
+  { emoji:"🪪", name:"Cartão do Cidadão Europeu", short:"Direitos dos Cidadãos", color:"#60d0ff", glow:"rgba(96,208,255,0.6)", vanberto:"Sou cidadão do meu país e da Europa!", set:2 },
+  { emoji:"🏢", name:"Chave do Parlamento", short:"Instituições Europeias", color:"#80c8ff", glow:"rgba(128,200,255,0.6)", vanberto:"Parlamento, Comissão, Conselho e Tribunal!", set:2 },
+  { emoji:"🌱", name:"Rebento do Futuro", short:"Proteger o Ambiente", color:"#60e060", glow:"rgba(96,224,96,0.6)", vanberto:"Reduzir, reutilizar e reciclar!", set:3 },
+  { emoji:"☀️", name:"Painel Solar", short:"Energia Limpa e Clima", color:"#ffe060", glow:"rgba(255,224,96,0.6)", vanberto:"Sol e vento: energia para o futuro!", set:3 },
+  { emoji:"🔬", name:"Microscópio da Inovação", short:"Ciência e Inovação", color:"#c080ff", glow:"rgba(192,128,255,0.6)", vanberto:"A ciência abre caminhos!", set:3 },
+  { emoji:"🚆", name:"Bilhete Erasmus+", short:"Viajar e Estudar", color:"#ff80a0", glow:"rgba(255,128,160,0.6)", vanberto:"Estudar noutro país é uma grande aventura!", set:3 },
+  { emoji:"⭐", name:"A 12.ª Estrela", short:"Jovens e Cidadania Digital", color:"#ffd700", glow:"rgba(255,215,0,0.7)", vanberto:"A Europa brilha quando todos participamos!", set:3 },
 ];
 
 export const ARTEFACT_SETS = [
-  { name:"Guardiões Digitais",     icon:"🛡️", bonus:150 },
-  { name:"Ameaças Digitais",       icon:"⚠️", bonus:150 },
-  { name:"Cidade Conectada",       icon:"🏙️", bonus:150 },
-  { name:"Inteligência Digital",   icon:"🧠", bonus:200 },
+  { name:"Mapas e Símbolos",        icon:"🗺️", bonus:150 },
+  { name:"Culturas da Europa",      icon:"🎭", bonus:150 },
+  { name:"Valores e Instituições",  icon:"🏛️", bonus:150 },
+  { name:"O Futuro da Europa",      icon:"🌱", bonus:200 },
 ];
 
 export const SET_REACTIONS = [
-  "🎉 Conjunto FUNDAMENTOS completo! És um verdadeiro pioneiro da internet!",
-  "📡 Conjunto COMUNICAÇÃO completo! Ninguém te engana com fake news ou phishing!",
-  "🛡️ Conjunto PROTEÇÃO completo! Os teus dispositivos estão sempre seguros!",
-  "🔒 Conjunto COMPLETO! GUARDIÃO SUPREMO da Internet Segura!",
+  "🎉 Conjunto MAPAS E SÍMBOLOS completo! Já conheces a Europa de lés a lés!",
+  "🎭 Conjunto CULTURAS completo! Respeitas e celebras a diversidade europeia!",
+  "🏛️ Conjunto VALORES E INSTITUIÇÕES completo! Percebes como a Europa se une!",
+  "⭐ Conjunto COMPLETO! As 12 estrelas brilham — GUARDIÃO SUPREMO da Europa!",
 ];
 
 export const ACHIEVEMENTS_DEFS = [
@@ -63,7 +63,7 @@ export const ACHIEVEMENTS_DEFS = [
   { id:"explorador",       tier:"🥈", name:"Explorador",               desc:"Encontra todos os segredos de um nível." },
   { id:"sabio",            tier:"🥈", name:"Sábio",                    desc:"Acerta 20 perguntas." },
   { id:"caca_tesouros",    tier:"🏆", name:"Caçador de Tesouros",      desc:"Encontra todas as salas secretas do jogo." },
-  { id:"guardiao",         tier:"🥇", name:"Guardião da Internet Segura",desc:"Completa o jogo." },
+  { id:"guardiao",         tier:"🥇", name:"Guardião da Europa",       desc:"Completa o jogo e recupera as 12 estrelas." },
   { id:"mestre",           tier:"🥇", name:"Mestre VanBerto's",        desc:"Acerta todas as perguntas à primeira tentativa." },
-  { id:"lenda",            tier:"🏆", name:"Lenda Digital",            desc:"100% de conclusão — todos os níveis e todas as estrelas." },
+  { id:"lenda",            tier:"🏆", name:"Lenda Europeia",           desc:"100% de conclusão — todos os níveis e todas as estrelas." },
 ];

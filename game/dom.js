@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/dom.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/dom.js
  *
  * Referências aos elementos do HTML (overlays, botões, campos) usadas por todo o jogo.
  *

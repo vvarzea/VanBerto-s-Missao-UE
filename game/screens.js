@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/screens.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/screens.js
  *
  * Ecrãs de Conquistas, Álbum, Estatísticas, Opções e Certificado final.
  *
@@ -7,23 +7,23 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { renderAlbum, resetAllProgress } from "./artefacts.js?v=20261108is20";
-import { btnMute, btnPause } from "./dom.js?v=20261108is20";
-import { playLevelTransition } from "./door.js?v=20261108is20";
-import { loadLevel, updateHearts } from "./level.js?v=20261108is20";
-import { BG_FILES } from "./map.js?v=20261108is20";
-import { closeOverlay, openOverlay, saveGame } from "./overlays.js?v=20261108is20";
-import { showHistory } from "./quiz.js?v=20261108is20";
-import { showPauseScreen } from "./scene.js?v=20261108is20";
-import { _certificateOpenedFrom, difficulty, getStartLives, mapProgress, pausedByTeacher, playerName, powerHaloGfx, sceneRef, score, scoreText, setDifficulty, set__certificateOpenedFrom, set__overlayPaused, set_awaitingQuiz, set_currentLevel, set_lives, set_livesLostThisLevel, set_pausedByTeacher, set_score, shadowGfx } from "./state.js?v=20261108is20";
-import { adventureScore, globalStats, medalTextCert, medalTier, updatePlayTime } from "./stats.js?v=20261108is20";
-import { toggleFullscreen } from "./ui.js?v=20261108is20";
-import { ensureAudio, SFX, isMuted, toggleMuted } from "../audio.js?v=20261108is20";
-import { renderAchievements, unlockedAchievements } from "../achievements.js?v=20261108is20";
-import { LEVELS } from "../data-levels.js?v=20261108is20";
-import { totalStarsEarned, levelStars } from "../stars.js?v=20261108is20";
-import { ACHIEVEMENTS_DEFS } from "../data-progression.js?v=20261108is20";
-import { loadNamespace, saveNamespace } from "../storage.js?v=20261108is20";
+import { renderAlbum, resetAllProgress } from "./artefacts.js?v=20261114eu5";
+import { btnMute, btnPause } from "./dom.js?v=20261114eu5";
+import { playLevelTransition } from "./door.js?v=20261114eu5";
+import { loadLevel, updateHearts } from "./level.js?v=20261114eu5";
+import { BG_FILES } from "./map.js?v=20261114eu5";
+import { closeOverlay, openOverlay, saveGame } from "./overlays.js?v=20261114eu5";
+import { showHistory } from "./quiz.js?v=20261114eu5";
+import { showPauseScreen } from "./scene.js?v=20261114eu5";
+import { _certificateOpenedFrom, difficulty, getStartLives, mapProgress, pausedByTeacher, playerName, powerHaloGfx, sceneRef, score, scoreText, setDifficulty, set__certificateOpenedFrom, set__overlayPaused, set_awaitingQuiz, set_currentLevel, set_lives, set_livesLostThisLevel, set_pausedByTeacher, set_score, shadowGfx } from "./state.js?v=20261114eu5";
+import { adventureScore, globalStats, medalTextCert, medalTier, updatePlayTime } from "./stats.js?v=20261114eu5";
+import { toggleFullscreen } from "./ui.js?v=20261114eu5";
+import { ensureAudio, SFX, isMuted, toggleMuted } from "../audio.js?v=20261114eu5";
+import { renderAchievements, unlockedAchievements } from "../achievements.js?v=20261114eu5";
+import { LEVELS } from "../data-levels.js?v=20261114eu5";
+import { totalStarsEarned, levelStars } from "../stars.js?v=20261114eu5";
+import { ACHIEVEMENTS_DEFS } from "../data-progression.js?v=20261114eu5";
+import { loadNamespace, saveNamespace } from "../storage.js?v=20261114eu5";
 
 // =====================================================
 // ===== CONQUISTAS =====
@@ -237,7 +237,7 @@ function showCertificate() {
 
   // Nome
   const certName = document.getElementById("certPlayerName");
-  if (certName) certName.textContent = playerName || "Ciber-Herói";
+  if (certName) certName.textContent = playerName || "Herói da Europa";
 
   // Título, subtítulo e texto do corpo — só mudam de "Oficial" (missão concluída) para
   // "Progresso" (a meio da aventura); os restantes campos abaixo (pontos, estrelas, %, medalha,
@@ -246,20 +246,20 @@ function showCertificate() {
   if (certTitle) certTitle.textContent = finished ? "Certificado Oficial" : "Certificado de Progresso";
   const certSubtitle = document.getElementById("certSubtitle");
   if (certSubtitle) certSubtitle.textContent = finished
-    ? "de Guardião da Internet Segura"
-    : `em Internet Segura — ${levelsCompletedSoFar} de ${LEVELS.length} níveis`;
+    ? "de Guardião da Europa"
+    : `em Europa — ${levelsCompletedSoFar} de ${LEVELS.length} níveis`;
   const certIntro2 = document.getElementById("certIntro2");
   if (certIntro2) certIntro2.textContent = finished
-    ? "que, com coragem, atenção e sabedoria, concluiu a missão das"
-    : "que, com coragem, atenção e sabedoria, está a completar a missão das";
+    ? "que, com coragem, atenção e sabedoria, concluiu a missão de recuperar as"
+    : "que, com coragem, atenção e sabedoria, está a recuperar as";
   const certHighlight = document.getElementById("certHighlight");
   if (certHighlight) certHighlight.textContent = finished
-    ? "20 Competências de Internet Segura"
-    : `${levelsCompletedSoFar} de 20 Competências de Internet Segura`;
+    ? "12 Estrelas da Bandeira Europeia"
+    : `${levelsCompletedSoFar} de 20 níveis da Missão Europa`;
   const certOutro = document.getElementById("certOutro");
   if (certOutro) certOutro.textContent = finished
-    ? "tornando-se oficialmente Guardião da Internet Segura."
-    : "e está a caminho de se tornar Guardião da Internet Segura.";
+    ? "tornando-se oficialmente Guardião da Europa."
+    : "e está a caminho de se tornar Guardião da Europa.";
   // "Jogar de novo" apaga TODO o progresso (resetAllProgress, ver o próprio botão mais abaixo) —
   // faz sentido logo depois de terminar o jogo, mas seria perigoso deixá-lo à vista a meio da
   // aventura: um clique sem querer, a pensar que era só fechar o certificado, apagava tudo.

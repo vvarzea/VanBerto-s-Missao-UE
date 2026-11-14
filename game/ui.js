@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/ui.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/ui.js
  *
  * Botões e atalhos: ecrã inteiro, pausa, alto contraste, navegação por teclado, Nova Aventura e dificuldade.
  *
@@ -7,19 +7,19 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { resetAllProgress } from "./artefacts.js?v=20261108is20";
-import { startBossFight } from "./boss-core.js?v=20261108is20";
-import { btnCloseHow, btnHow, btnMute, btnPause, btnStart, gameOverOverlay, playerNameInput, quizAnswers, quizOverlay, startOverlay, winOverlay } from "./dom.js?v=20261108is20";
-import { playLevelTransition } from "./door.js?v=20261108is20";
-import { loadLevel, updateHearts } from "./level.js?v=20261108is20";
-import { renderMap } from "./map.js?v=20261108is20";
-import { closeOverlay, openOverlay, saveGame } from "./overlays.js?v=20261108is20";
-import { resetQuizStats, showHistory, usedQuizByLevel, usedQuizByTheme } from "./quiz.js?v=20261108is20";
-import { showPauseScreen } from "./scene.js?v=20261108is20";
-import { bossState, currentLevel, getStartLives, inBossFight, pausedByTeacher, powerHaloGfx, sceneRef, score, scoreText, setDifficulty, set__overlayPaused, set_awaitingQuiz, set_currentLevel, set_lives, set_livesLostThisLevel, set_pausedByTeacher, set_playerName, set_score, shadowGfx } from "./state.js?v=20261108is20";
-import { flushScoreToStats } from "./stats.js?v=20261108is20";
-import { toggleMuted, ensureAudio, SFX } from "../audio.js?v=20261108is20";
-import { loadNamespace, saveNamespace } from "../storage.js?v=20261108is20";
+import { resetAllProgress } from "./artefacts.js?v=20261114eu5";
+import { startBossFight } from "./boss-core.js?v=20261114eu5";
+import { btnCloseHow, btnHow, btnMute, btnPause, btnStart, gameOverOverlay, playerNameInput, quizAnswers, quizOverlay, startOverlay, winOverlay } from "./dom.js?v=20261114eu5";
+import { playLevelTransition } from "./door.js?v=20261114eu5";
+import { loadLevel, updateHearts } from "./level.js?v=20261114eu5";
+import { renderMap } from "./map.js?v=20261114eu5";
+import { closeOverlay, openOverlay, saveGame } from "./overlays.js?v=20261114eu5";
+import { resetQuizStats, showHistory, usedQuizByLevel, usedQuizByTheme } from "./quiz.js?v=20261114eu5";
+import { showPauseScreen } from "./scene.js?v=20261114eu5";
+import { bossState, currentLevel, getStartLives, inBossFight, pausedByTeacher, powerHaloGfx, sceneRef, score, scoreText, setDifficulty, set__overlayPaused, set_awaitingQuiz, set_currentLevel, set_lives, set_livesLostThisLevel, set_pausedByTeacher, set_playerName, set_score, shadowGfx } from "./state.js?v=20261114eu5";
+import { flushScoreToStats } from "./stats.js?v=20261114eu5";
+import { toggleMuted, ensureAudio, SFX } from "../audio.js?v=20261114eu5";
+import { loadNamespace, saveNamespace } from "../storage.js?v=20261114eu5";
 
 // Botão "Sair" no menu principal — fecha mesmo o jogo (diferente do
 // "Sair para o Menu" que existe durante o jogo, que só volta ao menu

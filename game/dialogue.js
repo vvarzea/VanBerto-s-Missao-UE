@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/dialogue.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/dialogue.js
  *
  * Balões de fala do VanBerto's e diálogos dos bosses (vbSay, playBossDialogue) e a posição deles no ecrã.
  *
@@ -7,8 +7,8 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { _vbTimer, bossState, player, sceneRef, set__vbTimer } from "./state.js?v=20261108is20";
-import { playCinematic } from "../cinematics.js?v=20261108is20";
+import { _vbTimer, bossState, player, sceneRef, set__vbTimer } from "./state.js?v=20261114eu5";
+import { playCinematic } from "../cinematics.js?v=20261114eu5";
 
 export function vbSay(text,type="intro",duration=3400){
   if(document.body.classList.contains("hc-mode"))return;

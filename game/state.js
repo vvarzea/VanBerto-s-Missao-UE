@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/state.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/state.js
  *
  * Estado partilhado do jogo (cena, jogador, vidas, pontos, poderes…) e regras por dificuldade.
  *
@@ -7,8 +7,8 @@
  * Estado partilhado: LÊ-SE diretamente (import); para ALTERAR usa as funções set_<nome>() — os imports ES são só de leitura.
  *************************************************/
 
-import { loadNamespace, saveNamespace } from "../storage.js?v=20261108is20";
-import { QUIZ_BY_THEME, QUIZ_BY_THEME_AVANCADO } from "../data-quiz.js?v=20261108is20";
+import { loadNamespace, saveNamespace } from "../storage.js?v=20261114eu5";
+import { QUIZ_BY_THEME, QUIZ_BY_THEME_AVANCADO } from "../data-quiz.js?v=20261114eu5";
 
 export let playerName = "";
 
@@ -346,7 +346,7 @@ export function isStarAllowedExtremo(levelIdx, starOrderIdx) {
 // tema, para nunca ficar sem quiz nenhum a meio de um combate.
 
 export function getQuizPool(theme) {
-  const base = QUIZ_BY_THEME[theme] || QUIZ_BY_THEME["historia_internet"];
+  const base = QUIZ_BY_THEME[theme] || QUIZ_BY_THEME["mapa_europa"];
   // Extremo usa o mesmo banco avançado do Difícil (não há um 3º banco
   // dedicado) — nunca deve voltar ao banco base, que seria mais fácil.
   if (difficulty !== "facil") {

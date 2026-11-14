@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's e a Missão Internet Segura 🛡️  ·  game/blocks.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/blocks.js
  *
  * Blocos "?" e tijolos para dar CABEÇADAS (tipo Super Mário) e plataformas
  * extra. São gerados no fim do loadLevel() a partir dos dados do nível:
@@ -12,18 +12,18 @@
  * escondidos nas salas secretas, sem mexer nesses sistemas.
  *************************************************/
 
-import { platforms, itemsGroup, player, powered, starPower, lives, set_lives, getMaxLives, score, set_score, scoreText, set__hudDirty, difficulty } from "./state.js?v=20261108is20";
-import { showFloat } from "./feedback.js?v=20261108is20";
-import { makePlatformTextureThemed } from "../textures.js?v=20261108is20";
-import { ensureAudio, SFX, beep } from "../audio.js?v=20261108is20";
-import { THEMES } from "../data-levels.js?v=20261108is20";
-import { onHitMalware } from "./items.js?v=20261108is20";
-import { updateHearts } from "./level.js?v=20261108is20";
-import { loadNamespace, saveNamespace } from "../storage.js?v=20261108is20";
+import { platforms, itemsGroup, player, powered, starPower, lives, set_lives, getMaxLives, score, set_score, scoreText, set__hudDirty, difficulty } from "./state.js?v=20261114eu5";
+import { showFloat } from "./feedback.js?v=20261114eu5";
+import { makePlatformTextureThemed } from "../textures.js?v=20261114eu5";
+import { ensureAudio, SFX, beep } from "../audio.js?v=20261114eu5";
+import { THEMES } from "../data-levels.js?v=20261114eu5";
+import { onHitMalware } from "./items.js?v=20261114eu5";
+import { updateHearts } from "./level.js?v=20261114eu5";
+import { loadNamespace, saveNamespace } from "../storage.js?v=20261114eu5";
 
 const BLOCK = 40;
 let windVx = 0;
-const KEY_GOAL = 100;                 // 100 chaves = +1 vida (como as 100 moedas do Super Mário)
+const KEY_GOAL = 100;                 // 100 moedas = +1 vida (como as 100 moedas do Super Mário)
 let keyData = null;                   // { count, taken: { nivel: [ids] } }  (guardado)
 let keyText = null;
 let curIdx = 0;
@@ -36,16 +36,16 @@ export function resetKeys() { keyData = { count: 0, taken: {} }; saveKeys(); upd
 function ensureKeyHud(scene) {
   loadKeys();
   if (!keyText || !keyText.scene || !keyText.active) {
-    keyText = scene.add.text(150, 32, "", { fontFamily: "Nunito, system-ui, sans-serif", fontSize: "14px", fontStyle: "900", color: "#ffe14d", stroke: "#1e1b4b", strokeThickness: 5 }).setScrollFactor(0).setDepth(100);
+    keyText = scene.add.text(150, 32, "", { fontFamily: "Nunito, system-ui, sans-serif", fontSize: "14px", fontStyle: "900", color: "#ffe14d", stroke: "#0a2466", strokeThickness: 5 }).setScrollFactor(0).setDepth(100);
   }
   updateKeyHud();
 }
 function updateKeyHud() {
   if (!keyText || !keyText.active) return;
-  keyText.setText(`🔑 ${loadKeys().count}/${KEY_GOAL}`);
+  keyText.setText(`💶 ${loadKeys().count}/${KEY_GOAL}`);
   if (scoreText && scoreText.active) keyText.setPosition(scoreText.x + scoreText.displayWidth + 10, scoreText.y);
 }
-/** Soma n chaves (+10 pontos cada). Às 100 chaves: +1 vida (ou pontos extra se já tiveres o máximo). */
+/** Soma n chaves (+10 pontos cada). Às 100 moedas: +1 vida (ou pontos extra se já tiveres o máximo). */
 function addKeys(scene, n, x, y) {
   const k = loadKeys();
   k.count += n;
@@ -56,10 +56,10 @@ function addKeys(scene, n, x, y) {
     const px = player ? player.x : x, py = player ? player.y : y;
     if (lives < getMaxLives()) {
       set_lives(lives + 1); updateHearts(); SFX.life();
-      showFloat(scene, px, py - 100, "🔑 100 chaves! +1 vida ❤️", "#1e1b4b");
+      showFloat(scene, px, py - 100, "💶 100 moedas! +1 vida ❤️", "#0a2466");
     } else {
       addPoints(500);
-      showFloat(scene, px, py - 100, "🔑 100 chaves! +500 pontos", "#1e1b4b");
+      showFloat(scene, px, py - 100, "💶 100 moedas! +500 pontos", "#0a2466");
     }
   }
   saveKeys(); updateKeyHud();
@@ -163,23 +163,23 @@ function makeObstacleTextures(scene) {
     draw(t.getContext());
     t.refresh();
   };
-  mk("fw_beam", 26, 140, c => {            // feixe do firewall (vermelho-rosa a brilhar)
+  mk("fw_beam", 26, 140, c => {            // feixe da barreira (amarelo a brilhar)
     const g = c.createLinearGradient(0, 0, 26, 0);
-    g.addColorStop(0, "rgba(255,60,110,0)"); g.addColorStop(0.5, "rgba(255,90,130,0.95)"); g.addColorStop(1, "rgba(255,60,110,0)");
+    g.addColorStop(0, "rgba(255,204,0,0)"); g.addColorStop(0.5, "rgba(255,214,40,0.95)"); g.addColorStop(1, "rgba(255,204,0,0)");
     c.fillStyle = g; c.fillRect(0, 0, 26, 140);
     c.fillStyle = "rgba(255,255,255,0.9)"; c.fillRect(11, 0, 4, 140);
   });
   mk("fw_post", 34, 22, c => {             // base/emissor do firewall
-    c.fillStyle = "#1e1b4b"; c.fillRect(0, 4, 34, 18);
-    c.fillStyle = "#4b5bd6"; c.fillRect(2, 6, 30, 14);
+    c.fillStyle = "#0a2466"; c.fillRect(0, 4, 34, 18);
+    c.fillStyle = "#2f5fe0"; c.fillRect(2, 6, 30, 14);
     c.fillStyle = "#9ff0ff"; c.fillRect(11, 1, 12, 6);
-    c.fillStyle = "#1e1b4b"; c.fillRect(10, 0, 14, 2);
+    c.fillStyle = "#0a2466"; c.fillRect(10, 0, 14, 2);
   });
   mk("crumble", 140, 22, c => {            // plataforma frágil (pedra gretada)
-    c.fillStyle = "#1e1b4b"; c.fillRect(0, 0, 140, 22);
+    c.fillStyle = "#0a2466"; c.fillRect(0, 0, 140, 22);
     c.fillStyle = "#b7c0e8"; c.fillRect(2, 2, 136, 18);
     c.fillStyle = "#dfe5ff"; c.fillRect(2, 2, 136, 5);
-    c.strokeStyle = "#1e1b4b"; c.lineWidth = 2;
+    c.strokeStyle = "#0a2466"; c.lineWidth = 2;
     [[22, 2, 30, 20], [58, 2, 46, 20], [92, 2, 82, 20], [112, 2, 124, 20]].forEach(([x1, y1, x2, y2]) => {
       c.beginPath(); c.moveTo(x1, y1); c.lineTo((x1 + x2) / 2 + 5, 11); c.lineTo(x2, y2); c.stroke();
     });
@@ -187,16 +187,15 @@ function makeObstacleTextures(scene) {
 }
 
 function makeKeyTexture(scene) {
-  if (scene.textures.exists("key_item")) return;
+  if (scene.textures.exists("key_item")) return;       // moeda de euro (34×34)
   const t = scene.textures.createCanvas("key_item", 34, 34);
   const c = t.getContext();
-  c.lineWidth = 3; c.strokeStyle = "#1e1b4b"; c.fillStyle = "#ffd21f";
-  c.beginPath(); c.arc(11, 11, 8, 0, 7); c.fill(); c.stroke();               // argola
-  c.fillStyle = "#fff6e3"; c.beginPath(); c.arc(11, 11, 3, 0, 7); c.fill();  // furo
-  c.fillStyle = "#ffd21f"; c.fillRect(16, 9, 15, 5); c.strokeRect(16, 9, 15, 5);  // haste
-  c.fillRect(23, 14, 4, 7); c.strokeRect(23, 14, 4, 7);                       // dentes
-  c.fillRect(28, 14, 3, 5); c.strokeRect(28, 14, 3, 5);
-  c.fillStyle = "rgba(255,255,255,0.7)"; c.fillRect(6, 5, 5, 3);
+  c.lineWidth = 3; c.strokeStyle = "#0a2466";
+  c.fillStyle = "#ffcc00"; c.beginPath(); c.arc(17, 17, 14, 0, 7); c.fill(); c.stroke();
+  c.fillStyle = "#003399"; c.beginPath(); c.arc(17, 17, 9.5, 0, 7); c.fill();
+  c.fillStyle = "#ffcc00"; c.font = "900 15px Arial, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
+  c.fillText("€", 17, 18);
+  c.fillStyle = "rgba(255,255,255,0.75)"; c.fillRect(8, 6, 6, 3);
   t.refresh();
 }
 
@@ -296,9 +295,9 @@ function releaseContent(scene, b) {
   let kind = b.getData("content") || "moeda";
   if (kind === "heart" && lives >= getMaxLives()) kind = "moeda";
   if (kind === "moeda") {
-    const coin = scene.add.text(b.x, b.y - 26, "🔑", { fontSize: "26px" }).setOrigin(0.5).setDepth(6);
+    const coin = scene.add.text(b.x, b.y - 26, "💶", { fontSize: "26px" }).setOrigin(0.5).setDepth(6);
     scene.tweens.add({ targets: coin, y: coin.y - 52, alpha: 0, duration: 520, ease: "Quad.easeOut", onComplete: () => coin.destroy() });
-    showFloat(scene, b.x, b.y - 60, "+1 🔑", "#1e1b4b");
+    showFloat(scene, b.x, b.y - 60, "+1 💶", "#0a2466");
     addKeys(scene, 1, b.x, b.y);
     return;
   }
@@ -513,7 +512,7 @@ export function addBlocksAndPlatforms(scene, L, idx) {
     }
   }
 
-  // 4) Chaves 🔑 espalhadas, como as moedas do Super Mário (arcos no chão e filas por cima das plataformas)
+  // 4) Chaves 💶 espalhadas, como as moedas do Super Mário (arcos no chão e filas por cima das plataformas)
   const doneKeys = takenSet();
   let kn = 0;
   const putKey = (x, y) => {

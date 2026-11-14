@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/feedback.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/feedback.js
  *
  * Elogios, números flutuantes, hit-stop e mensagens dinâmicas de feedback.
  *
@@ -7,7 +7,7 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { PRAISE } from "../data-flavor.js?v=20261108is20";
+import { PRAISE } from "../data-flavor.js?v=20261114eu5";
 
 // ===== Elogios =====
 

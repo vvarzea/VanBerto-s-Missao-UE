@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/boss-core.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/boss-core.js
  *
  * Bosses (1/4): estado do combate, arranque, fases por HP, sprite, arena e barra de vida.
  *
@@ -7,22 +7,22 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { clearMiniViruses, clearPopupHazard, clearToxicZones, doBossBlink, doBossHop, doBossIdleArms, doBossIdleBlink, doBossRollQmark, doBossSmokePuff, doBossTeleport, doBossThrowBook, maintainMiniViruses, spawnMiniViruses, spawnPopupHazard, spawnToxicZones, stopPhishingDecoy } from "./boss-attacks.js?v=20261108is20";
-import { bossDialogueAnchor, playBossDialogue, vbDialogueAnchor } from "./dialogue.js?v=20261108is20";
-import { quizOverlay } from "./dom.js?v=20261108is20";
-import { showFloat } from "./feedback.js?v=20261108is20";
-import { clearDoubleJump, clearPower, clearStarPower, setInvuln } from "./items.js?v=20261108is20";
-import { clearExtremoAllies } from "./level.js?v=20261108is20";
-import { applyBackground, bgKeyForLevel } from "./map.js?v=20261108is20";
-import { snapPlayerToGround } from "./rooms.js?v=20261108is20";
-import { _critterSession, balloons, bossLockIcon, bossOverlay, bossRageIcon, bossState, bossTimers, bossVignette, critters, currentLevel, door, enemyTimers, getBossExtraHp, getBossSpeedMult, hudText, inBossFight, itemCountText, itemsGroup, malwareGroup, pipeExitDecor, platforms, player, set__critterSession, set__doorAnimRunning, set_awaitingQuiz, set_awaitingStory, set_balloons, set_bossLockIcon, set_bossOverlay, set_bossRageIcon, set_bossState, set_bossTimers, set_bossVignette, set_controlsInvertedUntil, set_critters, set_door, set_enemyTimers, set_inBossFight, set_invuln, set_pipeExitDecor, tipText } from "./state.js?v=20261108is20";
-import { clearMovingPlatforms, clearSign, clearTrampolines, spawnBossSign, spawnMovingPlatforms } from "./world.js?v=20261108is20";
-import { BOSS_BY_LEVEL } from "../data-bosses.js?v=20261108is20";
-import { clearPlatformDecor } from "../background.js?v=20261108is20";
-import { LEVELS, THEMES } from "../data-levels.js?v=20261108is20";
-import { makePlatformTextureThemed } from "../textures.js?v=20261108is20";
-import { ensureAudio, SFX, beep } from "../audio.js?v=20261108is20";
-import { BOSS_OBJECTIVE, BOSS_INTRO_VB, BOSS_HP_TAUNTS } from "../data-story.js?v=20261108is20";
+import { clearMiniViruses, clearPopupHazard, clearToxicZones, doBossBlink, doBossHop, doBossIdleArms, doBossIdleBlink, doBossRollQmark, doBossSmokePuff, doBossTeleport, doBossThrowBook, maintainMiniViruses, spawnMiniViruses, spawnPopupHazard, spawnToxicZones, stopPhishingDecoy } from "./boss-attacks.js?v=20261114eu5";
+import { bossDialogueAnchor, playBossDialogue, vbDialogueAnchor } from "./dialogue.js?v=20261114eu5";
+import { quizOverlay } from "./dom.js?v=20261114eu5";
+import { showFloat } from "./feedback.js?v=20261114eu5";
+import { clearDoubleJump, clearPower, clearStarPower, setInvuln } from "./items.js?v=20261114eu5";
+import { clearExtremoAllies } from "./level.js?v=20261114eu5";
+import { applyBackground, bgKeyForLevel } from "./map.js?v=20261114eu5";
+import { snapPlayerToGround } from "./rooms.js?v=20261114eu5";
+import { _critterSession, balloons, bossLockIcon, bossOverlay, bossRageIcon, bossState, bossTimers, bossVignette, critters, currentLevel, door, enemyTimers, getBossExtraHp, getBossSpeedMult, hudText, inBossFight, itemCountText, itemsGroup, malwareGroup, pipeExitDecor, platforms, player, set__critterSession, set__doorAnimRunning, set_awaitingQuiz, set_awaitingStory, set_balloons, set_bossLockIcon, set_bossOverlay, set_bossRageIcon, set_bossState, set_bossTimers, set_bossVignette, set_controlsInvertedUntil, set_critters, set_door, set_enemyTimers, set_inBossFight, set_invuln, set_pipeExitDecor, tipText } from "./state.js?v=20261114eu5";
+import { clearMovingPlatforms, clearSign, clearTrampolines, spawnBossSign, spawnMovingPlatforms } from "./world.js?v=20261114eu5";
+import { BOSS_BY_LEVEL } from "../data-bosses.js?v=20261114eu5";
+import { clearPlatformDecor } from "../background.js?v=20261114eu5";
+import { LEVELS, THEMES } from "../data-levels.js?v=20261114eu5";
+import { makePlatformTextureThemed } from "../textures.js?v=20261114eu5";
+import { ensureAudio, SFX, beep } from "../audio.js?v=20261114eu5";
+import { BOSS_OBJECTIVE, BOSS_INTRO_VB, BOSS_HP_TAUNTS } from "../data-story.js?v=20261114eu5";
 
 
 // =====================================================================

@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/rooms.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/rooms.js
  *
  * Agachar, canos e salas secretas: entrar, sair e reposicionar o jogador.
  *
@@ -7,14 +7,14 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { setInvuln } from "./items.js?v=20261108is20";
-import { applyBackground, bgKeyForLevel } from "./map.js?v=20261108is20";
-import { ROOM_ITEM_XY, ROOM_LANDING_Y, ROOM_LEDGE, ROOM_PIPE_XY, ROOM_THEME_IDX, ROOM_WORLD_W } from "./scene.js?v=20261108is20";
-import { _pendingEntranceReveal, _pipeWarping, balloons, collectedRoomPipes, critters, currentLevel, currentSign, door, inSecretRoom, isCrouching, itemsGroup, malwareGroup, movingPlatforms, pipes, platforms, player, sceneRef, secretRoomHidden, secretRoomReturn, secretRoomTemp, set__pendingEntranceReveal, set__pipeWarping, set__suppressCrouchUntilRelease, set_inSecretRoom, set_isCrouching, set_secretRoomHidden, set_secretRoomReturn, set_secretRoomTemp, trampolines } from "./state.js?v=20261108is20";
-import { clearSecretSigns, spawnSecretSign } from "./world.js?v=20261108is20";
-import { ensureAudio, beep, SFX } from "../audio.js?v=20261108is20";
-import { makePlatformTextureThemed, makePipeTexture } from "../textures.js?v=20261108is20";
-import { LEVELS, THEMES } from "../data-levels.js?v=20261108is20";
+import { setInvuln } from "./items.js?v=20261114eu5";
+import { applyBackground, bgKeyForLevel } from "./map.js?v=20261114eu5";
+import { ROOM_ITEM_XY, ROOM_LANDING_Y, ROOM_LEDGE, ROOM_PIPE_XY, ROOM_THEME_IDX, ROOM_WORLD_W } from "./scene.js?v=20261114eu5";
+import { _pendingEntranceReveal, _pipeWarping, balloons, collectedRoomPipes, critters, currentLevel, currentSign, door, inSecretRoom, isCrouching, itemsGroup, malwareGroup, movingPlatforms, pipes, platforms, player, sceneRef, secretRoomHidden, secretRoomReturn, secretRoomTemp, set__pendingEntranceReveal, set__pipeWarping, set__suppressCrouchUntilRelease, set_inSecretRoom, set_isCrouching, set_secretRoomHidden, set_secretRoomReturn, set_secretRoomTemp, trampolines } from "./state.js?v=20261114eu5";
+import { clearSecretSigns, spawnSecretSign } from "./world.js?v=20261114eu5";
+import { ensureAudio, beep, SFX } from "../audio.js?v=20261114eu5";
+import { makePlatformTextureThemed, makePipeTexture } from "../textures.js?v=20261114eu5";
+import { LEVELS, THEMES } from "../data-levels.js?v=20261114eu5";
 
 // Anima a entrada do VanBerto's (fade-in + "pop" estica-encolhe) — chamada
 // só quando o jogo realmente arranca (ver showHistory), nunca enquanto o
@@ -253,8 +253,8 @@ function buildSecretRoomContents(scene, kind, roomKey, fact) {
   // Emoji do rótulo varia consoante a recompensa — pequeno toque de
   // variedade entre salas sem mexer no tema roxo fixo (que se mantém de
   // propósito, para se reconhecer logo "sala secreta" em qualquer nível).
-  const kindEmoji = { estrela:"⭐", balao:"🔑", brinquedo:"🔐", medalha:"🏅",
-    heart:"❤️", duplosalto:"🦘", balaofesta:"🔒" };
+  const kindEmoji = { estrela:"⭐", balao:"📜", brinquedo:"🇪🇺", medalha:"🏅",
+    heart:"❤️", duplosalto:"🦘", balaofesta:"💶" };
 
   if (!alreadyCollected) {
     const keyMap={ estrela:"item_estrela", balao:"item_chave", brinquedo:"item_chip",

@@ -1,8 +1,8 @@
-// ===== Frases soltas e mensagens de "tempero" — MISSÃO CIBERSEGURANÇA =====
+// ===== Frases soltas e mensagens de "tempero" — MISSÃO EUROPA =====
 // PRAISE, PAUSE_TIPS, LEVEL_ENTRY_PHRASES, DYNAMIC_MSGS_CORRECT, DYNAMIC_MSGS_WRONG,
 // VB_LEVEL_INTRO, VB_HIT, VB_QUIZ_CORRECT, VB_QUIZ_WRONG, VB_STAR_POWER, VB_PERFECT_LEVEL
 
-export const PRAISE = ["🌟 Excelente!", "🛡️ Muito bem!", "🔐 Boa resposta!", "🎉 Fantástico!", "✨ Brilhante!", "🏆 Continua assim!"];
+export const PRAISE = ["🌟 Excelente!", "⭐ Muito bem!", "🇪🇺 Boa resposta!", "🎉 Fantástico!", "✨ Brilhante!", "🏆 Continua assim!"];
 
 // PAUSE_TIPS são sobre MECÂNICAS de jogo (agachar, super-salto, power-ups,
 // tipos de vilão), não sobre o tema — mantidos tal como no original.
@@ -24,31 +24,35 @@ export const PAUSE_TIPS = [
 // Frase curta mostrada ao entrar em cada nível — alinhada por posição no
 // array LEVELS (0-19), NÃO por artIdx.
 export const LEVEL_ENTRY_PHRASES = [
-  "Sê tu, com respeito! 🪪",
-  "Tens direitos online! ⚖️",
-  "Pensa no outro! 💚",
-  "A Internet é para todos! 🌈",
-  "Escolhe com cabeça! 🧭",
-  "Diz não à pressão! 🧗",
-  "Quem é quem online? 🤝",
-  "Pára o ciberbullying! 🛑",
-  "Não te deixes enganar! 🎭",
-  "Pede ajuda sempre! 🆘",
-  "Joga em equipa! 🏘️",
-  "Partilha com cuidado! 📤",
-  "Cuida da tua pegada! 👣",
-  "Juntos somos mais! 🧩",
-  "Faz pausas do ecrã! 🧘",
-  "Os algoritmos escolhem? 🪐",
-  "Usa a IA com cabeça! 🤖",
-  "Será mesmo real? 🧪",
-  "Verifica a fonte! 📡",
-  "O futuro é teu! 🚀"
+  "A Europa está no mapa! 🗺️",
+  "Portugal faz parte da Europa! 🇵🇹",
+  "Cada país tem a sua capital! 🏛️",
+  "Doze estrelas em círculo! 🇪🇺",
+  "Unida na diversidade! 🎶",
+  "Tantas línguas, uma Europa! 🗣️",
+  "A Europa tem monumentos incríveis! 🏰",
+  "Sabores e tradições de norte a sul! 🥘",
+  "Respeitar as diferenças! 🤝",
+  "9 de maio — Dia da Europa! 📜",
+  "A paz é um tesouro! 🕊️",
+  "Da CECA à União Europeia! 📖",
+  "Valores que nos unem! ⚖️",
+  "Direitos de todos os cidadãos! 🪪",
+  "Conhece as instituições! 🏢",
+  "Cuidar do ambiente é cuidar do futuro! 🌱",
+  "Energia limpa para todos! ☀️",
+  "A ciência abre caminhos! 🔬",
+  "Viajar e estudar na Europa! 🚆",
+  "A Europa brilha quando participas! ⭐"
 ];
 
 export const DYNAMIC_MSGS_CORRECT = [
-  "🌟 Fantástico!", "✨ Excelente!", "🎉 És incrível!",
-  "🛡️ Sabia que conseguias!", "🏆 Competência protegida!", "🔐 Muito bem!"
+  "🌟 Fantástico!",
+  "✨ Excelente!",
+  "🎉 És incrível!",
+  "🇪🇺 Sabia que conseguias!",
+  "🏆 Estrela recuperada!",
+  "⭐ Muito bem!"
 ];
 
 export const DYNAMIC_MSGS_WRONG = [
@@ -60,26 +64,26 @@ export const DYNAMIC_MSGS_WRONG = [
 // posição no array LEVELS (0-19), NÃO por artIdx. O motor usa sempre
 // VB_LEVEL_INTRO[0] no arranque do jogo (ver dia-crianca.js).
 export const VB_LEVEL_INTRO = [
-  "Hoje vamos recuperar a competência de Navegar em Segurança! 🌐 Estás preparado?",
-  "Uma palavra-passe forte é o teu primeiro escudo digital! 🔐 Vamos descobrir como criá-la?",
-  "Os teus dados pessoais são um tesouro! 🪪 Vamos aprender a protegê-los?",
-  "Nunca estamos sozinhos online! 🆘 Vamos descobrir quem nos ajuda?",
-  "Sinto um vírus por perto! 🦠 Vamos aprender a proteger o computador?",
-  "Jogar com regras é jogar melhor! 🎮 Vamos ver como jogar em segurança?",
-  "Tudo o que publicamos deixa um rasto! 👣 Vamos pensar antes de publicar?",
-  "Nem tudo o que lemos online é verdade! 📰 Vamos aprender a verificar?",
-  "Atenção aos links suspeitos! 🎣 Vamos aprender a reconhecer o phishing?",
-  "Dispositivos atualizados são dispositivos protegidos! 💻 Vamos cuidar deles?",
-  "Em família, decidimos juntos as regras de ecrã! 👨‍👩‍👧 Vamos lá?",
-  "Wi-Fi público pede cuidados redobrados! 📶 Vamos aprender quais?",
-  "Uma cópia de segurança pode salvar-nos de um grande susto! 💾 Vamos fazê-la?",
-  "A tecnologia é para todos! ♿ Vamos torná-la acessível?",
-  "Cuidado com ofertas boas demais para ser verdade! 🛒 Vamos aprender a desconfiar?",
-  "Denunciar é um direito nosso! 📢 Vamos usá-lo sem medo?",
-  "A tua identidade digital também merece proteção! 🧑‍💻 Vamos protegê-la?",
-  "Os teus segredos são teus! 🔒 A privacidade também é um direito!",
-  "Cuidado com desconhecidos online! 🚫 Vamos aprender a reconhecer o perigo?",
-  "Os teus direitos também existem online! ⚖️ Último nível — dá tudo!"
+  "Hoje vamos descobrir onde fica a Europa! 🗺️ Estás preparado?",
+  "Portugal fica no extremo ocidental da Europa! 🇵🇹 Vamos explorar o mapa?",
+  "Cada país tem a sua capital! 🏛️ Vamos aprender algumas?",
+  "A bandeira tem 12 estrelas douradas em círculo! 🇪🇺 Vamos recuperá-las?",
+  "Hino, lema, moeda e Dia da Europa! 🎶 Vamos descobrir os símbolos?",
+  "A Europa fala muitas línguas! 🗣️ Vamos ouvi-las?",
+  "Torres, castelos e palácios! 🏰 Vamos visitar o património?",
+  "Pizza, pastel de nata, fado, flamenco! 🥘 Vamos saborear a Europa?",
+  "Todos diferentes, todos iguais em direitos! 🤝 Vamos respeitar as diferenças?",
+  "A 9 de maio de 1950 começou tudo! 📜 Vamos conhecer a Declaração Schuman?",
+  "A paz não nasce sozinha! 🕊️ Vamos descobrir como se construiu?",
+  "Seis países fundaram a CEE em 1957! 📖 Vamos viajar no tempo?",
+  "Dignidade, liberdade, democracia, igualdade! ⚖️ Vamos conhecer os valores?",
+  "Ser cidadão europeu dá-nos direitos! 🪪 Vamos descobri-los?",
+  "Parlamento, Comissão, Conselho e Tribunal! 🏢 Vamos conhecê-los?",
+  "O planeta é a nossa casa! 🌱 Vamos cuidar dele?",
+  "O Sol e o vento dão-nos energia! ☀️ Vamos aproveitá-la?",
+  "A ciência ajuda a resolver problemas! 🔬 Vamos inovar?",
+  "Erasmus+, comboios e Schengen! 🚆 Vamos viajar pela Europa?",
+  "Último nível! A tua participação acende a 12.ª estrela! ⭐ Dá tudo!"
 ];
 
 export const VB_HIT = [
@@ -93,9 +97,9 @@ export const VB_HIT = [
 
 export const VB_QUIZ_CORRECT = [
   "INCRÍVEL! Sabias mesmo a resposta! 🏆",
-  "Que craque! Competência recuperada! ✨",
+  "Que craque! Mais uma estrela a brilhar! ✨",
   "Fantástico! Estou tão orgulhoso de ti! 🎉",
-  "Isso mesmo! A cibersegurança agradece! 🛡️",
+  "Isso mesmo! A Europa agradece! 🇪🇺",
   "Brilhante! Nada te escapa! 🌟",
   "Que resposta! Mereces uma estrela! ⭐"
 ];
@@ -118,6 +122,6 @@ export const VB_STAR_POWER = [
 export const VB_PERFECT_LEVEL = [
   "PERFEITO! Nenhuma vida perdida! Lendário! 🏆",
   "Uau! Passaste o nível sem um arranhão! ⭐",
-  "Impecável! Guardião da Internet Segura nível máximo! 🌟",
+  "Impecável! Guardião da Europa nível máximo! 🌟",
   "Incrível! Isso merecia um bónus extra! 🎉"
 ];

@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/map.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/map.js
  *
  * Mapa da aventura: progresso, mundos, carregamento dos fundos e arranque de um nível a partir do mapa.
  *
@@ -7,23 +7,23 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { vbSay } from "./dialogue.js?v=20261108is20";
-import { startOverlay } from "./dom.js?v=20261108is20";
-import { playLevelTransition } from "./door.js?v=20261108is20";
-import { loadLevel } from "./level.js?v=20261108is20";
-import { openOverlay, saveGame } from "./overlays.js?v=20261108is20";
-import { showHistory } from "./quiz.js?v=20261108is20";
-import { initPhaser } from "./scene.js?v=20261108is20";
-import { currentLevel, getStartLives, mapProgress, pausedByTeacher, playerName, playerNameHUD, powerHaloGfx, sceneRef, score, set__historySubOpen, set__overlayPaused, set__winOverlaySubOpen, set_currentLevel, set_lives, shadowGfx } from "./state.js?v=20261108is20";
-import { loadNamespace, saveNamespace } from "../storage.js?v=20261108is20";
-import { MAP_REGIONS } from "../data-progression.js?v=20261108is20";
-import { applyBackground as applyBackgroundRaw } from "../background.js?v=20261108is20";
-import { LEVELS, THEMES } from "../data-levels.js?v=20261108is20";
-import { ensureAudio, SFX } from "../audio.js?v=20261108is20";
-import { playTitleCard } from "../cinematics.js?v=20261108is20";
-import { starsForLevel } from "../stars.js?v=20261108is20";
-import { REGION_INTRO } from "../data-story.js?v=20261108is20";
-import { VB_LEVEL_INTRO } from "../data-flavor.js?v=20261108is20";
+import { vbSay } from "./dialogue.js?v=20261114eu5";
+import { startOverlay } from "./dom.js?v=20261114eu5";
+import { playLevelTransition } from "./door.js?v=20261114eu5";
+import { loadLevel } from "./level.js?v=20261114eu5";
+import { openOverlay, saveGame } from "./overlays.js?v=20261114eu5";
+import { showHistory } from "./quiz.js?v=20261114eu5";
+import { initPhaser } from "./scene.js?v=20261114eu5";
+import { currentLevel, getStartLives, mapProgress, pausedByTeacher, playerName, playerNameHUD, powerHaloGfx, sceneRef, score, set__historySubOpen, set__overlayPaused, set__winOverlaySubOpen, set_currentLevel, set_lives, shadowGfx } from "./state.js?v=20261114eu5";
+import { loadNamespace, saveNamespace } from "../storage.js?v=20261114eu5";
+import { MAP_REGIONS } from "../data-progression.js?v=20261114eu5";
+import { applyBackground as applyBackgroundRaw } from "../background.js?v=20261114eu5";
+import { LEVELS, THEMES } from "../data-levels.js?v=20261114eu5";
+import { ensureAudio, SFX } from "../audio.js?v=20261114eu5";
+import { playTitleCard } from "../cinematics.js?v=20261114eu5";
+import { starsForLevel } from "../stars.js?v=20261114eu5";
+import { REGION_INTRO } from "../data-story.js?v=20261114eu5";
+import { VB_LEVEL_INTRO } from "../data-flavor.js?v=20261114eu5";
 
 
 // ===== Dicas =====
@@ -79,9 +79,9 @@ const LEVEL_BG_OVERRIDE = {
   4: "bg_mundo1_n5",   // Nível 5
   5: "bg_mundo2_n6",   // Nível 6
   6: "bg_mundo2_n7",   // Nível 7
-  7: "bg_mundo2_n8",
+  7: "bg_mundo2_n8",   // Nível 8
   8: "bg_mundo2_n9",   // Nível 9
-  9: "bg_mundo2_n9",   // Nível 10 (agora fecha o Mundo 2)
+  9: "bg_mundo3_n10e11", // Nível 10
   10: "bg_mundo3_n10e11", // Nível 11
   11: "bg_mundo3_n12e13", // Nível 12
   12: "bg_mundo3_n12e13", // Nível 13

@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/door.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/door.js
  *
  * A porta do nível: abrir, animação de saída e transição para o nível seguinte.
  *
@@ -7,19 +7,19 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { showLevelCompleteCelebration, showRightRecovered } from "./artefacts.js?v=20261108is20";
-import { quizOverlay } from "./dom.js?v=20261108is20";
-import { nextLevel } from "./flow.js?v=20261108is20";
-import { markLevelCompleted } from "./map.js?v=20261108is20";
-import { pickQuizForLevel, showQuiz } from "./quiz.js?v=20261108is20";
-import { snapPlayerToGround } from "./rooms.js?v=20261108is20";
-import { _doorAnimRunning, _doorWatchdogTimer, _landingCheckTimer, _levelAtDoorTrigger, _starMelodyInterval, awaitingQuiz, awaitingStory, currentLevel, door, doorOverlap, doubleJumpCountdown, doubleJumpTimer, invuln, invulnBlinkEvent, invulnEndEvent, itemsCollected, itemsTotal, livesLostThisLevel, mapProgress, player, playerName, powerCountdown, powerHaloGfx, poweredTimer, set__doorAnimRunning, set__doorWatchdogTimer, set__landingCheckTimer, set__levelAtDoorTrigger, set__starMelodyInterval, set_awaitingQuiz, set_doorOverlap, set_doubleJumpActive, set_doubleJumpCountdown, set_doubleJumpTimer, set_invuln, set_invulnBlinkEvent, set_invulnEndEvent, set_lastQuizTheme, set_powerCountdown, set_powered, set_poweredTimer, set_starPower, set_starPowerCountdown, set_starPowerTimer, shadowGfx, starPowerCountdown, starPowerTimer, touch } from "./state.js?v=20261108is20";
-import { playVanBertoDance } from "./vanberto.js?v=20261108is20";
-import { ensureAudio, SFX } from "../audio.js?v=20261108is20";
-import { LEVELS, THEMES } from "../data-levels.js?v=20261108is20";
-import { finalizeLevelStars } from "../stars.js?v=20261108is20";
-import { checkAchievements } from "../achievements.js?v=20261108is20";
-import { LEVEL_ENTRY_PHRASES } from "../data-flavor.js?v=20261108is20";
+import { showLevelCompleteCelebration, showRightRecovered } from "./artefacts.js?v=20261114eu5";
+import { quizOverlay } from "./dom.js?v=20261114eu5";
+import { nextLevel } from "./flow.js?v=20261114eu5";
+import { markLevelCompleted } from "./map.js?v=20261114eu5";
+import { pickQuizForLevel, showQuiz } from "./quiz.js?v=20261114eu5";
+import { snapPlayerToGround } from "./rooms.js?v=20261114eu5";
+import { _doorAnimRunning, _doorWatchdogTimer, _landingCheckTimer, _levelAtDoorTrigger, _starMelodyInterval, awaitingQuiz, awaitingStory, currentLevel, door, doorOverlap, doubleJumpCountdown, doubleJumpTimer, invuln, invulnBlinkEvent, invulnEndEvent, itemsCollected, itemsTotal, livesLostThisLevel, mapProgress, player, playerName, powerCountdown, powerHaloGfx, poweredTimer, set__doorAnimRunning, set__doorWatchdogTimer, set__landingCheckTimer, set__levelAtDoorTrigger, set__starMelodyInterval, set_awaitingQuiz, set_doorOverlap, set_doubleJumpActive, set_doubleJumpCountdown, set_doubleJumpTimer, set_invuln, set_invulnBlinkEvent, set_invulnEndEvent, set_lastQuizTheme, set_powerCountdown, set_powered, set_poweredTimer, set_starPower, set_starPowerCountdown, set_starPowerTimer, shadowGfx, starPowerCountdown, starPowerTimer, touch } from "./state.js?v=20261114eu5";
+import { playVanBertoDance } from "./vanberto.js?v=20261114eu5";
+import { ensureAudio, SFX } from "../audio.js?v=20261114eu5";
+import { LEVELS, THEMES } from "../data-levels.js?v=20261114eu5";
+import { finalizeLevelStars } from "../stars.js?v=20261114eu5";
+import { checkAchievements } from "../achievements.js?v=20261114eu5";
+import { LEVEL_ENTRY_PHRASES } from "../data-flavor.js?v=20261114eu5";
 
 // ===== Porta + Quiz =====
 

@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/flow.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/flow.js
  *
  * Fluxo do jogo: passar de nível, fim de jogo, confetis e ecrã de vitória.
  *
@@ -7,24 +7,24 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { collectedArtefacts, showArtefactGallery } from "./artefacts.js?v=20261108is20";
-import { startBossFight } from "./boss-core.js?v=20261108is20";
-import { bonusStars, btnCloseQuiz, quizOverlay } from "./dom.js?v=20261108is20";
-import { clearDoubleJump, clearPower, clearStarPower } from "./items.js?v=20261108is20";
-import { loadLevel } from "./level.js?v=20261108is20";
-import { celebrateWorldComplete, enterLevelWithStory, isLastLevelOfRegion, regionForLevel, renderMap, renderWorldMap } from "./map.js?v=20261108is20";
-import { closeOverlay, openOverlay, saveGame } from "./overlays.js?v=20261108is20";
-import { quizStats, showHistory, wireReviewButton } from "./quiz.js?v=20261108is20";
-import { openAchievementsScreen } from "./screens.js?v=20261108is20";
-import { _doorWatchdogTimer, _landingCheckTimer, _reviewReturnOverlay, currentLevel, door, livesLostThisLevel, pausedByTeacher, player, playerName, powerHaloGfx, sceneRef, score, scoreText, set__doorWatchdogTimer, set__hudDirty, set__landingCheckTimer, set__reviewReturnOverlay, set__winOverlaySubOpen, set_awaitingQuiz, set_awaitingStory, set_livesLostThisLevel, set_score, shadowGfx, touch } from "./state.js?v=20261108is20";
-import { adventureScore, globalStats, medalTextWin, medalTier } from "./stats.js?v=20261108is20";
-import { btnWinRestart } from "./ui.js?v=20261108is20";
-import { starsForLevel, totalStarsEarned, levelStars } from "../stars.js?v=20261108is20";
-import { LEVELS } from "../data-levels.js?v=20261108is20";
-import { BOSS_BY_LEVEL } from "../data-bosses.js?v=20261108is20";
-import { ensureAudio, SFX } from "../audio.js?v=20261108is20";
-import { hideDoorGlow } from "../background.js?v=20261108is20";
-import { ARTEFACTS } from "../data-progression.js?v=20261108is20";
+import { collectedArtefacts, showArtefactGallery } from "./artefacts.js?v=20261114eu5";
+import { startBossFight } from "./boss-core.js?v=20261114eu5";
+import { bonusStars, btnCloseQuiz, quizOverlay } from "./dom.js?v=20261114eu5";
+import { clearDoubleJump, clearPower, clearStarPower } from "./items.js?v=20261114eu5";
+import { loadLevel } from "./level.js?v=20261114eu5";
+import { celebrateWorldComplete, enterLevelWithStory, isLastLevelOfRegion, regionForLevel, renderMap, renderWorldMap } from "./map.js?v=20261114eu5";
+import { closeOverlay, openOverlay, saveGame } from "./overlays.js?v=20261114eu5";
+import { quizStats, showHistory, wireReviewButton } from "./quiz.js?v=20261114eu5";
+import { openAchievementsScreen } from "./screens.js?v=20261114eu5";
+import { _doorWatchdogTimer, _landingCheckTimer, _reviewReturnOverlay, currentLevel, door, livesLostThisLevel, pausedByTeacher, player, playerName, powerHaloGfx, sceneRef, score, scoreText, set__doorWatchdogTimer, set__hudDirty, set__landingCheckTimer, set__reviewReturnOverlay, set__winOverlaySubOpen, set_awaitingQuiz, set_awaitingStory, set_livesLostThisLevel, set_score, shadowGfx, touch } from "./state.js?v=20261114eu5";
+import { adventureScore, globalStats, medalTextWin, medalTier } from "./stats.js?v=20261114eu5";
+import { btnWinRestart } from "./ui.js?v=20261114eu5";
+import { starsForLevel, totalStarsEarned, levelStars } from "../stars.js?v=20261114eu5";
+import { LEVELS } from "../data-levels.js?v=20261114eu5";
+import { BOSS_BY_LEVEL } from "../data-bosses.js?v=20261114eu5";
+import { ensureAudio, SFX } from "../audio.js?v=20261114eu5";
+import { hideDoorGlow } from "../background.js?v=20261114eu5";
+import { ARTEFACTS } from "../data-progression.js?v=20261114eu5";
 
 // BUG CORRIGIDO: nextLevel() não tinha nenhuma proteção contra ser chamada
 // duas vezes seguidas para a MESMA conclusão de nível (ex.: o botão
@@ -77,7 +77,7 @@ export function nextLevel(scene){
     set_score(score + (50));
     bonusStars.textContent = (realStars === 3)
       ? "⭐⭐⭐\n+50 Nível Perfeito!"
-      : "🛡️\n+50 Sem perder vidas!";
+      : "🌟\n+50 Sem perder vidas!";
     bonusStars.classList.add("show"); setTimeout(()=>bonusStars.classList.remove("show"),2000);
   }
   set_livesLostThisLevel(0);
@@ -219,8 +219,8 @@ export function showVictoryScreen(scene){
     const pct = _allStars ? 100 : Math.min(_pctFromStars, _pctFromGlobalStats);
     const _tier=medalTier(pct);
     const medal=medalTextWin(_tier);
-    const master=(_tier==="perfect")?" 🌟 Defensor Perfeito da Internet Segura!":"";
-    document.getElementById("winPlayerName").textContent=playerName||"Ciber-Herói";
+    const master=(_tier==="perfect")?" 🌟 Defensor Perfeito da Europa!":"";
+    document.getElementById("winPlayerName").textContent=playerName||"Herói da Europa";
     document.getElementById("winScore").textContent=adventureScore();
     // Só mostra a fração se a percentagem for a dela; se as estrelas mandarem (valor mais baixo), mostra só a percentagem — nunca «17/27 (50%)».
     document.getElementById("winPct").textContent=(gTotal>0&&pct===_pctFromGlobalStats)?`${gCorrect}/${gTotal} (${pct}%)`:`${pct}%`;
@@ -228,38 +228,17 @@ export function showVictoryScreen(scene){
 
     // ── Tabela de temas com erros — aparece logo se existirem ───────
     const THEME_LABELS={
-      historia_internet:"Nasce a Internet",palavras_passe:"Palavras-passe Fortes",
-      dados_pessoais:"Dados Pessoais",instituicoes_apoio:"Quem Nos Protege",
-      virus_malware:"Vírus e Malware",jogos_seguros:"Jogar em Segurança",
-      pegada_digital:"Pegada Digital",fake_news:"Fake News",
-      phishing:"Phishing",dispositivos:"Dispositivos Protegidos",
-      regras_familia:"Ecrã em Família",wifi_publico:"Wi-Fi Público",
-      copias_seguranca:"Cópias de Segurança",acessibilidade_digital:"Acessibilidade Digital",
-      spam_compras:"Spam e Compras",denuncia_conteudo:"Denunciar e Pedir Ajuda",
-      identidade_digital:"Identidade Digital",privacidade:"Privacidade",
-      contacto_desconhecidos:"Cuidado com Desconhecidos",direitos_digitais:"Direitos Digitais",
-      cd1:"O Portal da Identidade",
-      cd2:"A Fortaleza dos Direitos",
-      cd3:"A Floresta da Empatia",
-      cd4:"O Jardim da Inclusão",
-      cd5:"O Farol das Escolhas",
-      cd6:"O Desfiladeiro das Pressões",
-      cd7:"A Caverna das Relações Online",
-      cd8:"O Pântano do Ciberbullying",
-      cd9:"A Ponte da Manipulação",
-      cd10:"A Fortaleza do Apoio",
-      cd11:"A Praça das Comunidades",
-      cd12:"O Bairro da Partilha Responsável",
-      cd13:"A Avenida da Pegada Digital",
-      cd14:"A Torre da Colaboração",
-      cd15:"O Centro do Bem-Estar Digital",
-      cd16:"O Planeta dos Algoritmos",
-      cd17:"O Laboratório da Inteligência Artificial",
-      cd18:"O Mundo dos Conteúdos Sintéticos",
-      cd19:"A Estação da Informação Fiável",
-      cd20:"O Núcleo do Futuro Digital",
-      boss_1:"Guardião da Internet",boss_2:"O Sombra das Redes",boss_3:"O Manipulador Digital",boss_4:"A Inteligência Artificial"
-    };
+      mapa_europa:"Onde Fica a Europa",portugal_europa:"Portugal na Europa",
+      paises_capitais:"Países e Capitais",bandeira_ue:"A Bandeira Europeia",
+      simbolos_ue:"Símbolos da UE",linguas:"Línguas da Europa",
+      monumentos:"Monumentos e Património",gastronomia_musica:"Sabores e Tradições",
+      diversidade_respeito:"Diversidade e Respeito",dia_europa_schuman:"Dia da Europa e Schuman",
+      paz_cooperacao:"Paz e Cooperação",historia_ue:"Da CECA à UE",
+      valores_europeus:"Valores Europeus",direitos_cidadaos:"Direitos dos Cidadãos",
+      instituicoes:"Instituições Europeias",ambiente:"Proteger o Ambiente",
+      energia_clima:"Energia e Clima",ciencia_inovacao:"Ciência e Inovação",
+      mobilidade_erasmus:"Viajar e Estudar",jovens_cidadania_digital:"Jovens e Cidadania Digital"
+      };
     const winThemeErrors=document.getElementById("winThemeErrors");
     const winThemeTable=document.getElementById("winThemeTable");
     // Erros da aventura toda (registo persistente) — o mesmo âmbito de «17/27 (63%)» acima

@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/boss-combat.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/boss-combat.js
  *
  * Bosses (3/4): dano, saltos, fúria, colisões, fase de recolha e ataque especial.
  *
@@ -7,21 +7,21 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { clearMiniViruses, clearPopupHazard, clearToxicZones, currentContaminationZones, currentPopupConfig, doBossTeleport, showBossLaugh, spawnToxicZones, startPhishingDecoy, stopPhishingDecoy, triggerBossBlackout, updateToxicZones } from "./boss-attacks.js?v=20261108is20";
-import { destroyBossHpBar, drawBossHpBar, enterBossPhase, startBossFinalStandBurst } from "./boss-core.js?v=20261108is20";
-import { startBossQuizPhase } from "./boss-end.js?v=20261108is20";
-import { vbSayRandom } from "./dialogue.js?v=20261108is20";
-import { hitFlash } from "./dom.js?v=20261108is20";
-import { applyHitStop, showFloat } from "./feedback.js?v=20261108is20";
-import { showGameOver } from "./flow.js?v=20261108is20";
-import { setInvuln } from "./items.js?v=20261108is20";
-import { clearExtremoAllies, spawnExtremoReinforcement, updateHearts } from "./level.js?v=20261108is20";
-import { snapPlayerToGround } from "./rooms.js?v=20261108is20";
-import { awaitingQuiz, bossExtremoAllies, bossLockIcon, bossMiniViruses, bossOverlay, bossRageIcon, bossState, bossTimers, difficulty, heartsGfx, inBossFight, invuln, itemCountText, itemsGroup, lives, livesLostThisLevel, player, sceneRef, score, scoreText, set__hudDirty, set_awaitingQuiz, set_bossExtremoAllies, set_bossLockIcon, set_bossMiniViruses, set_bossOverlay, set_bossPopupAnchors, set_bossRageIcon, set_bossTimers, set_controlsInvertedUntil, set_invuln, set_lives, set_livesLostThisLevel, set_score, starPower, tipText } from "./state.js?v=20261108is20";
-import { triggerVanBertoSad } from "./vanberto.js?v=20261108is20";
-import { ensureAudio, beep, SFX } from "../audio.js?v=20261108is20";
-import { BOSS_HP_TAUNTS } from "../data-story.js?v=20261108is20";
-import { VB_STAR_POWER } from "../data-flavor.js?v=20261108is20";
+import { clearMiniViruses, clearPopupHazard, clearToxicZones, currentContaminationZones, currentPopupConfig, doBossTeleport, showBossLaugh, spawnToxicZones, startPhishingDecoy, stopPhishingDecoy, triggerBossBlackout, updateToxicZones } from "./boss-attacks.js?v=20261114eu5";
+import { destroyBossHpBar, drawBossHpBar, enterBossPhase, startBossFinalStandBurst } from "./boss-core.js?v=20261114eu5";
+import { startBossQuizPhase } from "./boss-end.js?v=20261114eu5";
+import { vbSayRandom } from "./dialogue.js?v=20261114eu5";
+import { hitFlash } from "./dom.js?v=20261114eu5";
+import { applyHitStop, showFloat } from "./feedback.js?v=20261114eu5";
+import { showGameOver } from "./flow.js?v=20261114eu5";
+import { setInvuln } from "./items.js?v=20261114eu5";
+import { clearExtremoAllies, spawnExtremoReinforcement, updateHearts } from "./level.js?v=20261114eu5";
+import { snapPlayerToGround } from "./rooms.js?v=20261114eu5";
+import { awaitingQuiz, bossExtremoAllies, bossLockIcon, bossMiniViruses, bossOverlay, bossRageIcon, bossState, bossTimers, difficulty, heartsGfx, inBossFight, invuln, itemCountText, itemsGroup, lives, livesLostThisLevel, player, sceneRef, score, scoreText, set__hudDirty, set_awaitingQuiz, set_bossExtremoAllies, set_bossLockIcon, set_bossMiniViruses, set_bossOverlay, set_bossPopupAnchors, set_bossRageIcon, set_bossTimers, set_controlsInvertedUntil, set_invuln, set_lives, set_livesLostThisLevel, set_score, starPower, tipText } from "./state.js?v=20261114eu5";
+import { triggerVanBertoSad } from "./vanberto.js?v=20261114eu5";
+import { ensureAudio, beep, SFX } from "../audio.js?v=20261114eu5";
+import { BOSS_HP_TAUNTS } from "../data-story.js?v=20261114eu5";
+import { VB_STAR_POWER } from "../data-flavor.js?v=20261114eu5";
 
 // Reação exagerada tipo desenho animado sempre que QUALQUER boss é atingido:
 // achata-se por meio segundo (textura "_ouch" + squash) e volta ao normal,
@@ -107,7 +107,7 @@ function handleStompBossTouch(b) {
     bossState.hitCooldownUntil = sceneRef.time.now + 400;
     player.setVelocityY(-360);
     ensureAudio(); beep({freq:260,dur:0.08,type:"triangle",vol:0.07,slideTo:200});
-    showFloat(sceneRef, b.x, b.y-100, bossState.def.shield.msg, "#1e1b4b");
+    showFloat(sceneRef, b.x, b.y-100, bossState.def.shield.msg, "#0a2466");
     return true;
   }
   if (isFalling && playerBottom <= bossTop + STOMP_TOLERANCE) {
@@ -283,11 +283,11 @@ function updateBossShield(scene, b) {
       g = scene.add.container(b.x, b.y).setDepth(depth);
       for (let i = 0; i < 6; i++) g.add(scene.add.image(0, 0, "boss_proj_notif").setScale(1.25));
     } else if (sh.type === "firewall") {                         // estrela/engrenagem de firewall
-      g = scene.add.star(b.x, b.y, 8, 82, 100, 0x39d6ff, 0.18).setStrokeStyle(4, 0x67e8f9, 0.95).setDepth(depth);
+      g = scene.add.star(b.x, b.y, 8, 82, 100, 0xffcc00, 0.20).setStrokeStyle(4, 0xfff0a0, 0.95).setDepth(depth);
     } else if (sh.type === "cloak") {                            // aura de sombra
-      g = scene.add.circle(b.x, b.y, 92, 0x120a22, 0.38).setStrokeStyle(3, 0xe0453a, 0.7).setDepth(depth);
+      g = scene.add.circle(b.x, b.y, 92, 0x120a22, 0.38).setStrokeStyle(3, 0x8a5cff, 0.8).setDepth(depth);
     } else {                                                     // bolha azul (Guardião)
-      g = scene.add.circle(b.x, b.y, 98, 0x4aa8ff, 0.30).setStrokeStyle(5, 0xcfe9ff, 0.95).setDepth(depth);
+      g = scene.add.circle(b.x, b.y, 98, 0x2f6bff, 0.30).setStrokeStyle(5, 0xffe066, 0.95).setDepth(depth);
     }
     bossState.shieldGfx = g;
   }

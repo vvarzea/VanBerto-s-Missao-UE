@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/level.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/level.js
  *
  * Carregar um nível, vilões, drones e o HUD (pontos, corações, barra de progresso).
  *
@@ -7,22 +7,22 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { addBlocksAndPlatforms } from "./blocks.js?v=20261108is20";
-import { createArtOrbs } from "./artefacts.js?v=20261108is20";
-import { clearBossArenaDecor } from "./boss-core.js?v=20261108is20";
-import { tryOpenDoor } from "./door.js?v=20261108is20";
-import { showFloat } from "./feedback.js?v=20261108is20";
-import { clearDoubleJump, clearPower, clearStarPower } from "./items.js?v=20261108is20";
-import { applyBackground, bgKeyForLevel, prefetchBackgrounds } from "./map.js?v=20261108is20";
-import { saveGame } from "./overlays.js?v=20261108is20";
-import { setCrouchHitbox, snapPlayerToGround } from "./rooms.js?v=20261108is20";
-import { _doorWatchdogTimer, _landingCheckTimer, awaitingQuiz, bossExtremoAllies, bossState, bossTimers, currentLevel, currentLevelTip, decorativePipes, difficulty, door, doorOverlap, enemyTimers, getDifficulty, getMaxLives, getVillainJumpIntervalMult, getVillainSpeedMult, heartsGfx, hudText, invuln, isItemVisibleInDificil, isReducibleItemKind, isStarAllowedExtremo, itemCountText, itemsCollected, itemsGroup, itemsTotal, lives, malwareGroup, pipeExitDecor, pipes, platforms, player, playerName, playerNameHUD, powerHaloGfx, powerIndicator, powered, progressFill, resetPipeWarpState, score, scoreText, set__doorAnimRunning, set__doorWatchdogTimer, set__hudDirty, set__landingCheckTimer, set__pendingEntranceReveal, set_awaitingQuiz, set_bossExtremoAllies, set_bossTimers, set_collectedItemIndices, set_collectedRoomPipes, set_controlsInvertedUntil, set_currentLevel, set_currentLevelTip, set_decorativePipes, set_door, set_doorOverlap, set_enemyTimers, set_extraShieldCounted, set_inSecretRoom, set_invuln, set_isCrouching, set_itemsCollected, set_itemsTotal, set_livesLostThisLevel, set_pipeExitDecor, set_pipes, set_secretRoomHidden, set_secretRoomReturn, set_secretRoomTemp, shadowGfx, tipText, touch } from "./state.js?v=20261108is20";
-import { clearHazards, clearMovingPlatforms, clearPipeHintSign, clearSecretSigns, clearSecrets, clearTrampolines, difficultyFactor, spawnBalloons, spawnCritters, spawnHazards, spawnLevelSign, spawnMovingPlatforms, spawnPipeHintSign, spawnSecrets, spawnShields, spawnTrampolines } from "./world.js?v=20261108is20";
-import { LEVELS, THEMES } from "../data-levels.js?v=20261108is20";
-import { resetLevelStarTracking } from "../stars.js?v=20261108is20";
-import { makePlatformTextureThemed, makePipeTexture } from "../textures.js?v=20261108is20";
-import { spawnPlatformDecor, resetDoorGlow } from "../background.js?v=20261108is20";
-import { ensureAudio, SFX, beep } from "../audio.js?v=20261108is20";
+import { addBlocksAndPlatforms } from "./blocks.js?v=20261114eu5";
+import { createArtOrbs } from "./artefacts.js?v=20261114eu5";
+import { clearBossArenaDecor } from "./boss-core.js?v=20261114eu5";
+import { tryOpenDoor } from "./door.js?v=20261114eu5";
+import { showFloat } from "./feedback.js?v=20261114eu5";
+import { clearDoubleJump, clearPower, clearStarPower } from "./items.js?v=20261114eu5";
+import { applyBackground, bgKeyForLevel, prefetchBackgrounds } from "./map.js?v=20261114eu5";
+import { saveGame } from "./overlays.js?v=20261114eu5";
+import { setCrouchHitbox, snapPlayerToGround } from "./rooms.js?v=20261114eu5";
+import { _doorWatchdogTimer, _landingCheckTimer, awaitingQuiz, bossExtremoAllies, bossState, bossTimers, currentLevel, currentLevelTip, decorativePipes, difficulty, door, doorOverlap, enemyTimers, getDifficulty, getMaxLives, getVillainJumpIntervalMult, getVillainSpeedMult, heartsGfx, hudText, invuln, isItemVisibleInDificil, isReducibleItemKind, isStarAllowedExtremo, itemCountText, itemsCollected, itemsGroup, itemsTotal, lives, malwareGroup, pipeExitDecor, pipes, platforms, player, playerName, playerNameHUD, powerHaloGfx, powerIndicator, powered, progressFill, resetPipeWarpState, score, scoreText, set__doorAnimRunning, set__doorWatchdogTimer, set__hudDirty, set__landingCheckTimer, set__pendingEntranceReveal, set_awaitingQuiz, set_bossExtremoAllies, set_bossTimers, set_collectedItemIndices, set_collectedRoomPipes, set_controlsInvertedUntil, set_currentLevel, set_currentLevelTip, set_decorativePipes, set_door, set_doorOverlap, set_enemyTimers, set_extraShieldCounted, set_inSecretRoom, set_invuln, set_isCrouching, set_itemsCollected, set_itemsTotal, set_livesLostThisLevel, set_pipeExitDecor, set_pipes, set_secretRoomHidden, set_secretRoomReturn, set_secretRoomTemp, shadowGfx, tipText, touch } from "./state.js?v=20261114eu5";
+import { clearHazards, clearMovingPlatforms, clearPipeHintSign, clearSecretSigns, clearSecrets, clearTrampolines, difficultyFactor, spawnBalloons, spawnCritters, spawnHazards, spawnLevelSign, spawnMovingPlatforms, spawnPipeHintSign, spawnSecrets, spawnShields, spawnTrampolines } from "./world.js?v=20261114eu5";
+import { LEVELS, THEMES } from "../data-levels.js?v=20261114eu5";
+import { resetLevelStarTracking } from "../stars.js?v=20261114eu5";
+import { makePlatformTextureThemed, makePipeTexture } from "../textures.js?v=20261114eu5";
+import { spawnPlatformDecor, resetDoorGlow } from "../background.js?v=20261114eu5";
+import { ensureAudio, SFX, beep } from "../audio.js?v=20261114eu5";
 
 // ===== Carregar nível =====
 
@@ -433,26 +433,26 @@ export function loadLevel(scene,idx){
   set__pendingEntranceReveal( true);
 
   const TIPS = [
-    "🪪 Descobre como construímos a nossa identidade no mundo digital e como devemos respeitar a identidade dos outros.",
-    "⚖️ Explora os direitos e deveres que também existem quando utilizamos serviços e espaços digitais.",
-    "💚 Aprende a reconhecer emoções, apoiar os outros e comunicar com empatia em situações online.",
-    "🌈 Descobre como a tecnologia pode incluir pessoas com diferentes necessidades e experiências. 🦘 USA OS TRAMPOLINS! Os vãos são intransponíveis sem eles!",
-    "🧭 Pensa nas consequências das tuas decisões e aprende a escolher o comportamento mais responsável.",
-    "🧗 Reconhece mensagens e comportamentos que tentam pressionar, assustar ou manipular os utilizadores.",
-    "🤝 Aprende a distinguir contactos digitais saudáveis de comportamentos que ultrapassam limites. 🦘 Usa os trampolins para atravessar os vãos!",
-    "🛑 Identifica agressões repetidas online e descobre como apoiar quem é afetado.",
-    "🎭 Descobre técnicas usadas para influenciar emoções e decisões em ambientes digitais.",
-    "🆘 Aprende a reconhecer quando é necessário denunciar, pedir ajuda e preservar provas.",
-    "🏘️ Explora formas de participar em grupos digitais, colaborar e construir comunidades positivas.",
-    "📤 Pensa no impacto de fotografias, vídeos e mensagens que partilhamos sobre outras pessoas.",
-    "👣 Compreende como as ações online podem deixar registos e influenciar a reputação ao longo do tempo. 🔥 CUIDADO COM A LAVA! Mantém-te nas plataformas!",
-    "🧩 Utiliza ferramentas digitais para aprender em conjunto, comunicar e criar trabalhos com respeito.",
-    "🧘 Descobre hábitos equilibrados e formas de cuidar do bem-estar físico e emocional quando utilizas tecnologia.",
-    "🪐 Descobre como os sistemas digitais selecionam conteúdos e influenciam aquilo que vemos.",
-    "🤖 Explora as possibilidades e os limites da inteligência artificial e aprende a utilizá-la com sentido crítico.",
-    "🧪 Aprende a analisar imagens, vídeos e áudios que podem ter sido criados ou alterados digitalmente. 🏃 As plataformas MOVEM-SE! Observa o ritmo antes de saltar!",
-    "📡 Desenvolve estratégias para avaliar fontes, reconhecer desinformação e verificar conteúdos.",
-    "🚀 Reúne tudo o que aprendeste para tomar decisões responsáveis num mundo cada vez mais tecnológico."
+    "🧭 Apanha as estrelas e chega ao Portal ✨ para descobrir onde fica a Europa!",
+    "🇵🇹 Portugal fica no extremo ocidental da Europa — vais encontrá-lo no mapa!",
+    "🏛️ Cada país da UE tem a sua capital — repara nas placas pelo caminho!",
+    "🦘 USA OS TRAMPOLINS! Os vãos são intransponíveis sem eles!",
+    "🎶 O hino da UE é a «Ode à Alegria» — e o lema é «Unida na diversidade»!",
+    "🗣️ A UE tem 24 línguas oficiais — quantas consegues dizer «olá»?",
+    "🏰 Os monumentos contam a história dos povos — protege o património!",
+    "🥘 Cada país tem sabores e músicas únicos — respeita as tradições!",
+    "🤝 Respeitar as diferenças torna a Europa mais forte!",
+    "📜 A 9 de maio de 1950, Robert Schuman lançou a ideia da União Europeia!",
+    "🕊️ A UE nasceu para manter a paz entre os países da Europa!",
+    "📖 O Tratado de Roma (1957) criou a CEE com seis países fundadores!",
+    "⚖️ Dignidade, liberdade, democracia, igualdade e Estado de direito: valores europeus!",
+    "🔥 CUIDADO COM A LAVA! Mantém-te nas plataformas — não caias!",
+    "🏢 Parlamento, Comissão, Conselho e Tribunal: as instituições da UE!",
+    "🌱 Reduzir, reutilizar e reciclar — cuida do ambiente!",
+    "☀️ Sol e vento são energias limpas para o futuro da Europa!",
+    "🏃 As plataformas MOVEM-SE! Observa o ritmo antes de saltar!",
+    "🚆 Com o Erasmus+ podes estudar noutro país da Europa!",
+    "⭐ A tua participação acende a 12.ª estrela da bandeira!"
   ];
   set_currentLevelTip( (TIPS[currentLevel] || TIPS[0]) + (currentLevel >= 6 ? " ⚠️ Cuidado!" : ""));
   tipText.setText(currentLevelTip);

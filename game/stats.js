@@ -1,5 +1,5 @@
 /*************************************************
- * VanBerto's — Missão Cibersegurança 🛡️  ·  game/stats.js
+ * VanBerto's — A Missão Europa 🇪🇺  ·  game/stats.js
  *
  * Estatísticas globais persistentes, medalhas e rastreio de eventos.
  *
@@ -7,9 +7,9 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
-import { btnStart } from "./dom.js?v=20261108is20";
-import { score } from "./state.js?v=20261108is20";
-import { loadNamespace, saveNamespace } from "../storage.js?v=20261108is20";
+import { btnStart } from "./dom.js?v=20261114eu5";
+import { score } from "./state.js?v=20261114eu5";
+import { loadNamespace, saveNamespace } from "../storage.js?v=20261114eu5";
 
 // =====================================================
 // ===== ESTATÍSTICAS GLOBAIS — rastreio persistente =====
