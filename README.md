@@ -13,6 +13,9 @@ Versão do jogo da UE construída sobre o motor mais recente da «Missão Intern
 - **Moedas de euro 💶** (antes «chaves»): cada moeda vale +10 pontos; **100 moedas = +1 vida** (ou +500 pontos se já tiveres o máximo). Contador «💶 n/100» no ecrã.
 - **Blocos «?» e tijolos** para dar cabeçadas, plataformas extra flutuantes, **plataformas que caem**, **barreiras intermitentes** (amarelas) e **vento**.
 - **Visual claro** (cartões brancos com contorno azul-UE, fundo azul-pálido, botões amarelos) e modal inicial com a mascote.
+- **Limpeza da cibersegurança**: curiosidades dos níveis reescritas sobre a UE; «drones» e «pacotes» passaram a **pombas da paz 🕊️** e **bandeirinhas 🚩**; o drone hostil do modo Extremo é agora uma **nuvem da discórdia 🌩️**; o pop-up de spam do Titã é um **balão de discórdia 📢**.
+- **VanBerto's com capa da UE** 🦸: capa azul com estrelas douradas e gola com orla amarela, no menu (`vanberto_real.png`) e no boneco em jogo (andar, salto, feliz, triste).
+- **Plataformas** só em azul e dourado; **«Como Jogar»** explica moedas, blocos, plataformas que caem, barreiras, vento e bosses protegidos.
 - Guardado como antes em `vanbertos_europa_save_v1` (as gravações da v4 continuam a funcionar).
 
 ---

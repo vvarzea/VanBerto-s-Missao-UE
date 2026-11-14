@@ -7,7 +7,7 @@
 const VERSION = "20261114eu5";
 const CACHE = "vanbertos-" + VERSION;
 
-// Ficheiros do núcleo. Os .js e .css pedem-se com ?v=20261114eu5SION, como no index.html e nos imports.
+// Ficheiros do núcleo. Os .js e .css pedem-se com ?v=VERSION, como no index.html e nos imports.
 const CORE = [
   "./", "index.html", "manifest.json",
   "dia-crianca.css", "dia-crianca.js", "phaser.min.js",

@@ -70,18 +70,18 @@ export function makePipeTexture(scene){
 }
 
 // Gera uma textura de plataforma para cada tema
-const PLAT_COLORS=[
-  [0x0d3878,0x1e5cb8,0x6aa8ff], // tema0 azul rico
-  [0x6a1800,0xc04018,0xff8850], // tema1 crepúsculo
-  [0x004858,0x0090a0,0x60e8f0], // tema2 aqua profundo
-  [0x780840,0xc03070,0xffa0c8], // tema3 rosa
-  [0x200060,0x4810a0,0xc080ff], // tema4 lilás noturno
-  [0x003a3a,0x008888,0x40e8e0], // tema5 turquesa
-  [0x6a1800,0xb84010,0xff9050], // tema6 laranja quente
-  [0x001040,0x0848a0,0x60b8f8], // tema7 azul noturno
-  [0x580020,0xa01060,0xff80b8], // tema8 magenta rico
-  [0x081808,0x185c28,0x70d870], // tema9 floresta
-  [0x7a4a00,0xd9921a,0xffd86a], // tema10 final dourado
+const PLAT_COLORS=[   // só azul e dourado da UE
+  [0x0d3878,0x1e5cb8,0x6aa8ff], // azul rico
+  [0x7a4a00,0xd9921a,0xffd86a], // dourado
+  [0x001040,0x0848a0,0x60b8f8], // azul noturno
+  [0x0a2466,0x2f5fe0,0x9fc0ff], // azul-UE
+  [0x7a4a00,0xe3aa00,0xfff0a0], // amarelo-UE
+  [0x0d3878,0x1e5cb8,0x6aa8ff],
+  [0x001040,0x0848a0,0x60b8f8],
+  [0x7a4a00,0xd9921a,0xffd86a],
+  [0x0a2466,0x2f5fe0,0x9fc0ff],
+  [0x0d3878,0x1e5cb8,0x6aa8ff],
+  [0x7a4a00,0xe3aa00,0xfff0a0],
 ];
 export function makePlatformTextureThemed(scene, key, themeIdx){
   if(scene.textures.exists(key)) return;
@@ -2957,6 +2957,35 @@ function cVan(ctx,x,y,r){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();}
 function cfVan(ctx,x,y,r,color){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();}
 function lVan(ctx,x1,y1,x2,y2){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
 
+// ===== EUROPA — capa azul-UE do VanBerto's (atrás do corpo) + gola por baixo da cabeça =====
+function euCapaTras(ctx, armsUp){
+  const X=x=>48+(x-278)*0.125, Y=y=>44+(y-430)*0.135;
+  const left=[[150,428],[90,446],[30,490],[-22,570],[-48,660]];
+  const right=left.map(([x,y])=>[556-x,y]).reverse();
+  const hem=[]; const n=6;
+  for(let i=0;i<=n*6;i++){ const t=i/(n*6), x=-52+660*t, k=(t*n)%1; hem.push([x,696+Math.sin(k*Math.PI)*24]); }
+  const flare = armsUp ? -6 : 0;               // no salto a capa sobe um pouco
+  const pts=[...left,...hem,...right];
+  ctx.save(); ctx.lineJoin="round";
+  ctx.beginPath(); pts.forEach(([x,y],i)=>{ const px=X(x), py=Y(y)+(y>600?flare:0); i?ctx.lineTo(px,py):ctx.moveTo(px,py); }); ctx.closePath();
+  const g=ctx.createLinearGradient(0,44,0,82); g.addColorStop(0,"#1a48c0"); g.addColorStop(1,"#0a2a80");
+  ctx.fillStyle=g; ctx.fill(); ctx.lineWidth=2.4; ctx.strokeStyle="#101a30"; ctx.stroke();
+  ctx.beginPath(); hem.forEach(([x,y],i)=>{ const px=X(x), py=Y(y)+flare; i?ctx.lineTo(px,py):ctx.moveTo(px,py); });
+  ctx.lineWidth=2; ctx.strokeStyle="#ffcc00"; ctx.stroke();
+  ctx.fillStyle="#ffcc00";
+  for(const [sx,sy,r] of [[10,560,3.4],[546,560,3.4],[-26,625,2.2],[582,625,2.2],[52,640,2.6],[504,640,2.6]]){
+    ctx.beginPath(); for(let i=0;i<10;i++){ const a=-Math.PI/2+i*Math.PI/5, rr=i%2?r*0.42:r; ctx.lineTo(X(sx)+Math.cos(a)*rr, Y(sy+(flare&&sy>600?flare/0.135:0))+Math.sin(a)*rr); } ctx.closePath(); ctx.fill();
+  }
+  ctx.restore();
+}
+function euCapaFrente(ctx){
+  ctx.save();
+  ctx.beginPath(); ctx.ellipse(48,46,22,9,0,0,Math.PI*2); ctx.fillStyle="#101a30"; ctx.fill();
+  ctx.beginPath(); ctx.ellipse(48,46,20.4,7.6,0,0,Math.PI*2); ctx.fillStyle="#0a3cb0"; ctx.fill();
+  ctx.beginPath(); ctx.ellipse(48,46,20.4,7.6,0,0.15,Math.PI-0.15); ctx.lineWidth=1.6; ctx.strokeStyle="#ffcc00"; ctx.stroke();
+  ctx.restore();
+}
+
 function makeVanBertoTexture(scene,key,blink,step,armsUp){
   if(scene.textures.exists(key)) return;
   const w=96,h=96, tex=scene.textures.createCanvas(key,w,h), ctx=tex.getContext();
@@ -2967,6 +2996,7 @@ function makeVanBertoTexture(scene,key,blink,step,armsUp){
   ctx.save(); ctx.translate(0, 6);
   const NAVY="#16233e", NAVY2="#26365a", OUT="#101a30";
   function white(x0,y0,x1,y1){const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,"#ffffff");g.addColorStop(0.55,"#e6edf7");g.addColorStop(1,"#b4c4dc");return g;}
+  euCapaTras(ctx, armsUp);
 
   // ===== PERNAS (bem visíveis por baixo do tronco; passo marcado) =====
   const LIFT=8, STRIDE=3;
@@ -3029,6 +3059,7 @@ function makeVanBertoTexture(scene,key,blink,step,armsUp){
   ctx.fillStyle=dome; ctx.beginPath(); ctx.arc(48,56,5.7,0,Math.PI*2); ctx.fill();
   cfVan(ctx,46,53.8,1.5,"rgba(255,255,255,0.85)");
 
+  euCapaFrente(ctx);
   // ===== EAR PODS (atrás do capacete) =====
   function pod(cx){
     cfVan(ctx,cx,32,6,NAVY);
@@ -3419,4 +3450,32 @@ function europaItensRedraw(scene){
   const moedas=[{cor:"ouro"},{cor:"ouro",bimetal:true,texto:"2€"},{cor:"ouro"},{cor:"prata"},{cor:"cobre",texto:"c"},{cor:"ouro",bimetal:true}];
   moedas.forEach((m,i)=>novo("item_cadeado_"+i,32,32,ctx=>euItemMoeda(ctx,m)));
   ["pt","fr","es","it","de"].forEach((p,i)=>novo("item_pacote_"+i,48,36,ctx=>euItemBandeirinha(ctx,p)));
+  novo("item_drone",64,52,euItemPomba);          // pomba da paz (antes: mini-drone)
+  novo("drone_hostil",64,52,euInimigoNuvem);     // nuvem da discórdia (antes: drone hostil)
+}
+function euItemPomba(c){ // 64×52 — pomba branca com ramo de oliveira
+  c.save(); c.lineJoin="round"; c.lineCap="round";
+  c.shadowColor="rgba(255,230,120,.8)"; c.shadowBlur=9;
+  c.fillStyle="#fff"; c.strokeStyle="#0a2466"; c.lineWidth=2.4;
+  c.beginPath(); c.moveTo(14,30); c.quadraticCurveTo(8,22,16,20); c.quadraticCurveTo(24,14,36,24); c.quadraticCurveTo(48,22,52,30); c.quadraticCurveTo(46,40,32,42); c.quadraticCurveTo(20,42,14,30); c.closePath(); c.fill(); c.shadowBlur=0; c.stroke();
+  c.fillStyle="#dfe9ff"; c.beginPath(); c.moveTo(24,24); c.quadraticCurveTo(26,6,44,4); c.quadraticCurveTo(44,18,36,30); c.closePath(); c.fill(); c.stroke();   // asa
+  c.fillStyle="#fff"; c.beginPath(); c.arc(50,22,7,0,7); c.fill(); c.stroke();                                     // cabeça
+  c.fillStyle="#ffcc00"; c.beginPath(); c.moveTo(56,21); c.lineTo(62,23); c.lineTo(56,26); c.closePath(); c.fill(); c.stroke(); // bico
+  c.fillStyle="#0a2466"; c.beginPath(); c.arc(51,20,1.6,0,7); c.fill();
+  c.strokeStyle="#2a8a3a"; c.lineWidth=2.2; c.beginPath(); c.moveTo(58,25); c.quadraticCurveTo(52,33,44,34); c.stroke();     // ramo
+  c.fillStyle="#3cb04a"; for(const [x,y] of [[52,31],[48,34],[45,31]]){ c.beginPath(); c.ellipse(x,y,3.4,1.8,-0.6,0,7); c.fill(); }
+  c.fillStyle="#fff"; c.strokeStyle="#0a2466"; c.lineWidth=2; c.beginPath(); c.moveTo(16,31); c.lineTo(3,36); c.lineTo(5,28); c.lineTo(1,24); c.lineTo(16,26); c.closePath(); c.fill(); c.stroke(); // cauda
+  c.restore();
+}
+function euInimigoNuvem(c){ // 64×52 — nuvem escura zangada com raio (discórdia)
+  c.save(); c.lineJoin="round";
+  c.shadowColor="rgba(120,80,255,.55)"; c.shadowBlur=10;
+  c.fillStyle="#3b4a80"; c.strokeStyle="#0a2466"; c.lineWidth=2.6;
+  c.beginPath(); c.arc(20,26,12,Math.PI*0.5,Math.PI*1.5); c.arc(30,16,13,Math.PI,Math.PI*1.9); c.arc(46,22,12,Math.PI*1.3,Math.PI*0.45); c.lineTo(46,34); c.lineTo(20,38); c.closePath(); c.fill(); c.shadowBlur=0; c.stroke();
+  c.fillStyle="rgba(255,255,255,.16)"; c.beginPath(); c.ellipse(28,15,9,4,-0.3,0,7); c.fill();
+  c.fillStyle="#fff"; for(const x of [24,40]){ c.beginPath(); c.ellipse(x,24,5,5.5,0,0,7); c.fill(); c.stroke(); }
+  c.fillStyle="#c22"; for(const x of [25,39]){ c.beginPath(); c.arc(x,25,2.4,0,7); c.fill(); }
+  c.strokeStyle="#0a2466"; c.lineWidth=3; c.beginPath(); c.moveTo(17,15); c.lineTo(28,20); c.moveTo(47,15); c.lineTo(36,20); c.stroke();   // sobrancelhas
+  c.fillStyle="#ffcc00"; c.strokeStyle="#7a4a00"; c.lineWidth=1.8; c.beginPath(); c.moveTo(34,34); c.lineTo(26,44); c.lineTo(32,44); c.lineTo(28,52); c.lineTo(42,40); c.lineTo(35,40); c.lineTo(40,34); c.closePath(); c.fill(); c.stroke(); // raio
+  c.restore();
 }
