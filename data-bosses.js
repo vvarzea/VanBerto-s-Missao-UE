@@ -8,7 +8,7 @@
 
 export const BOSSES = [
   {
-    id: "monstro_phishing",
+    id: "dragao_confusao",
     shield: { type: "firewall", up: 2200, down: 2600, msg: "🐉 Confusão! Espera que passe" },
     afterLevel: 8,           // Fecha o mundo "Vale da Comunicação Segura" (Níveis 6-9 —
                               // jogos seguros, pegada digital, fake news, phishing).
@@ -21,10 +21,10 @@ export const BOSSES = [
     // segurança (setTint) caso a textura não carregue.
     color: 0x39d6ff,
     // Anzol prateado em vez da bola "?" roxa genérica — ver comentário
-    // completo junto a boss_proj_hook em textures.js. Sem orbTint: o anzol
+    // completo junto a boss_proj_bubble em textures.js. Sem orbTint: o anzol
     // já tem as suas próprias cores (prateado + brilho ciano), tal como o
     // envelope do Robô do Spam.
-    orbTexture: "boss_proj_hook",
+    orbTexture: "boss_proj_bubble",
     // Personalidade do arremesso (ver doBossRollQmark em dia-crianca.js):
     // o anzol "lança-se" na horizontal como uma cana de pesca a fisgar, em
     // vez de cair a direito como os outros 3 bosses.
@@ -49,7 +49,7 @@ export const BOSSES = [
     // startBossFinalStandBurst() já era 100% genérica (usa def.name,
     // def.orbTexture/orbTint, arena.worldW), por isso ativar aqui só pede
     // ao motor para disparar o mesmo momento de clímax ao chegar a 1 salto
-    // por dar — com o anzol (boss_proj_hook) próprio deste boss, não com o
+    // por dar — com o anzol (boss_proj_bubble) próprio deste boss, não com o
     // orbe sombrio do Espião. Sem isto, só o último boss do jogo tinha um
     // momento culminante — os outros 3 terminavam sem nenhum.
     finalStandBurst: true,
@@ -175,7 +175,7 @@ export const BOSSES = [
     }
   },
   {
-    id: "virus_gigante",
+    id: "guardiao_mapas",
     shield: { type: "bubble",   up: 2300, down: 2700, msg: "🛡️ Escudo da bússola! Espera que baixe" },
     afterLevel: 4,            // Fecha o mundo "Reino dos Fundamentos" (Níveis 1-5 — internet,
                                // palavras-passe, dados pessoais, instituições de apoio, vírus).
@@ -198,7 +198,7 @@ export const BOSSES = [
     epicDefeat: true,
     doubleThrowAtMaxRage: true,
     // "Último fôlego" (nova) — ver comentário completo no Monstro do
-    // Phishing; aqui usa o micróbio (boss_proj_germ) próprio deste boss.
+    // Phishing; aqui usa o micróbio (boss_proj_pin) próprio deste boss.
     finalStandBurst: true,
     // Decidido depois de discutir a dificuldade dos 4 bosses: o motor por
     // omissão manda 3 projéteis no último fôlego (ver startBossFinalStandBurst
@@ -212,7 +212,7 @@ export const BOSSES = [
     // comentário no Monstro do Phishing).
     stompLabel: "🗺️ Mapas recuperados",
     // Reforço do chefe no Extremo — ver comentário completo junto ao
-    // Monstro do Phishing (data-bosses.js, boss monstro_phishing).
+    // Monstro do Phishing (data-bosses.js, boss dragao_confusao).
     extremoReinforcement: true,
     // Arena contaminada reativada (nova) — este boss já teve isto antes da
     // conversão para "boss clássico à Mario" (2 zonas fixas + vírus a
@@ -279,7 +279,7 @@ export const BOSSES = [
     // o 1º boss do jogo.
     qmarkEvery: 2400,
     forceFirstOrbRight: true, // pedido: o 1º ataque deste boss vai sempre para a direita — só a partir do 2º persegue mesmo o VanBerto's
-    orbTexture: "boss_proj_germ", // micróbio com espigões — antes reutilizava a bola "?" do Monstro, sem sentido temático para um vírus
+    orbTexture: "boss_proj_pin", // micróbio com espigões — antes reutilizava a bola "?" do Monstro, sem sentido temático para um vírus
     // Personalidade do arremesso (ver doBossRollQmark/spawnBossGermSplit em
     // dia-crianca.js): ao primeiro toque no chão, o micróbio "replica-se"
     // em 2 mais pequenos — só este boss faz isto, tal como só ele tem um
@@ -354,7 +354,7 @@ export const BOSSES = [
     }
   },
   {
-    id: "espiao_sombras",
+    id: "sombra_indiferenca",
     shield: { type: "cloak",    up: 2000, down: 2800, msg: "🌑 Está invisível! Espera que apareça" },
     afterLevel: 19,          // Último boss do jogo — fecha o mundo "Cidade da Identidade
                               // Digital" (Níveis 16-20) E o jogo inteiro. Ao ser derrotado,
@@ -396,8 +396,8 @@ export const BOSSES = [
     movementType: "patrol",
     patrolSpeed: 190,
     hopEvery: 2200,
-    qmarkEvery: 1600,          // 2000→1600: pedido "demoram muito a atirar" (ver mesmo ajuste nos outros 2 bosses "normais", em monstro_phishing e robo_spam)
-    orbTexture: "boss_proj_shadow", // orbe sombrio próprio — antes reutilizava a bola "?" do Monstro só retintada, sem sentido temático para um guardião das sombras
+    qmarkEvery: 1600,          // 2000→1600: pedido "demoram muito a atirar" (ver mesmo ajuste nos outros 2 bosses "normais", em dragao_confusao e titan_discordia)
+    orbTexture: "boss_proj_orb", // orbe sombrio próprio — antes reutilizava a bola "?" do Monstro só retintada, sem sentido temático para um guardião das sombras
     orbTint: 0x6a3fb5,
     // Personalidade do arremesso (ver doBossRollQmark em dia-crianca.js):
     // a orbe parte mais devagar que os outros 3, mas vai-se "puxando"
@@ -412,7 +412,7 @@ export const BOSSES = [
     // para o combate final, sem tocar no hp nem na dificuldade geral.
     finalStandBurst: true,
     // Falas próprias de fúria (nova) — ver comentário completo no Monstro
-    // do Phishing (data-bosses.js, boss monstro_phishing).
+    // do Phishing (data-bosses.js, boss dragao_confusao).
     rageLines: { angry: "Que importa? Ninguém liga!", desperate: "A tua participação... está a vencer-me!" },
     // extraTeleportOnRage removido (ver comentário completo junto a
     // movementType, acima) — dependia do teletransporte que fazia este
@@ -428,7 +428,7 @@ export const BOSSES = [
     // comentário no Monstro do Phishing).
     stompLabel: "🌟 Indiferença vencida",
     // Reforço do chefe no Extremo — ver comentário completo junto ao
-    // Monstro do Phishing (data-bosses.js, boss monstro_phishing).
+    // Monstro do Phishing (data-bosses.js, boss dragao_confusao).
     extremoReinforcement: true,
     // bossY: recalculado com o redesenho "feiticeiro-espião" (ver
     // makeBossTextures em textures.js) — a capa/robe antiga não tinha
@@ -489,7 +489,7 @@ export const BOSSES = [
     }
   },
   {
-    id: "robo_spam",
+    id: "titan_discordia",
     shield: { type: "notif",    up: 2000, down: 2800, msg: "📢 Barulho! Espera que acalme" },
     afterLevel: 14,          // Fecha o mundo "Fortaleza da Proteção Digital" (Níveis 10-15 —
                              // dispositivos, família, wi-fi, backups, acessibilidade, spam).
@@ -507,7 +507,7 @@ export const BOSSES = [
     epicDefeat: true,
     doubleThrowAtMaxRage: true,
     // "Último fôlego" (nova) — ver comentário completo no Monstro do
-    // Phishing; aqui usa o envelope de spam (boss_proj_spam) próprio.
+    // Phishing; aqui usa o envelope de spam (boss_proj_rock) próprio.
     finalStandBurst: true,
     // Falas próprias de fúria (nova) — ver comentário completo no Monstro
     // do Phishing.
@@ -516,7 +516,7 @@ export const BOSSES = [
     // comentário no Monstro do Phishing).
     stompLabel: "🧱 Muros derrubados",
     // Reforço do chefe no Extremo — ver comentário completo junto ao
-    // Monstro do Phishing (data-bosses.js, boss monstro_phishing).
+    // Monstro do Phishing (data-bosses.js, boss dragao_confusao).
     extremoReinforcement: true,
     // Pop-ups de spam (nova — substitui a "arena contaminada" que este boss
     // partilhava sem necessidade com o Vírus Gigante, ver comentário
@@ -560,7 +560,7 @@ export const BOSSES = [
     patrolSpeed: 150,        // mais rápido — sensação industrial
     hopEvery: 2000,
     qmarkEvery: 1750,        // 2000→1750: pedido "demoram muito a atirar" — corte mais pequeno que os outros 2, porque este já atira sempre a pares (alwaysDoubleThrow), logo já é o mais denso dos 4
-    orbTexture: "boss_proj_spam", // envelope de spam com selo de aviso vermelho — o robô atira correio, não parafusos
+    orbTexture: "boss_proj_rock", // envelope de spam com selo de aviso vermelho — o robô atira correio, não parafusos
     orbTint: 0xffffff,       // sem tint — o envelope já tem as suas próprias cores (branco/vermelho)
     // CORRIGIDO (pedido: "as imagens dos spams são demasiado grandes") —
     // este boss é o único a atirar sempre a pares e com o intervalo mais

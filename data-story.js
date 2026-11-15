@@ -1,8 +1,6 @@
 // ===== Conteúdo narrativo — MISSÃO EUROPA (Dia da Europa) =====
 // Ficheiro puramente de dados, sem lógica de jogo.
-// Os ids internos dos bosses (virus_gigante, monstro_phishing, robo_spam, espiao_sombras) mantêm-se
-// por compatibilidade com o motor: 1.º Guardião dos Mapas, 2.º Dragão da Confusão Cultural,
-// 3.º Titã da Discórdia, 4.º Sombra da Indiferença.
+// Ids dos bosses: guardiao_mapas, dragao_confusao, titan_discordia, sombra_indiferenca.
 
 export const REGION_INTRO = {
   origens: {
@@ -26,27 +24,27 @@ export const REGION_INTRO = {
 // "{N}" é substituído pelo número real de saltos necessários (def.hp, já com o +1 do modo Difícil)
 // no momento em que o texto é mostrado — ver startBossFight(). Nunca escrever o número aqui.
 export const BOSS_OBJECTIVE = {
-  virus_gigante: "Desvia-te dos pinos de mapa 📍 que o Guardião dos Mapas atira e salta-lhe em cima {N} vezes para o vencer!",
-  monstro_phishing: "Desvia-te dos balões de confusão 💬 que o Dragão lança e salta-lhe em cima {N} vezes para o vencer!",
-  robo_spam: "O Titã patrulha depressa e atira pedras 🪨 — apanha o ritmo e salta-lhe em cima {N} vezes para o vencer!",
-  espiao_sombras: "A Sombra anda muito depressa a atirar orbes de indiferença 🌑! Salta-lhe em cima {N} vezes para o vencer!"
+  guardiao_mapas: "Desvia-te dos pinos de mapa 📍 que o Guardião dos Mapas atira e salta-lhe em cima {N} vezes para o vencer!",
+  dragao_confusao: "Desvia-te dos balões de confusão 💬 que o Dragão lança e salta-lhe em cima {N} vezes para o vencer!",
+  titan_discordia: "O Titã patrulha depressa e atira pedras 🪨 — apanha o ritmo e salta-lhe em cima {N} vezes para o vencer!",
+  sombra_indiferenca: "A Sombra anda muito depressa a atirar orbes de indiferença 🌑! Salta-lhe em cima {N} vezes para o vencer!"
 };
 
 // "reaction" = fala do VanBerto's ANTES do boss se apresentar; "rally" = DEPOIS da ameaça, antes do combate.
 export const BOSS_INTRO_VB = {
-  virus_gigante: {
+  guardiao_mapas: {
     reaction: "Os mapas estão todos baralhados... alguém por aqui levou as estrelas!",
     rally: "Vamos mostrar-lhe que conhecemos a Europa de lés a lés!"
   },
-  monstro_phishing: {
+  dragao_confusao: {
     reaction: "Tantas línguas misturadas... isto está uma grande confusão!",
     rally: "Cada cultura é uma riqueza! Não vais baralhar-nos!"
   },
-  robo_spam: {
+  titan_discordia: {
     reaction: "Sinto a Europa dividida... este gigante quer separar-nos!",
     rally: "Juntos somos mais fortes! A cooperação vence a discórdia!"
   },
-  espiao_sombras: {
+  sombra_indiferenca: {
     reaction: "Está tudo tão cinzento... como se ninguém se importasse.",
     rally: "Quando participamos, a Europa brilha! Vamos acender a última estrela!"
   }
@@ -54,10 +52,10 @@ export const BOSS_INTRO_VB = {
 
 // Uma única fala de vitória por boss, ligada às estrelas recuperadas (3 por mundo, 12 no total).
 export const BOSS_VICTORY_VB = {
-  virus_gigante: "Conseguimos! Recuperámos as 3 primeiras estrelas da bandeira! ⭐ (3/12)",
-  monstro_phishing: "Vencemos! Mais 3 estrelas voltaram a brilhar! ⭐ (6/12)",
-  robo_spam: "A união venceu a discórdia! Já temos 9 estrelas! ⭐ (9/12)",
-  espiao_sombras: "As 12 estrelas brilham outra vez! A Europa está unida! 🇪🇺 (12/12)"
+  guardiao_mapas: "Conseguimos! Recuperámos as 3 primeiras estrelas da bandeira! ⭐ (3/12)",
+  dragao_confusao: "Vencemos! Mais 3 estrelas voltaram a brilhar! ⭐ (6/12)",
+  titan_discordia: "A união venceu a discórdia! Já temos 9 estrelas! ⭐ (9/12)",
+  sombra_indiferenca: "As 12 estrelas brilham outra vez! A Europa está unida! 🇪🇺 (12/12)"
 };
 
 // Frases curtas mostradas (sem parar o jogo, só um "floatie") sempre que se apanha um objeto de conhecimento no combate do Dragão.
@@ -71,22 +69,22 @@ export const KNOWLEDGE_FACTS = [
 
 // Falas curtas do boss em marcos de HP durante o combate.
 export const BOSS_HP_TAUNTS = {
-  virus_gigante: {
+  guardiao_mapas: {
     atStart: ["Ninguém se orienta sem os meus mapas!", "Não me consegues apanhar!", "Vou esconder todos os países!"],
     hp2: ["Argh! Isso picou...", "Não contava com esse salto!", "Ainda tenho mapas de sobra!"],
     hp1: ["Não... os mapas estão a ficar claros!", "Isto não pode ser...", "Estou a perder o norte!"]
   },
-  monstro_phishing: {
+  dragao_confusao: {
     atStart: ["Vais ficar baralhado!", "Ninguém entende ninguém aqui!", "Achas mesmo que me vais vencer?"],
     hp2: ["Isso foi sorte!", "Não contava com esse salto...", "Grrr, tenta outra vez!"],
     hp1: ["Não! As culturas estão a entender-se!", "Isto não pode ser...", "A diversidade... é mais forte!"]
   },
-  robo_spam: {
+  titan_discordia: {
     atStart: ["Vou dividir-vos a todos!", "Não me apanhas, sou rápido demais!", "Cada um por si!"],
     hp2: ["Essa abalou-me as pedras!", "Não contava com essa pancada!", "Ainda tenho muros para erguer!"],
     hp1: ["Não... estão todos a cooperar!", "Os meus muros... estão a ruir!", "Isto não pode ser!"]
   },
-  espiao_sombras: {
+  sombra_indiferenca: {
     atStart: ["Para quê tentar? Ninguém liga!", "Nunca me vais apanhar no ar!", "Nada vai mudar, desiste!"],
     hp2: ["Impossível! Estás mesmo interessado?", "Isso não devia ter acontecido...", "Grrr, mais rápido da próxima vez!"],
     hp1: ["Não... a tua participação está a vencer!", "A sombra... está a desaparecer!", "Isto não pode ser o fim!"]

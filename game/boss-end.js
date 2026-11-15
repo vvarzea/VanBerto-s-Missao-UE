@@ -10,6 +10,7 @@
 import { collectedBossRights, saveBossRights } from "./artefacts.js?v=20261114eu5";
 import { clearMiniViruses, clearPopupHazard, clearToxicZones, stopPhishingDecoy } from "./boss-attacks.js?v=20261114eu5";
 import { destroyBossHpBar, showBossBanner } from "./boss-core.js?v=20261114eu5";
+import { bossPoseUrl } from "./boss-art.js?v=20261114eu5";
 import { bossDialogueAnchor, playBossDialogue, vbDialogueAnchor } from "./dialogue.js?v=20261114eu5";
 import { clearExtremoAllies } from "./level.js?v=20261114eu5";
 import { pickQuizForLevel, showQuiz } from "./quiz.js?v=20261114eu5";
@@ -165,7 +166,7 @@ export function startBossQuizPhase() {
     };
     try {
       playBossDialogue([
-        { speaker:"boss", name:def.name, emoji:def.emoji, text: def.defeatLine, anchor: bossDialogueAnchor() },
+        { speaker:"boss", name:def.name, emoji:def.emoji, text: def.defeatLine, portrait: bossPoseUrl(def.id, 6), anchor: bossDialogueAnchor() },
         { speaker:"vb", text: BOSS_VICTORY_VB[def.id] || "Conseguimos! Mais um direito está a salvo!", anchor: vbDialogueAnchor() }
       ], startBossPortalPhase);
     } catch (err) {

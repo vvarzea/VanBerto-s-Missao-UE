@@ -429,27 +429,60 @@ export function init_screens_0() {
     let downloading = false;
     navigator.serviceWorker.ready.then(() => { section.style.display = ""; }).catch(() => {});
 
-    btn.addEventListener("click", () => {
-      if (downloading) return;
+    const DONE_KEY = "vb_offline_done_v5", SKIP_KEY = "vb_offline_skip_v5";
+    const flag = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; };
+    const paintDone = () => { status.textContent = "✅ Tudo guardado — o jogo já funciona sem internet."; btn.textContent = "✅ Guardado"; };
+    if (flag(DONE_KEY)) paintDone();
+
+    // Descarrega todos os fundos; devolve false se o modo offline ainda não está pronto.
+    function startDownload(onProgress, onDone) {
       const reg = navigator.serviceWorker.controller;
-      if (!reg) { status.textContent = "Ainda a preparar o modo offline — tenta outra vez daqui a um instante."; return; }
-      downloading = true; btn.disabled = true; btn.textContent = "⏳ A guardar…";
-      status.textContent = "";
+      if (!reg) return false;
+      downloading = true;
       const files = [...new Set(Object.values(BG_FILES))]; // os fundos: o resto do jogo já fica em cache na 1.ª visita (ver sw.js)
       const channel = new MessageChannel();
       channel.port1.onmessage = (event) => {
         const msg = event.data;
-        if (msg.type === "CACHE_ALL_PROGRESS") {
-          btn.textContent = `⏳ A guardar… ${msg.done}/${msg.total}`;
-        } else if (msg.type === "CACHE_ALL_DONE") {
-          downloading = false; btn.disabled = false; btn.textContent = "⬇️ Guardar tudo";
-          status.textContent = msg.failed.length
-            ? `Guardado, mas ${msg.failed.length} imagem(ns) falhou — repete quando tiveres melhor ligação.`
-            : "✅ Tudo guardado — o jogo já funciona sem internet.";
-        }
+        if (msg.type === "CACHE_ALL_PROGRESS") onProgress(msg.done, msg.total);
+        else if (msg.type === "CACHE_ALL_DONE") { downloading = false; if (!msg.failed.length) flag(DONE_KEY, "1"); onDone(msg.failed.length); }
       };
       reg.postMessage({ type: "CACHE_ALL", files }, [channel.port2]);
+      return true;
+    }
+
+    btn.addEventListener("click", () => {
+      if (downloading) return;
+      btn.disabled = true; btn.textContent = "⏳ A guardar…"; status.textContent = "";
+      const ok = startDownload(
+        (d, t) => { btn.textContent = `⏳ A guardar… ${d}/${t}`; },
+        (failed) => {
+          btn.disabled = false; btn.textContent = "⬇️ Guardar tudo";
+          if (failed) status.textContent = `Guardado, mas ${failed} imagem(ns) falhou — repete quando tiveres melhor ligação.`; else paintDone();
+        });
+      if (!ok) { btn.disabled = false; btn.textContent = "⬇️ Guardar tudo"; status.textContent = "Ainda a preparar o modo offline — tenta outra vez daqui a um instante."; }
     });
+
+    // Convite automático (1 vez): depois de o modo offline estar pronto, sugere guardar o jogo todo.
+    navigator.serviceWorker.ready.then(() => {
+      if (flag(DONE_KEY) || flag(SKIP_KEY)) return;
+      setTimeout(() => {
+        if (flag(DONE_KEY) || flag(SKIP_KEY) || document.getElementById("offlineBanner")) return;
+        const el = document.createElement("div");
+        el.id = "offlineBanner"; el.setAttribute("role", "dialog");
+        el.innerHTML = `<div class="ob-text">📶 <strong>Queres jogar sem internet?</strong><br><span>Guarda o jogo neste aparelho (cerca de 5 MB). Faz-se uma vez só.</span></div>
+          <div class="ob-actions"><button type="button" class="btn primary" id="obSave">⬇️ Guardar</button><button type="button" class="btn" id="obSkip">Agora não</button></div>`;
+        document.body.appendChild(el);
+        const close = () => el.remove();
+        el.querySelector("#obSkip").onclick = () => { flag(SKIP_KEY, "1"); close(); };
+        el.querySelector("#obSave").onclick = () => {
+          const b = el.querySelector("#obSave"); b.disabled = true; b.textContent = "⏳ A guardar…";
+          const ok = startDownload(
+            (d, t) => { b.textContent = `⏳ ${d}/${t}`; },
+            (failed) => { if (failed) { b.disabled = false; b.textContent = "Tentar outra vez"; } else { paintDone(); el.querySelector(".ob-text").innerHTML = "✅ <strong>Pronto!</strong> O jogo já funciona sem internet."; el.querySelector(".ob-actions").remove(); setTimeout(close, 2600); } });
+          if (!ok) { b.disabled = false; b.textContent = "Tentar outra vez"; }
+        };
+      }, 6000);
+    }).catch(() => {});
   })();
 
   document.getElementById("btnWinCertificate")?.addEventListener("click", () => {

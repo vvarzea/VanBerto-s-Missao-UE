@@ -7,6 +7,7 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
+import { bossPoseUrl } from "./boss-art.js?v=20261114eu5";
 import { isLastLevelOfRegion, saveMapProgress } from "./map.js?v=20261114eu5";
 import { resetQuizStats, usedQuizByLevel, usedQuizByTheme } from "./quiz.js?v=20261114eu5";
 import { itemsTotal, mapProgress, score, scoreText, set_mapProgress, set_score } from "./state.js?v=20261114eu5";
@@ -557,6 +558,41 @@ export function renderAlbum() {
     }
     grid.appendChild(card);
   });
+
+  // ----- Cartas dos Bosses (uma por boss derrotado; as não conquistadas ficam em silhueta) -----
+  const BOSS_CARD = {
+    guardiao_mapas:     { valor: "Conhecimento", texto: "Conhecer o mapa da Europa ajuda-nos a perceber quem são os nossos vizinhos e onde fica o nosso lugar." },
+    dragao_confusao:    { valor: "Diversidade", texto: "As culturas diferentes não se baralham: respeitam-se e celebram-se. O lema da UE é «Unida na diversidade»." },
+    titan_discordia:    { valor: "Cooperação e paz", texto: "Juntos somos mais fortes. A União Europeia nasceu para que os países resolvessem as diferenças a conversar." },
+    sombra_indiferenca: { valor: "Participação", texto: "A Europa brilha quando todos participamos: ajudar, opinar, votar e cuidar do que é de todos." }
+  };
+  const head = document.createElement("h3");
+  head.className = "album-section-title"; head.textContent = "🏆 Cartas dos Bosses";
+  grid.appendChild(head);
+  let bossCount = 0;
+  [...BOSSES].sort((a, b) => a.afterLevel - b.afterLevel).forEach(b => {
+    const info = collectedBossRights[b.id];
+    const meta = BOSS_CARD[b.id] || { valor: "", texto: "" };
+    const card = document.createElement("div");
+    card.className = "album-card album-card--boss " + (info ? "album-card--unlocked" : "album-card--locked");
+    if (info) {
+      bossCount++;
+      card.innerHTML = `
+          <img class="album-boss-img" src="${bossPoseUrl(b.id, info.flawless ? 1 : 6)}" alt="${b.name}" draggable="false" />
+          <p class="album-card-name">${b.name}</p>
+          <p class="album-card-article">💛 Valor: ${meta.valor}</p>
+          <p class="album-card-desc">${meta.texto}</p>
+          ${info.flawless ? '<p class="album-card-stars">🏅 Vitória perfeita!</p>' : '<p class="album-card-stars">Derrotado ✔️</p>'}`;
+    } else {
+      card.innerHTML = `
+          <img class="album-boss-img album-boss-img--locked" src="${bossPoseUrl(b.id, 0)}" alt="" draggable="false" />
+          <p class="album-card-name">???</p>
+          <p class="album-card-desc">Derrota este boss para desbloquear a carta.</p>`;
+    }
+    grid.appendChild(card);
+  });
+  const bossPct = document.getElementById("albumBossCount");
+  if (bossPct) bossPct.textContent = `${bossCount}/${BOSSES.length}`;
   const pct = Math.round((unlockedCount / normalLevels.length) * 100);
   const pctEl = document.getElementById("albumProgressPct");
   const fillEl = document.getElementById("albumProgressFill");

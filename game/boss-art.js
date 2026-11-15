@@ -7,11 +7,13 @@
  *************************************************/
 // Cada boss tem 7 poses (imagem enviada): 0 normal · 1 riso · 2 ataque · 3 espanto (ouch) · 4 zangado · 5 salto · 6 triste
 export const BOSS_ART_FILES = {
-  virus_gigante:    "guardiao",   // 🗺️ Guardião dos Mapas
-  monstro_phishing: "dragao",     // 🐉 Dragão da Confusão Cultural
-  robo_spam:        "tita",       // 🤖 Titã da Discórdia
-  espiao_sombras:   "sombra"      // 🌑 Sombra da Indiferença
+  guardiao_mapas:    "guardiao",   // 🗺️ Guardião dos Mapas
+  dragao_confusao: "dragao",     // 🐉 Dragão da Confusão Cultural
+  titan_discordia:        "tita",       // 🤖 Titã da Discórdia
+  sombra_indiferenca:   "sombra"      // 🌑 Sombra da Indiferença
 };
+// URL da pose de um boss (0 normal · 1 riso · 2 ataque · 3 espanto · 4 zangado · 5 salto · 6 triste)
+export function bossPoseUrl(id, pose) { const nm = BOSS_ART_FILES[id]; return nm ? "boss/" + nm + "_" + pose + ".webp" : ""; }
 const POSE_OF = { "": 0, "_laugh": 1, "_armsdown": 2, "_ouch": 3, "_angry": 4, "_sad": 6 };
 
 export function loadBossArt(scene) {

@@ -2923,6 +2923,8 @@ body.cine-active .cine-bar-top,body.cine-active .cine-bar-bottom{height:13vh;}
   content:""; position:absolute; left:50%; bottom:-13px; transform:translateX(-50%);
   border-width:14px 11px 0 11px; border-style:solid; border-color: #0a2466 transparent transparent transparent;
 }
+#cineAvatar.has-img{ width:84px; height:84px; margin-top:-22px; filter:drop-shadow(0 3px 5px rgba(10,36,102,.45)); }
+#cineAvatar.has-img img{ width:100%; height:100%; object-fit:contain; display:block; }
 #cineAvatar{ font-size:38px; line-height:1; flex-shrink:0; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5)); }
 #cineBody{ flex:1; min-width:0; }
 #cineName{ margin:0 0 2px; font-size:13px; font-weight:900; color: #0a2466; letter-spacing:0.02em; }
@@ -2940,6 +2942,7 @@ body.cine-active .cine-bar-top,body.cine-active .cine-bar-bottom{height:13vh;}
 @media (max-width:600px){
   #cineDialog{ width:96vw; gap:8px; padding:10px 12px 12px; }
   #cineAvatar{ font-size:28px; }
+  #cineAvatar.has-img{ width:62px; height:62px; margin-top:-14px; }
   #cineText{ font-size:12.5px; }
   #cineName{ font-size:11px; }
 }
@@ -3230,3 +3233,22 @@ html, body {
 .lc-star.lc-star--on { color: #ffc400 !important; -webkit-text-stroke: 2px #0a2466; paint-order: stroke fill; }
 .level-node-star--on { color: #ffc400 !important; text-shadow: 0 0 2px #0a2466; }
 #bonusStars { color: #ffd21f !important; -webkit-text-stroke: 2px #0a2466; paint-order: stroke fill; text-shadow: none; }
+
+/* ===== Álbum: cartas dos bosses ===== */
+.album-section-title { grid-column: 1 / -1; margin: 14px 0 2px; font-size: 15px; color: #003399; text-align: center; }
+.album-card--boss { text-align: center; }
+.album-boss-img { display: block; margin: 0 auto 4px; width: 96px; height: 96px; object-fit: contain; filter: drop-shadow(0 3px 4px rgba(10,36,102,.35)); }
+.album-boss-img--locked { filter: brightness(0) opacity(.28); }
+.album-card--boss.album-card--unlocked { border-color: #ffcc00 !important; box-shadow: 0 0 0 3px rgba(255,204,0,.35); }
+
+/* ===== Perguntas com bandeira ===== */
+.quiz-flag { display: block; margin: 4px auto 6px; width: 132px; height: 88px; border-radius: 6px; box-shadow: 0 3px 8px rgba(10,36,102,.35); background: #fff; }
+@media (max-height: 520px) { .quiz-flag { width: 90px; height: 60px; } }
+
+/* ===== Convite para jogar offline ===== */
+#offlineBanner { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 9500; width: min(520px, 94vw); box-sizing: border-box;
+  display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  background: #fff; border: 3px solid #0a2466; border-radius: 14px; box-shadow: 4px 4px 0 #0a2466; padding: 9px 12px; color: #0a2466; font-size: 13px; }
+#offlineBanner .ob-text span { font-size: 11.5px; opacity: .8; }
+#offlineBanner .ob-actions { display: flex; gap: 6px; }
+#offlineBanner .btn { padding: 6px 10px; font-size: 12px; min-height: 0; }

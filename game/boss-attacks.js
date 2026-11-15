@@ -367,7 +367,7 @@ export function doBossRollQmark(scene, isFollowUp) {
   const towardPlayer = isForcedFirstShot
     ? 1
     : (player.x < b.x ? -1 : 1);
-  const q = itemsGroup.create(b.x, b.y - 10, def.orbTexture || "boss_proj_qmark");
+  const q = itemsGroup.create(b.x, b.y - 10, def.orbTexture || "boss_proj_ball");
   if (def.orbTint != null) q.setTint(def.orbTint);
   // orbScale (opt-in, nova — pedido: "as imagens dos spams são demasiado
   // grandes"): o Robô do Spam atira sempre a pares e com o intervalo mais
@@ -494,7 +494,7 @@ export function doBossRollQmark(scene, isFollowUp) {
 
 function spawnBossGermSplit(scene, x, y, def, chase) {
   [-1, 1].forEach(dir => {
-    const child = itemsGroup.create(x, y - 4, def.orbTexture || "boss_proj_qmark");
+    const child = itemsGroup.create(x, y - 4, def.orbTexture || "boss_proj_ball");
     if (def.orbTint != null) child.setTint(def.orbTint);
     child.setScale(0.62).setDepth(2).setData("bossProjQmark", true);
     child.body.setAllowGravity(true);

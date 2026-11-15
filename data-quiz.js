@@ -87,6 +87,7 @@ export const QUIZ_BY_THEME = {
     { q:"Portugal faz parte da União Europeia?", a:[{t:"Sim",ok:true},{t:"Não, faz parte da União Africana",ok:false},{t:"Não, faz parte da União Asiática",ok:false}], exp:"Portugal é membro da União Europeia desde 1986." },
     { q:"Que moeda se usa em Portugal?", a:[{t:"O escudo",ok:false},{t:"A libra",ok:false},{t:"O euro",ok:true}], exp:"O euro substituiu o escudo em 2002." },
     { q:"Em que parte da Europa se localiza Portugal continental?", a:[{t:"Sudoeste",ok:true},{t:"Noroeste",ok:false},{t:"Nordeste",ok:false}], exp:"Portugal continental fica no extremo sudoeste da Europa, na Península Ibérica." },
+    { img:"PT", q:"De que país é esta bandeira?", a:[{t:"Portugal",ok:true},{t:"Itália",ok:false},{t:"Irlanda",ok:false}], exp:"A bandeira de Portugal é verde e vermelha, com o escudo e a esfera armilar ao centro." },
   ],
   paises_capitais: [
     { q:"Qual é a capital da França?", a:[{t:"Paris",ok:true},{t:"Lyon",ok:false},{t:"Marselha",ok:false}], exp:"Paris é a capital da França e fica no rio Sena." },
@@ -96,6 +97,10 @@ export const QUIZ_BY_THEME = {
     { q:"Qual é a capital da Grécia?", a:[{t:"Salónica",ok:false},{t:"Atenas",ok:true},{t:"Esparta",ok:false}], exp:"Atenas é a capital da Grécia e é uma das cidades mais antigas da Europa." },
     { q:"Qual destes países faz parte da União Europeia?", a:[{t:"Brasil",ok:false},{t:"Portugal",ok:true},{t:"Canadá",ok:false}], exp:"Portugal é um dos 27 países da União Europeia." },
     { q:"Qual é a capital da Bélgica?", a:[{t:"Bruxelas",ok:true},{t:"Amesterdão",ok:false},{t:"Luxemburgo",ok:false}], exp:"Bruxelas é a capital da Bélgica e acolhe várias instituições da União Europeia." },
+    { img:"ES", q:"De que país é esta bandeira?", a:[{t:"Espanha",ok:true},{t:"Portugal",ok:false},{t:"Itália",ok:false}], exp:"A bandeira de Espanha tem faixas vermelhas e amarela. A capital é Madrid." },
+    { img:"FR", q:"De que país é esta bandeira?", a:[{t:"França",ok:true},{t:"Itália",ok:false},{t:"Países Baixos",ok:false}], exp:"A bandeira da França é azul, branca e vermelha. A capital é Paris." },
+    { img:"DE", q:"De que país é esta bandeira?", a:[{t:"Alemanha",ok:true},{t:"Bélgica",ok:false},{t:"Áustria",ok:false}], exp:"A bandeira da Alemanha é preta, vermelha e dourada. A capital é Berlim." },
+    { img:"IT", q:"De que país é esta bandeira?", a:[{t:"Itália",ok:true},{t:"Irlanda",ok:false},{t:"França",ok:false}], exp:"A bandeira de Itália é verde, branca e vermelha. A capital é Roma." },
   ],
   bandeira_ue: [
     { q:"Que cor tem o fundo da bandeira da UE?", a:[{t:"Azul",ok:true},{t:"Vermelho",ok:false},{t:"Verde",ok:false}], exp:"O fundo da bandeira europeia é azul, como o céu." },
@@ -104,6 +109,7 @@ export const QUIZ_BY_THEME = {
     { q:"Como estão dispostas as estrelas na bandeira?", a:[{t:"Em círculo",ok:true},{t:"Em linha reta",ok:false},{t:"Em triângulo",ok:false}], exp:"O círculo simboliza a união entre os povos." },
     { q:"O círculo de estrelas simboliza…", a:[{t:"As quatro estações do ano e os seus ciclos",ok:false},{t:"A união e a harmonia entre os povos da Europa",ok:true},{t:"Os países que fundaram a União Europeia",ok:false}], exp:"O círculo representa solidariedade e harmonia." },
     { q:"Se um novo país entrar na UE, quantas estrelas terá a bandeira?", a:[{t:"Passa a ter 28",ok:false},{t:"Perde uma estrela",ok:false},{t:"Continua a ter 12",ok:true}], exp:"O número 12 é simbólico, por isso nunca muda." },
+    { img:"EU", q:"Esta é a bandeira de quê?", a:[{t:"Da União Europeia",ok:true},{t:"Da ONU",ok:false},{t:"De um país da Europa",ok:false}], exp:"É a bandeira da União Europeia: fundo azul e doze estrelas douradas em círculo." },
   ],
   simbolos_ue: [
     { q:"Qual é o hino da União Europeia?", a:[{t:"A «Ode à Alegria», de Beethoven",ok:true},{t:"A «Marselhesa», o hino nacional de França",ok:false},{t:"«Imagine», a canção de John Lennon",ok:false}], exp:"A melodia vem da 9.ª Sinfonia de Beethoven." },
@@ -273,6 +279,11 @@ export const QUIZ_BY_THEME_AVANCADO = {
     { q:"Qual é a capital da Estónia?", a:[{t:"Tallinn",ok:true},{t:"Riga",ok:false},{t:"Vilnius",ok:false},{t:"Helsínquia",ok:false}], exp:"Tallinn é a capital da Estónia." },
     { q:"Que país tem Sófia como capital?", a:[{t:"Roménia",ok:false},{t:"Bulgária",ok:true},{t:"Albânia",ok:false},{t:"Moldávia",ok:false}], exp:"Sófia é a capital da Bulgária." },
     { q:"Qual destas associações país–capital está correta?", a:[{t:"Letónia–Vilnius",ok:false},{t:"Lituânia–Riga",ok:false},{t:"Eslováquia–Bratislava",ok:true},{t:"Croácia–Sarajevo",ok:false}], exp:"Bratislava é a capital da Eslováquia; Riga é da Letónia, Vilnius da Lituânia e Zagreb da Croácia." },
+    { img:"BE", q:"De que país é esta bandeira?", a:[{t:"Bélgica",ok:true},{t:"Alemanha",ok:false},{t:"Roménia",ok:false},{t:"França",ok:false}], exp:"A bandeira da Bélgica é preta, amarela e vermelha. A capital, Bruxelas, é também sede de instituições da UE." },
+    { img:"NL", q:"De que país é esta bandeira?", a:[{t:"Países Baixos",ok:true},{t:"Áustria",ok:false},{t:"Hungria",ok:false},{t:"Alemanha",ok:false}], exp:"A bandeira dos Países Baixos é vermelha, branca e azul. A capital é Amesterdão." },
+    { img:"SE", q:"De que país é esta bandeira?", a:[{t:"Suécia",ok:true},{t:"Finlândia",ok:false},{t:"Dinamarca",ok:false},{t:"Grécia",ok:false}], exp:"A bandeira da Suécia é azul com uma cruz amarela. A capital é Estocolmo." },
+    { img:"IE", q:"De que país é esta bandeira?", a:[{t:"Irlanda",ok:true},{t:"Itália",ok:false},{t:"Hungria",ok:false},{t:"Roménia",ok:false}], exp:"A bandeira da Irlanda é verde, branca e laranja. A capital é Dublin." },
+    { img:"GR", q:"De que país é esta bandeira?", a:[{t:"Grécia",ok:true},{t:"Finlândia",ok:false},{t:"Suécia",ok:false},{t:"Dinamarca",ok:false}], exp:"A bandeira da Grécia tem listas azuis e brancas e uma cruz no canto. A capital é Atenas." },
   ],
   bandeira_ue: [
     { q:"Que organização criou a bandeira de 12 estrelas, em 1955?", a:[{t:"A NATO",ok:false},{t:"A ONU",ok:false},{t:"O Conselho da Europa",ok:true},{t:"O Parlamento Europeu",ok:false}], exp:"O Conselho da Europa adotou-a em 1955; a UE passou a usá-la oficialmente em 1985." },

@@ -98,8 +98,15 @@ export function playCinematic(slides, onComplete, bars = true) {
     const style = SPEAKER_STYLE[s.speaker] || SPEAKER_STYLE.vb;
     dialogEl.className = "cine-show " + style.cls;
     const avatarEmoji = s.emoji || style.emoji;
-    dlgAvatar.textContent = avatarEmoji;
-    dlgAvatar.style.display = avatarEmoji ? "" : "none";
+    if (s.portrait) {
+      dlgAvatar.innerHTML = "";
+      const im = document.createElement("img"); im.src = s.portrait; im.alt = s.name || ""; im.draggable = false;
+      dlgAvatar.appendChild(im); dlgAvatar.classList.add("has-img"); dlgAvatar.style.display = "";
+    } else {
+      dlgAvatar.classList.remove("has-img");
+      dlgAvatar.textContent = avatarEmoji;
+      dlgAvatar.style.display = avatarEmoji ? "" : "none";
+    }
     dlgName.textContent = s.name || style.name;
     dlgText.textContent = s.text || "";
     dlgHint.textContent = (i === slides.length - 1) ? "Toca para continuar ▶" : "Toca para avançar ▶";

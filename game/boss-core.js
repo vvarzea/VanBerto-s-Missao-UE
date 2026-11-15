@@ -8,6 +8,7 @@
  *************************************************/
 
 import { clearMiniViruses, clearPopupHazard, clearToxicZones, doBossBlink, doBossHop, doBossIdleArms, doBossIdleBlink, doBossRollQmark, doBossSmokePuff, doBossTeleport, doBossThrowBook, maintainMiniViruses, spawnMiniViruses, spawnPopupHazard, spawnToxicZones, stopPhishingDecoy } from "./boss-attacks.js?v=20261114eu5";
+import { bossPoseUrl } from "./boss-art.js?v=20261114eu5";
 import { bossDialogueAnchor, playBossDialogue, vbDialogueAnchor } from "./dialogue.js?v=20261114eu5";
 import { quizOverlay } from "./dom.js?v=20261114eu5";
 import { showFloat } from "./feedback.js?v=20261114eu5";
@@ -603,7 +604,7 @@ export function startBossFight(scene, levelJustCompleted, onComplete) {
   try {
     playBossDialogue([
       { speaker:"vb",   text: introVB.reaction, anchor: vbDialogueAnchor() },
-      { speaker:"boss", name: def.name, emoji: def.emoji, text: def.intro, anchor: bossDialogueAnchor() },
+      { speaker:"boss", name: def.name, emoji: def.emoji, text: def.intro, portrait: bossPoseUrl(def.id, 1), anchor: bossDialogueAnchor() },
       { speaker:"vb",   text: introVB.rally, anchor: vbDialogueAnchor() }
     ], startBossPlatformPhase);
   } catch (err) {
@@ -744,7 +745,7 @@ export function startBossFinalStandBurst(scene) {
     // terminado (3º salto certeiro) nesse intervalo.
     if (!bossState || bossState.phase !== "platform") return;
     const x = fromLeft ? -20 : worldW + 20;
-    const shadow = itemsGroup.create(x, y, def.orbTexture || "boss_proj_shadow");
+    const shadow = itemsGroup.create(x, y, def.orbTexture || "boss_proj_orb");
     if (def.orbTint != null) shadow.setTint(def.orbTint);
     if (def.orbScale) shadow.setScale(def.orbScale); // ver comentário em doBossRollQmark
     shadow.setDepth(2).setData("bossFinalBurst", true).setAngle(fromLeft ? -12 : 12);

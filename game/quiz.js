@@ -7,6 +7,7 @@
  * As variáveis de estado vivem em state.js; aqui alteram-se com set_<nome>().
  *************************************************/
 
+import { flagHTML } from "../flags.js?v=20261114eu5";
 import { damageBoss } from "./boss-combat.js?v=20261114eu5";
 import { startBossFight } from "./boss-core.js?v=20261114eu5";
 import { vbSayRandom } from "./dialogue.js?v=20261114eu5";
@@ -229,7 +230,7 @@ export function showQuiz(quiz,done,attemptNum){
   const _qTheme = bossState?.def?.quizTheme || LEVELS[currentLevel]?.quizTheme;
   const _article = QUIZ_ARTICLE[_qTheme];
   const _badgeHTML = _article ? `<span class="quiz-article-badge">📜 ${_article}</span><br>` : "";
-  quizQuestion.innerHTML = _badgeHTML + (isRetry ? `🔄 ${attemptNum}ª tentativa! ` : "") + quiz.q;
+  quizQuestion.innerHTML = _badgeHTML + (quiz.img ? flagHTML(quiz.img) + "<br>" : "") + (isRetry ? `🔄 ${attemptNum}ª tentativa! ` : "") + quiz.q;
   quizAnswers.innerHTML=""; quizFeedback.textContent=""; quizFeedback.style.color="#ff6b35";
   quizExplanation.textContent=""; quizExplanation.classList.add("hidden");
   // Limpar sempre o btnCloseQuiz ao abrir nova pergunta — evita cliques acidentais
