@@ -15,6 +15,12 @@ Versão do jogo da UE construída sobre o motor mais recente da «Missão Intern
 - **Visual claro** (cartões brancos com contorno azul-UE, fundo azul-pálido, botões amarelos) e modal inicial com a mascote.
 - **Limpeza da cibersegurança**: curiosidades dos níveis reescritas sobre a UE; «drones» e «pacotes» passaram a **pombas da paz 🕊️** e **bandeirinhas 🚩**; o drone hostil do modo Extremo é agora uma **nuvem da discórdia 🌩️**; o pop-up de spam do Titã é um **balão de discórdia 📢**.
 - **VanBerto's com capa da UE** 🦸: capa azul com estrelas douradas e gola com orla amarela, no menu (`vanberto_real.png`) e no boneco em jogo (andar, salto, feliz, triste).
+- **Inimigos novos**: Peça Perdida (puzzle vermelho), Muro Zangado (azul) e Boato Saltitão (verde) substituem os vírus.
+- **Retratos dos bosses** nos diálogos: riso na entrada, triste na derrota.
+- **Cartas dos Bosses** no Álbum (valor europeu de cada um; silhueta até serem derrotados; medalha se a vitória for perfeita).
+- **Perguntas com bandeira** (`flags.js`, bandeiras em SVG): `img:"PT"` numa pergunta mostra a bandeira por cima do texto.
+- **Convite para jogar offline**: aparece uma vez no menu; guarda tudo (~5 MB). Também em Opções → «Guardar tudo».
+- **Ids limpos**: `guardiao_mapas`, `dragao_confusao`, `titan_discordia`, `sombra_indiferenca` (as gravações antigas são migradas sozinhas).
 - **Plataformas** só em azul e dourado; **«Como Jogar»** explica moedas, blocos, plataformas que caem, barreiras, vento e bosses protegidos.
 - Guardado como antes em `vanbertos_europa_save_v1` (as gravações da v4 continuam a funcionar).
 
@@ -34,7 +40,7 @@ Feito sobre o motor dos jogos «Missão» do VanBerto's (20 níveis, 4 mundos, 4
 | 4 — O Futuro da Europa | 16–20 | ambiente, energia, ciência, Erasmus+, jovens e cidadania digital | Sombra da Indiferença |
 
 **Conteúdo:** as perguntas estão em `data-quiz.js`, gerado por `_dev/importar_perguntas.py` a partir de `_dev/perguntas_atualizadas.json` (extraído do Word «Perguntas Atualizadas»). Cartões «Sabias que…?» e dicas: `_dev/cartoes_dicas.json`. (`_dev/gerar_quiz_europa.py` é o gerador anterior, só para consulta.)
-Os ids internos dos bosses mantêm os nomes do motor (`virus_gigante` = Guardião dos Mapas, `monstro_phishing` = Dragão, `robo_spam` = Titã, `espiao_sombras` = Sombra).
+Os ids internos dos bosses mantêm os nomes do motor (`guardiao_mapas` = Guardião dos Mapas, `dragao_confusao` = Dragão, `titan_discordia` = Titã, `sombra_indiferenca` = Sombra).
 Arte da autora: mapas dos mundos 1 a 4 (`map-mundo1..4.webp`), fundos dos níveis (`mundoN_*.webp`, as mesmas imagens, inteiras e só sem as estrelas desenhadas) e sala secreta (`sala_secreta.webp`). Gerados por `_dev/gerar_fundos.py`.
 
 ---

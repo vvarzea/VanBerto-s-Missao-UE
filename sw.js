@@ -16,7 +16,7 @@ const CORE = [
   "game/items.js", "game/level.js", "game/map.js", "game/overlays.js", "game/quiz.js", "game/rooms.js",
   "game/scene.js", "game/screens.js", "game/state.js", "game/stats.js", "game/ui.js", "game/vanberto.js",
   "game/world.js",
-  "achievements.js", "audio.js", "background.js", "cinematics.js", "stars.js", "storage.js", "textures.js",
+  "achievements.js", "audio.js", "background.js", "cinematics.js", "stars.js", "flags.js", "storage.js", "textures.js",
   "data-bosses.js", "data-flavor.js", "data-levels.js", "data-progression.js", "data-quiz.js", "data-story.js",
   "vanberto_real.png", "apple-touch-icon.png", "favicon.ico", "favicon-16x16.png", "favicon-32x32.png", "favicon-48x48.png",
   "icon-192.png", "icon-512.png", "icon-maskable-512.png",

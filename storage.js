@@ -13,12 +13,23 @@
 
 const ROOT_KEY = "vanbertos_europa_save_v1";
 
+
+// Renomeação dos ids dos bosses (v5): as gravações antigas usavam os ids do jogo original.
+const ID_MIGRATION = { virus_gigante:"guardiao_mapas", monstro_phishing:"dragao_confusao", robo_spam:"titan_discordia", espiao_sombras:"sombra_indiferenca" };
+function migrateIds(raw) {
+  if (!raw) return raw;
+  let out = raw;
+  for (const [a, b] of Object.entries(ID_MIGRATION)) out = out.split(a).join(b);
+  if (out !== raw) { try { localStorage.setItem(ROOT_KEY, out); } catch {} }
+  return out;
+}
+
 let root = null;
 
 function loadRoot() {
   if (root) return root;
   try {
-    const raw = localStorage.getItem(ROOT_KEY);
+    const raw = migrateIds(localStorage.getItem(ROOT_KEY));
     root = raw ? JSON.parse(raw) : {};
   } catch {
     root = {};
@@ -49,7 +60,7 @@ export function loadNamespace(ns, fallback = {}) {
 // desatualizada.
 function readFreshRoot() {
   try {
-    const raw = localStorage.getItem(ROOT_KEY);
+    const raw = migrateIds(localStorage.getItem(ROOT_KEY));
     const parsed = raw ? JSON.parse(raw) : {};
     return (parsed && typeof parsed === "object") ? parsed : {};
   } catch {

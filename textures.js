@@ -837,8 +837,8 @@ function makeBossTextures(scene){
     ctx.restore();
   }
 
-  if (!scene.textures.exists("boss_monstro_phishing")) {
-    const tex = scene.textures.createCanvas("boss_monstro_phishing", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_dragao_confusao")) {
+    const tex = scene.textures.createCanvas("boss_dragao_confusao", S, S), ctx = tex.getContext();
     drawPhishingBody(ctx);
     drawPhishingArms(ctx, "wave");
     drawPhishingFace(ctx, "normal");
@@ -847,15 +847,15 @@ function makeBossTextures(scene){
   // Duas variantes para a animação "idle" (ver doBossIdleArms/doBossIdleBlink
   // em dia-crianca.js) — o boss alterna braços "wave"/"rest" a espaços
   // regulares e pisca os olhos de vez em quando, tal como antes.
-  if (!scene.textures.exists("boss_monstro_phishing_armsdown")) {
-    const tex = scene.textures.createCanvas("boss_monstro_phishing_armsdown", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_dragao_confusao_armsdown")) {
+    const tex = scene.textures.createCanvas("boss_dragao_confusao_armsdown", S, S), ctx = tex.getContext();
     drawPhishingBody(ctx);
     drawPhishingArms(ctx, "rest");
     drawPhishingFace(ctx, "normal");
     tex.refresh();
   }
-  if (!scene.textures.exists("boss_monstro_phishing_blink")) {
-    const tex = scene.textures.createCanvas("boss_monstro_phishing_blink", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_dragao_confusao_blink")) {
+    const tex = scene.textures.createCanvas("boss_dragao_confusao_blink", S, S), ctx = tex.getContext();
     drawPhishingBody(ctx);
     drawPhishingArms(ctx, "wave");
     drawPhishingFace(ctx, "blink");
@@ -863,8 +863,8 @@ function makeBossTextures(scene){
   }
   // Estado "ouch" — usado por meio segundo sempre que leva um salto na
   // cabeça: olhos redondos e esbugalhados + boca em "o" de surpresa.
-  if (!scene.textures.exists("boss_monstro_phishing_ouch")) {
-    const tex = scene.textures.createCanvas("boss_monstro_phishing_ouch", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_dragao_confusao_ouch")) {
+    const tex = scene.textures.createCanvas("boss_dragao_confusao_ouch", S, S), ctx = tex.getContext();
     drawPhishingBody(ctx);
     drawPhishingArms(ctx, "rest");
     drawPhishingFace(ctx, "ouch");
@@ -873,8 +873,8 @@ function makeBossTextures(scene){
   // Estado "riso maléfico" — usado na entrada do combate (intro): olhos
   // semicerrados de gozo + boca bem aberta em zigue-zague, confiante que
   // vai ganhar.
-  if (!scene.textures.exists("boss_monstro_phishing_laugh")) {
-    const tex = scene.textures.createCanvas("boss_monstro_phishing_laugh", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_dragao_confusao_laugh")) {
+    const tex = scene.textures.createCanvas("boss_dragao_confusao_laugh", S, S), ctx = tex.getContext();
     drawPhishingBody(ctx);
     drawPhishingArms(ctx, "wave");
     drawPhishingFace(ctx, "laugh");
@@ -882,8 +882,8 @@ function makeBossTextures(scene){
   }
   // Estado "zangado" — ao escalar de fúria a meio do combate (ver
   // bossEnterRage em dia-crianca.js): sobrolhos em V afiados, mais próximos.
-  if (!scene.textures.exists("boss_monstro_phishing_angry")) {
-    const tex = scene.textures.createCanvas("boss_monstro_phishing_angry", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_dragao_confusao_angry")) {
+    const tex = scene.textures.createCanvas("boss_dragao_confusao_angry", S, S), ctx = tex.getContext();
     drawPhishingBody(ctx);
     drawPhishingArms(ctx, "wave");
     drawPhishingFace(ctx, "angry");
@@ -892,14 +892,14 @@ function makeBossTextures(scene){
   // Estado "triste" — usado na derrota, antes de fugir a correr da arena
   // (ver startBossStompDefeat em dia-crianca.js): olhos caídos + boca
   // franzida para baixo.
-  if (!scene.textures.exists("boss_monstro_phishing_sad")) {
-    const tex = scene.textures.createCanvas("boss_monstro_phishing_sad", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_dragao_confusao_sad")) {
+    const tex = scene.textures.createCanvas("boss_dragao_confusao_sad", S, S), ctx = tex.getContext();
     drawPhishingBody(ctx);
     drawPhishingArms(ctx, "rest");
     drawPhishingFace(ctx, "sad");
     tex.refresh();
   }
-  // REMOVIDO: estado "sentado" (boss_monstro_phishing_sentado) — textura
+  // REMOVIDO: estado "sentado" (boss_dragao_confusao_sentado) — textura
   // órfã. Desenhava uma pose de derrota "simpática" (sentado, chapéu caído,
   // a acenar) de uma versão antiga da sequência de derrota; a sequência
   // atual (ver startBossStompDefeat em dia-crianca.js) usa antes a textura
@@ -1224,44 +1224,44 @@ function makeBossTextures(scene){
     ctx.restore();
   }
 
-  if (!scene.textures.exists("boss_virus_gigante")) {
-    const tex = scene.textures.createCanvas("boss_virus_gigante", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_guardiao_mapas")) {
+    const tex = scene.textures.createCanvas("boss_guardiao_mapas", S, S), ctx = tex.getContext();
     drawVirusBody(ctx); drawVirusArms(ctx, "wave"); drawVirusFace(ctx, "normal");
     tex.refresh();
   }
-  if (!scene.textures.exists("boss_virus_gigante_armsdown")) {
-    const tex = scene.textures.createCanvas("boss_virus_gigante_armsdown", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_guardiao_mapas_armsdown")) {
+    const tex = scene.textures.createCanvas("boss_guardiao_mapas_armsdown", S, S), ctx = tex.getContext();
     drawVirusBody(ctx); drawVirusArms(ctx, "rest"); drawVirusFace(ctx, "normal");
     tex.refresh();
   }
-  if (!scene.textures.exists("boss_virus_gigante_blink")) {
-    const tex = scene.textures.createCanvas("boss_virus_gigante_blink", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_guardiao_mapas_blink")) {
+    const tex = scene.textures.createCanvas("boss_guardiao_mapas_blink", S, S), ctx = tex.getContext();
     drawVirusBody(ctx); drawVirusArms(ctx, "rest"); drawVirusFace(ctx, "blink");
     tex.refresh();
   }
   // "ouch" — usado por meio segundo sempre que leva um salto na cabeça.
-  if (!scene.textures.exists("boss_virus_gigante_ouch")) {
-    const tex = scene.textures.createCanvas("boss_virus_gigante_ouch", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_guardiao_mapas_ouch")) {
+    const tex = scene.textures.createCanvas("boss_guardiao_mapas_ouch", S, S), ctx = tex.getContext();
     drawVirusBody(ctx); drawVirusArms(ctx, "wave"); drawVirusFace(ctx, "ouch");
     tex.refresh();
   }
   // Estado "riso maléfico" — entrada em combate.
-  if (!scene.textures.exists("boss_virus_gigante_laugh")) {
-    const tex = scene.textures.createCanvas("boss_virus_gigante_laugh", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_guardiao_mapas_laugh")) {
+    const tex = scene.textures.createCanvas("boss_guardiao_mapas_laugh", S, S), ctx = tex.getContext();
     drawVirusBody(ctx); drawVirusArms(ctx, "rest"); drawVirusFace(ctx, "laugh");
     tex.refresh();
   }
   // Estado "zangado" — durante a escalada de fúria; o motor de jogo aplica
   // também um tint avermelhado por cima deste estado.
-  if (!scene.textures.exists("boss_virus_gigante_angry")) {
-    const tex = scene.textures.createCanvas("boss_virus_gigante_angry", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_guardiao_mapas_angry")) {
+    const tex = scene.textures.createCanvas("boss_guardiao_mapas_angry", S, S), ctx = tex.getContext();
     drawVirusBody(ctx); drawVirusArms(ctx, "wave"); drawVirusFace(ctx, "angry");
     tex.refresh();
   }
   // Estado "triste" — derrota: o brilho da cara apaga-se quase todo antes
   // de fugir, tal como o Espião das Sombras.
-  if (!scene.textures.exists("boss_virus_gigante_sad")) {
-    const tex = scene.textures.createCanvas("boss_virus_gigante_sad", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_guardiao_mapas_sad")) {
+    const tex = scene.textures.createCanvas("boss_guardiao_mapas_sad", S, S), ctx = tex.getContext();
     drawVirusBody(ctx); drawVirusArms(ctx, "rest"); drawVirusFace(ctx, "sad");
     tex.refresh();
   }
@@ -1617,47 +1617,47 @@ function makeBossTextures(scene){
     ctx.restore();
   }
 
-  if (!scene.textures.exists("boss_espiao_sombras")) {
-    const tex = scene.textures.createCanvas("boss_espiao_sombras", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_sombra_indiferenca")) {
+    const tex = scene.textures.createCanvas("boss_sombra_indiferenca", S, S), ctx = tex.getContext();
     drawGuardiaoBody(ctx); drawGuardiaoArms(ctx, "wave"); drawGuardiaoFace(ctx, "normal");
     tex.refresh();
   }
-  if (!scene.textures.exists("boss_espiao_sombras_armsdown")) {
-    const tex = scene.textures.createCanvas("boss_espiao_sombras_armsdown", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_sombra_indiferenca_armsdown")) {
+    const tex = scene.textures.createCanvas("boss_sombra_indiferenca_armsdown", S, S), ctx = tex.getContext();
     drawGuardiaoBody(ctx); drawGuardiaoArms(ctx, "rest"); drawGuardiaoFace(ctx, "normal");
     tex.refresh();
   }
-  if (!scene.textures.exists("boss_espiao_sombras_blink")) {
-    const tex = scene.textures.createCanvas("boss_espiao_sombras_blink", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_sombra_indiferenca_blink")) {
+    const tex = scene.textures.createCanvas("boss_sombra_indiferenca_blink", S, S), ctx = tex.getContext();
     drawGuardiaoBody(ctx); drawGuardiaoArms(ctx, "rest"); drawGuardiaoFace(ctx, "blink");
     tex.refresh();
   }
   // "ouch": braços em garra levantados em choque + olhos redondos
   // esbugalhados — a mesma reação do Monstro do Phishing.
-  if (!scene.textures.exists("boss_espiao_sombras_ouch")) {
-    const tex = scene.textures.createCanvas("boss_espiao_sombras_ouch", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_sombra_indiferenca_ouch")) {
+    const tex = scene.textures.createCanvas("boss_sombra_indiferenca_ouch", S, S), ctx = tex.getContext();
     drawGuardiaoBody(ctx); drawGuardiaoArms(ctx, "wave"); drawGuardiaoFace(ctx, "ouch");
     tex.refresh();
   }
   // Estado "riso maléfico" — entrada em combate: confiante que a escuridão
   // vai vencer.
-  if (!scene.textures.exists("boss_espiao_sombras_laugh")) {
-    const tex = scene.textures.createCanvas("boss_espiao_sombras_laugh", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_sombra_indiferenca_laugh")) {
+    const tex = scene.textures.createCanvas("boss_sombra_indiferenca_laugh", S, S), ctx = tex.getContext();
     drawGuardiaoBody(ctx); drawGuardiaoArms(ctx, "rest"); drawGuardiaoFace(ctx, "laugh");
     tex.refresh();
   }
   // Estado "zangado" — durante a escalada de fúria; o motor de jogo aplica
   // também um tint avermelhado por cima deste estado.
-  if (!scene.textures.exists("boss_espiao_sombras_angry")) {
-    const tex = scene.textures.createCanvas("boss_espiao_sombras_angry", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_sombra_indiferenca_angry")) {
+    const tex = scene.textures.createCanvas("boss_sombra_indiferenca_angry", S, S), ctx = tex.getContext();
     drawGuardiaoBody(ctx); drawGuardiaoArms(ctx, "wave"); drawGuardiaoFace(ctx, "angry");
     tex.refresh();
   }
   // Estado "triste" — derrota: o brilho da cara apaga-se quase todo (ver
   // comentário em drawGuardiaoFace) antes de fugir, em vez de uma cara
   // triste desenhada — mais coerente com "sombra a perder o poder".
-  if (!scene.textures.exists("boss_espiao_sombras_sad")) {
-    const tex = scene.textures.createCanvas("boss_espiao_sombras_sad", S, S), ctx = tex.getContext();
+  if (!scene.textures.exists("boss_sombra_indiferenca_sad")) {
+    const tex = scene.textures.createCanvas("boss_sombra_indiferenca_sad", S, S), ctx = tex.getContext();
     drawGuardiaoBody(ctx); drawGuardiaoArms(ctx, "rest"); drawGuardiaoFace(ctx, "sad");
     tex.refresh();
   }
@@ -1933,25 +1933,25 @@ function makeBossTextures(scene){
     drawPoluidorBrow(ctx, mood);
     drawPoluidorEyes(ctx, mood);
   }
-  if(!scene.textures.exists("boss_robo_spam")){
-    const tex=scene.textures.createCanvas("boss_robo_spam",S,S), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_titan_discordia")){
+    const tex=scene.textures.createCanvas("boss_titan_discordia",S,S), ctx=tex.getContext();
     drawPoluidorBody(ctx); drawPoluidorArms(ctx,"wave"); drawPoluidorFace(ctx,"normal");
     tex.refresh();
   }
-  if(!scene.textures.exists("boss_robo_spam_armsdown")){
-    const tex=scene.textures.createCanvas("boss_robo_spam_armsdown",S,S), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_titan_discordia_armsdown")){
+    const tex=scene.textures.createCanvas("boss_titan_discordia_armsdown",S,S), ctx=tex.getContext();
     drawPoluidorBody(ctx); drawPoluidorArms(ctx,"rest"); drawPoluidorFace(ctx,"normal");
     tex.refresh();
   }
-  if(!scene.textures.exists("boss_robo_spam_blink")){
-    const tex=scene.textures.createCanvas("boss_robo_spam_blink",S,S), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_titan_discordia_blink")){
+    const tex=scene.textures.createCanvas("boss_titan_discordia_blink",S,S), ctx=tex.getContext();
     drawPoluidorBody(ctx); drawPoluidorArms(ctx,"wave"); drawPoluidorFace(ctx,"blink");
     tex.refresh();
   }
   // "ouch" — sobrancelhas esbugalhadas, olhos brancos de sobrecarga, boca
   // ovalada bem aberta + faíscas dos cantos do visor.
-  if(!scene.textures.exists("boss_robo_spam_ouch")){
-    const tex=scene.textures.createCanvas("boss_robo_spam_ouch",S,S), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_titan_discordia_ouch")){
+    const tex=scene.textures.createCanvas("boss_titan_discordia_ouch",S,S), ctx=tex.getContext();
     drawPoluidorBody(ctx); drawPoluidorArms(ctx,"rest"); drawPoluidorFace(ctx,"ouch");
     ctx.strokeStyle="#ffe85c"; ctx.lineWidth=2; ctx.lineCap="round";
     [[C-21,C-12,C-29,C-22],[C+21,C-12,C+29,C-22],[C-17,C+12,C-25,C+20]].forEach(([x1,y1,x2,y2])=>{
@@ -1961,23 +1961,23 @@ function makeBossTextures(scene){
   }
   // "riso maléfico" — entrada em combate: sobrancelhas trocistas erguidas
   // nas pontas, lentes com brilho quente, boca-grelha bem aberta a rir.
-  if(!scene.textures.exists("boss_robo_spam_laugh")){
-    const tex=scene.textures.createCanvas("boss_robo_spam_laugh",S,S), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_titan_discordia_laugh")){
+    const tex=scene.textures.createCanvas("boss_titan_discordia_laugh",S,S), ctx=tex.getContext();
     drawPoluidorBody(ctx); drawPoluidorArms(ctx,"wave"); drawPoluidorFace(ctx,"laugh");
     tex.refresh();
   }
   // "zangado" (vermelho) — sobrancelhas em V bem carregado, lentes maiores
   // e mais intensas, boca em grelha cerrada/dentada. O motor de jogo
   // aplica também um tint por cima deste estado.
-  if(!scene.textures.exists("boss_robo_spam_angry")){
-    const tex=scene.textures.createCanvas("boss_robo_spam_angry",S,S), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_titan_discordia_angry")){
+    const tex=scene.textures.createCanvas("boss_titan_discordia_angry",S,S), ctx=tex.getContext();
     drawPoluidorBody(ctx); drawPoluidorArms(ctx,"wave"); drawPoluidorFace(ctx,"angry");
     tex.refresh();
   }
   // "triste" — derrota: sobrancelhas preocupadas (caídas para dentro),
   // lentes pequenas e baças, boca-grelha descaída, antes de fugir a coxear.
-  if(!scene.textures.exists("boss_robo_spam_sad")){
-    const tex=scene.textures.createCanvas("boss_robo_spam_sad",S,S), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_titan_discordia_sad")){
+    const tex=scene.textures.createCanvas("boss_titan_discordia_sad",S,S), ctx=tex.getContext();
     drawPoluidorBody(ctx); drawPoluidorArms(ctx,"rest"); drawPoluidorFace(ctx,"sad");
     tex.refresh();
   }
@@ -2024,8 +2024,8 @@ function makeBossTextures(scene){
   // ── Bola ❓ do Monstro da Ignorância (redesenho) — rola devagar pelo chão,
   // saltitando um pouco, em vez de voar direto à cabeça. Lenta e fácil de
   // ver/evitar de propósito — nada de "aviso vermelho" agressivo aqui.
-  if(!scene.textures.exists("boss_proj_qmark")){
-    const w=30,h=30,tex=scene.textures.createCanvas("boss_proj_qmark",w,h), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_proj_ball")){
+    const w=30,h=30,tex=scene.textures.createCanvas("boss_proj_ball",w,h), ctx=tex.getContext();
     const gr=ctx.createRadialGradient(w/2-4,h/2-4,2,w/2,h/2,15);
     gr.addColorStop(0,"#c8aeff"); gr.addColorStop(0.6,"#8a5cff"); gr.addColorStop(1,"#5228b0");
     ctx.fillStyle=gr;
@@ -2045,8 +2045,8 @@ function makeBossTextures(scene){
   // temático nenhum para este boss em particular. Um anzol prateado a
   // brilhar em ciano — a mesma "isca" que a cana de pesca segura — é a
   // metáfora óbvia de "morde o isco e é fisgado" que faltava.
-  if(!scene.textures.exists("boss_proj_hook")){
-    const w=30,h=30,tex=scene.textures.createCanvas("boss_proj_hook",w,h), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_proj_bubble")){
+    const w=30,h=30,tex=scene.textures.createCanvas("boss_proj_bubble",w,h), ctx=tex.getContext();
     ctx.save();
     ctx.shadowColor="#39d6ff"; ctx.shadowBlur=6;
     ctx.strokeStyle="#eef2f7"; ctx.lineWidth=3.4; ctx.lineCap="round";
@@ -2067,8 +2067,8 @@ function makeBossTextures(scene){
   // nenhum (o "?" só fazia sentido no Monstro da Ignorância). Desenhada em
   // tons neutros/claros para o setTint (orbTint em data-bosses.js) pintar
   // limpo por cima, tal como já acontecia com a bola ❓ original.
-  if(!scene.textures.exists("boss_proj_germ")){
-    const w=30,h=30,tex=scene.textures.createCanvas("boss_proj_germ",w,h), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_proj_pin")){
+    const w=30,h=30,tex=scene.textures.createCanvas("boss_proj_pin",w,h), ctx=tex.getContext();
     const cx=w/2, cy=h/2, r=10;
     // espigões curtos angulares à volta (fragmento de malware, não organismo)
     ctx.strokeStyle="#ffd23f"; ctx.lineWidth=2.2;
@@ -2097,8 +2097,8 @@ function makeBossTextures(scene){
   // par de "olhos" ténues — dá logo a ideia de nuvem/sombra com alguma
   // presença assombrada, sem símbolo nenhum. Desenhada quase branca (o tint
   // em data-bosses.js é que lhe dá a cor roxo-escura final).
-  if(!scene.textures.exists("boss_proj_shadow")){
-    const w=30,h=30,tex=scene.textures.createCanvas("boss_proj_shadow",w,h), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_proj_orb")){
+    const w=30,h=30,tex=scene.textures.createCanvas("boss_proj_orb",w,h), ctx=tex.getContext();
     const cx=w/2, cy=h/2;
     ctx.shadowColor="#e8e0ff"; ctx.shadowBlur=6;
     const gr=ctx.createRadialGradient(cx-2,cy-2,1,cx,cy,13);
@@ -2128,8 +2128,8 @@ function makeBossTextures(scene){
   // selo vermelho de aviso (⚠), tal como os que o robô atira/cospe —
   // troca a porca dourada (tema industrial genérico) por algo que se lê
   // de imediato como "correio indesejado a ser atirado".
-  if(!scene.textures.exists("boss_proj_spam")){
-    const w=32,h=24,tex=scene.textures.createCanvas("boss_proj_spam",w,h), ctx=tex.getContext();
+  if(!scene.textures.exists("boss_proj_rock")){
+    const w=32,h=24,tex=scene.textures.createCanvas("boss_proj_rock",w,h), ctx=tex.getContext();
     ctx.shadowColor="rgba(220,40,30,0.6)"; ctx.shadowBlur=6;
     // corpo do envelope
     ctx.fillStyle="#fffaff";
@@ -3366,7 +3366,7 @@ function euProjBadStar(ctx){ // 34×28 — estrela apagada e rachada (a evitar)
   ctx.restore();
 }
 function europaBossesRedraw(scene){
-  const BOSSES={ virus_gigante:euGuardiao, monstro_phishing:euDragao, robo_spam:euTita, espiao_sombras:euSombra };
+  const BOSSES={ guardiao_mapas:euGuardiao, dragao_confusao:euDragao, titan_discordia:euTita, sombra_indiferenca:euSombra };
   for(const [name,draw] of Object.entries(BOSSES)){
     for(const [suf,v] of Object.entries(HB_VARIANTS)){
       const key="boss_"+name+suf;
@@ -3375,7 +3375,7 @@ function europaBossesRedraw(scene){
       draw(ctx,v); tex.refresh();
     }
   }
-  const PROJ={ boss_proj_germ:[30,30,euProjPin], boss_proj_hook:[30,30,euProjBubble], boss_proj_qmark:[30,30,euProjBubble], boss_proj_spam:[32,24,euProjRock], boss_proj_shadow:[30,30,euProjOrb], boss_proj_book:[34,28,euProjStar], boss_proj_badbook:[34,28,euProjBadStar] };
+  const PROJ={ boss_proj_pin:[30,30,euProjPin], boss_proj_bubble:[30,30,euProjBubble], boss_proj_ball:[30,30,euProjBubble], boss_proj_rock:[32,24,euProjRock], boss_proj_orb:[30,30,euProjOrb], boss_proj_book:[34,28,euProjStar], boss_proj_badbook:[34,28,euProjBadStar] };
   for(const [key,[w,h,draw]] of Object.entries(PROJ)){
     if(scene.textures.exists(key)) scene.textures.remove(key);
     const tex=scene.textures.createCanvas(key,w,h), ctx=tex.getContext(); draw(ctx); tex.refresh();
@@ -3450,9 +3450,63 @@ function europaItensRedraw(scene){
   const moedas=[{cor:"ouro"},{cor:"ouro",bimetal:true,texto:"2€"},{cor:"ouro"},{cor:"prata"},{cor:"cobre",texto:"c"},{cor:"ouro",bimetal:true}];
   moedas.forEach((m,i)=>novo("item_cadeado_"+i,32,32,ctx=>euItemMoeda(ctx,m)));
   ["pt","fr","es","it","de"].forEach((p,i)=>novo("item_pacote_"+i,48,36,ctx=>euItemBandeirinha(ctx,p)));
+  novo("vilao_round",64,64,euVilaoPeca);           // Peça Perdida (puzzle zangado)
+  novo("vilao_spike",64,64,euVilaoMuro);           // Muro Zangado
+  novo("vilao_bug",64,64,euVilaoBoato);            // Boato Saltitão
   novo("item_drone",64,52,euItemPomba);          // pomba da paz (antes: mini-drone)
   novo("drone_hostil",64,52,euInimigoNuvem);     // nuvem da discórdia (antes: drone hostil)
 }
+// ===== EUROPA — vilões: Peça Perdida (vermelha), Muro Zangado (azul), Boato Saltitão (verde) =====
+const NV="#101a30";
+function euSombraVilao(c){ c.fillStyle="rgba(0,0,0,.25)"; c.beginPath(); c.ellipse(32,60,21,4,0,0,7); c.fill(); }
+function euCaraZangada(c,cx,cy){
+  c.lineCap="round"; c.lineJoin="round";
+  for(const d of [-1,1]){
+    c.fillStyle="#fff"; c.strokeStyle=NV; c.lineWidth=2; c.beginPath(); c.ellipse(cx+d*8.5,cy,6,7,0,0,7); c.fill(); c.stroke();
+    c.fillStyle=NV; c.beginPath(); c.arc(cx+d*7.2,cy+1.2,2.9,0,7); c.fill();
+    c.fillStyle="#fff"; c.beginPath(); c.arc(cx+d*6.4,cy-0.2,1,0,7); c.fill();
+    c.strokeStyle=NV; c.lineWidth=3.2; c.beginPath(); c.moveTo(cx+d*15,cy-10); c.lineTo(cx+d*3,cy-5); c.stroke();
+  }
+  c.fillStyle="#fff"; c.strokeStyle=NV; c.lineWidth=2; c.beginPath();
+  if(c.roundRect) c.roundRect(cx-9,cy+8,18,8,3); else c.rect(cx-9,cy+8,18,8);
+  c.fill(); c.stroke();
+  c.lineWidth=1.2; for(const x of [-3,3]){ c.beginPath(); c.moveTo(cx+x,cy+8); c.lineTo(cx+x,cy+16); c.stroke(); }
+}
+function euVilaoPeca(c){ // puzzle vermelho
+  euSombraVilao(c); c.lineJoin="round";
+  const shapes=()=>{ c.beginPath(); if(c.roundRect) c.roundRect(10,16,40,40,8); else c.rect(10,16,40,40); c.fill();
+    c.beginPath(); c.arc(30,13,7.5,0,7); c.fill(); c.beginPath(); c.arc(53,36,7.5,0,7); c.fill(); };
+  c.fillStyle=NV; c.strokeStyle=NV; c.lineWidth=7; c.save(); shapes(); c.restore();
+  c.save(); c.beginPath(); if(c.roundRect) c.roundRect(10,16,40,40,8); else c.rect(10,16,40,40); c.lineWidth=7; c.stroke(); c.restore();
+  const g=c.createLinearGradient(0,6,0,56); g.addColorStop(0,"#ff6a5a"); g.addColorStop(1,"#c0261f"); c.fillStyle=g; shapes();
+  c.fillStyle=NV; c.beginPath(); c.arc(10,36,6.5,0,7); c.fill();          // reentrância à esquerda
+  c.fillStyle="rgba(255,255,255,.35)"; c.beginPath(); c.ellipse(20,22,8,3,-0.3,0,7); c.fill();
+  euCaraZangada(c,30,34);
+}
+function euVilaoMuro(c){ // muro de pedra com picos
+  euSombraVilao(c); c.lineJoin="round";
+  c.fillStyle=NV; c.strokeStyle=NV; c.lineWidth=6;
+  c.beginPath(); c.rect(8,20,48,38); c.fill(); c.stroke();
+  for(let i=0;i<5;i++){ c.beginPath(); c.moveTo(10+i*10.5,21); c.lineTo(15+i*10.5,5); c.lineTo(20+i*10.5,21); c.closePath(); c.fill(); c.stroke(); }
+  const g=c.createLinearGradient(0,20,0,58); g.addColorStop(0,"#7f93c4"); g.addColorStop(1,"#4a5f98"); c.fillStyle=g; c.fillRect(8,20,48,38);
+  c.fillStyle="#d8e2ff"; for(let i=0;i<5;i++){ c.beginPath(); c.moveTo(11+i*10.5,20); c.lineTo(15+i*10.5,7.5); c.lineTo(19+i*10.5,20); c.closePath(); c.fill(); }
+  c.strokeStyle="rgba(16,26,48,.55)"; c.lineWidth=1.6;
+  for(const y of [32,45]){ c.beginPath(); c.moveTo(8,y); c.lineTo(56,y); c.stroke(); }
+  for(const [x,y0,y1] of [[22,20,32],[42,20,32],[14,32,45],[32,32,45],[50,32,45],[22,45,58],[42,45,58]]){ c.beginPath(); c.moveTo(x,y0); c.lineTo(x,y1); c.stroke(); }
+  c.fillStyle="rgba(255,255,255,.28)"; c.fillRect(9,21,46,3);
+  euCaraZangada(c,32,35);
+}
+function euVilaoBoato(c){ // balão de conversa verde com ?!
+  euSombraVilao(c); c.lineJoin="round";
+  const shape=()=>{ c.beginPath(); c.ellipse(32,31,25,22,0,0,7); c.fill(); c.beginPath(); c.moveTo(14,44); c.lineTo(10,59); c.lineTo(30,51); c.closePath(); c.fill(); };
+  c.fillStyle=NV; c.strokeStyle=NV; c.lineWidth=7; shape(); c.lineWidth=7; c.beginPath(); c.ellipse(32,31,25,22,0,0,7); c.stroke();
+  const g=c.createLinearGradient(0,9,0,53); g.addColorStop(0,"#7be07a"); g.addColorStop(1,"#27a14a"); c.fillStyle=g; shape();
+  c.fillStyle="rgba(255,255,255,.35)"; c.beginPath(); c.ellipse(22,16,9,3,-0.4,0,7); c.fill();
+  euCaraZangada(c,32,30);
+  c.font="900 15px Arial, sans-serif"; c.textAlign="center"; c.textBaseline="middle"; c.lineWidth=3; c.strokeStyle=NV;
+  c.fillStyle="#ffcc00"; c.strokeText("?!",52,8); c.fillText("?!",52,8);
+}
+
 function euItemPomba(c){ // 64×52 — pomba branca com ramo de oliveira
   c.save(); c.lineJoin="round"; c.lineCap="round";
   c.shadowColor="rgba(255,230,120,.8)"; c.shadowBlur=9;
